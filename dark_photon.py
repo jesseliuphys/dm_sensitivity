@@ -35,11 +35,21 @@ def main():
   cavity3        = csv_to_lists( 'limits/dp_cavity3.csv' )
   shuket         = csv_to_lists( 'limits/dp_shuket.csv' )
 
-  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket )
+  Adish = 10.0 # dish area in m^2
+  snr=5. # signal to noise
+  effic=0.5 # signal detection efficiency
+  time=1. # integration time in hours
+
+  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=5., effic=0.5, time=1. )
+  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=1.,  snr=5., effic=0.5, time=1. )
+  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=5., effic=0.1, time=1. )
+  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=5., effic=0.9, time=1. )
+  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=5., effic=0.5, time=0.1 )
+  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=10., effic=0.5, time=0.1 )
   # ----------------------------------------------------------
 
 #__________________________________________
-def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket ):
+def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=5., effic=0.5, time=1. ):
   '''
   This plots the contours from the raw (x,y) values of each contour
   '''
@@ -99,40 +109,39 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   #plt.fill([-3.5, -1.5, -1.5, -3.5, -3.5], [-13.4, -13.4, -7, -7, -13.4], myLighterOrange, linewidth=1, edgecolor=myDarkOrange, zorder=-3) 
   #plt.fill([-4, -1, -1, -4, -4], [-15.8, -15.8, -7, -7, -15.8], myLightOrange, linewidth=1, edgecolor=myDarkOrange, zorder=-4) 
 
-  Adish = 10.0 # m^2
 
   #-----------------------------
   # Upgrade 2
   #-----------------------------
   # KID [0.2, 5] meV
-  x, y = calc_darkPhoton_coupling(1e-24, Adish, 0.2, 5)
+  x, y = calc_darkPhoton_coupling(1e-24, Adish, 0.2, 5, snr, effic, time)
   plt.plot(x, y, myLightOrange, alpha=0.7,lw=3, ls='--', c=myMediumOrange, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myLightOrange, alpha=0.2)
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling(1e-24, Adish, 207, 830)
+  x, y = calc_darkPhoton_coupling(1e-24, Adish, 207, 830, snr, effic, time)
   plt.plot(x, y, alpha=0.3,lw=3, ls='--', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkPink, alpha=0.1)
 
   # QCD [6.2] meV
-  x, y = calc_darkPhoton_coupling(1e-24, Adish, 6.18, 6.22)
+  x, y = calc_darkPhoton_coupling(1e-24, Adish, 6.18, 6.22, snr, effic, time)
   plt.fill_between(x, y, [-5, -5], color=myDarkGray, alpha=0.3)
 
   #-----------------------------
   # Upgrade 1
   #-----------------------------
   # Bolometer [1.65, 83] meV
-  x, y = calc_darkPhoton_coupling(2e-20, Adish, 0.24, 248)
+  x, y = calc_darkPhoton_coupling(2e-20, Adish, 0.24, 248, snr, effic, time)
   plt.plot(x, y, alpha=0.7,lw=3, ls='-.', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.1)
 
   # KID [0.2, 5] meV
-  x, y = calc_darkPhoton_coupling(1e-21, Adish, 0.2, 5)
+  x, y = calc_darkPhoton_coupling(1e-21, Adish, 0.2, 5, snr, effic, time)
   plt.plot(x, y, myLightOrange, alpha=0.7,lw=3, ls='-.', c=myMediumOrange, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myLightOrange, alpha=0.2)
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling(1e-21, Adish, 207, 830)
+  x, y = calc_darkPhoton_coupling(1e-21, Adish, 207, 830, snr, effic, time)
   plt.plot(x, y, alpha=0.3,lw=3, ls='-.', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkPink, alpha=0.1)
 
@@ -140,55 +149,55 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   # Baseline
   #-----------------------------
   # Standard 1.6 K IR Labs bolometer [0.24, 83] meV
-  x, y = calc_darkPhoton_coupling(1e-13, Adish, 83.0, 248.0)
+  x, y = calc_darkPhoton_coupling(1e-13, Adish, 83.0, 248.0, snr, effic, time)
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.15)
 
   # Standard 1.6 K IR Labs bolometer [0.24, 83] meV
-  x, y = calc_darkPhoton_coupling(5e-14, Adish, 4.0, 83.0)
+  x, y = calc_darkPhoton_coupling(5e-14, Adish, 4.0, 83.0, snr, effic, time)
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.15)
 
   # Far-IR 1.6 K IR Labs bolometer
-  x, y = calc_darkPhoton_coupling(4e-15, Adish, 0.24, 4.0)
+  x, y = calc_darkPhoton_coupling(4e-15, Adish, 0.24, 4.0, snr, effic, time)
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.15)
 
   # KID [0.2, 5] meV
-  x, y = calc_darkPhoton_coupling(3e-17, Adish, 0.2, 5)
+  x, y = calc_darkPhoton_coupling(3e-17, Adish, 0.2, 5, snr, effic, time)
   plt.plot(x, y, alpha=0.8,lw=3, c=myMediumOrange, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myLightOrange, alpha=0.6)
 
   # TES [0.2, 1.2] meV
-  x, y = calc_darkPhoton_coupling(6e-17, Adish, 0.19, 1.2)
+  x, y = calc_darkPhoton_coupling(6e-17, Adish, 0.19, 1.2, snr, effic, time)
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkPurple, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkPurple, alpha=0.15)
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling(1e-18, Adish, 207, 830)
+  x, y = calc_darkPhoton_coupling(1e-18, Adish, 207, 830, snr, effic, time)
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myLightPink, alpha=0.6)
 
   # QCD [6.2] meV
-  x, y = calc_darkPhoton_coupling(1e-20, Adish, 6.18, 6.22)
+  x, y = calc_darkPhoton_coupling(1e-20, Adish, 6.18, 6.22, snr, effic, time)
   #plt.plot(x, y, myMediumGray, alpha=0.8,lw=3, c=myDarkGray, zorder=4, label=r'$\mathrm{QCD}~10^{-20}~\mathrm{W}~\mathrm{Hz}^{-1/2}$') 
   plt.fill_between(x, y, [-5, -5], color=myDarkGray, alpha=0.9)
 
   # Gentec [0.4, 120] meV
-  x, y = calc_darkPhoton_coupling(1e-8, Adish, 0.4, 120)
+  x, y = calc_darkPhoton_coupling(1e-8, Adish, 0.4, 120, snr, effic, time)
   plt.plot(x, y, lw=3, ls='-', c=myDarkGreen) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myMediumGreen, alpha=0.3)
 
   #-----------------------------
   # General power eye-guides
   #-----------------------------
-  x, y = calc_darkPhoton_coupling(1e-15, Adish, 1e-6, 1e4)
+  x, y = calc_darkPhoton_coupling(1e-15, Adish, 1e-6, 1e4, snr=1., effic=1., time=1/3600.)
   plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
   
-  x, y = calc_darkPhoton_coupling(1e-20, Adish, 1e-6, 1e4)
+  x, y = calc_darkPhoton_coupling(1e-20, Adish, 1e-6, 1e4, snr=1., effic=1., time=1/3600.)
   plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
 
-  x, y = calc_darkPhoton_coupling(1e-25, Adish, 1e-6, 1e4)
+  x, y = calc_darkPhoton_coupling(1e-25, Adish, 1e-6, 1e4, snr=1., effic=1., time=1/3600.)
   plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
 
   # Constant rate
@@ -198,7 +207,7 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   x, y = calc_darkPhoton_coupling_rate(1.0, Adish, 1e-6, 1e4)
   plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
 
-  plt.plot([1, 1], [1, 1], lw=3, ls='-', c=myDarkGray, label='Baseline') 
+  plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label='Baseline') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label='Upgrade 1') 
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label='Upgrade 2') 
   plt.legend(loc='lower right', prop={'size':13}, frameon=False, handlelength=2.8, borderpad=0.8)
@@ -264,7 +273,8 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   #fig.text(0.45, 0.21, r'Five 1 THz photons per week', color=myDarkOrange, size=text_size*0.7)
 
   #fig.text(0.77, 0.18, r'$A_\mathrm{antenna} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
-  fig.text(0.45, 0.18, r'\textbf{BREAD} $A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
+  fig.text(0.50, 0.21, r'\textbf{BREAD} $A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
+  fig.text(0.50, 0.175, r'$\mathrm{SNR}' + ' = {0}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0:.1f}$'.format(effic) + ', $\Delta t_\mathrm{int}' + ' = {0}'.format(time) + '~\mathrm{hrs}$', color=myDarkGray, size=text_size*0.68)
 
   # Adjust axis ticks
   ax.minorticks_on()
@@ -280,10 +290,10 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   plt.tight_layout(pad=0.3)
   plt.subplots_adjust( top=0.85,left=0.15 )
   
-  save_name = 'fig_dark_photon'
-  print('Saving as {0}'.format(save_name))
+  save_name = 'fig_dark_photon_Adish{0}_snr{1}_effic{2}_time{3}'.format(Adish, snr, effic, time)
+  print('Saving as {0}.pdf'.format(save_name))
   plt.savefig(save_name + '_photosensors.pdf', format='pdf', dpi=50)
-  plt.savefig(save_name + '_photosensors.png', format='png', dpi=400)
+  #plt.savefig(save_name + '_photosensors.png', format='png', dpi=400)
   #plt.savefig(save_name + '.eps', format='eps', dpi=150)
   #plt.savefig(save_name, format='png', dpi=150)
 
@@ -304,25 +314,36 @@ def csv_to_lists(csv_file):
   return data
 
 #__________________________________________
-def calc_darkPhoton_coupling(power, mirrorArea, minMass, maxMass):
+def calc_darkPhoton_coupling(nep, mirrorArea, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity = 0.3):
   '''
-  Convert instrument parameters and detected signal power to axion coupling
-   - power is units of Watts
-   - mirrorArea units is m^2
+  Convert instrument parameters and detected signal power to dark photon coupling
+   - nep          = overall noise equivalent power of photonsensor in units of Watts/sqrt(Hz)
+   - mirrorArea   = area of dish antenna units is m^2
+   - min/maxMass  = min and max mass to plot
+   - snr          = required signal to noise ratio 
+   - effic        = overall signal power efficiency 
+   - time         = integration time in hours
+   - relicDensity = dark matter relic density in GeV/cm^3
   '''
-  relicDensity = 0.3 # GeV/cm^3
-  kineticMixingSq = ( power / float(4.5 * 10**(-21) ) ) * ( 0.3 / relicDensity ) * ( 10.0 / mirrorArea  ) 
-  kineticMixing = math.sqrt( kineticMixingSq )
+
+  #kineticMixingSq = ( power / float(4.5 * 10**(-21) ) ) * ( 0.3 / relicDensity ) * ( 10.0 / mirrorArea  ) 
+
+  R        = ( snr / 5. )
+  noise    = ( nep / 1.0e-21 )
+  A        = ( 10.0 / mirrorArea  ) 
+  dt       = math.sqrt( 1. / time )
+  epsilon  = ( 0.5 / effic )
+  rho      = ( 0.3 / relicDensity )
+
+  kineticMixingSq = 3.7 * R * noise * A * dt * epsilon * rho
+  kineticMixing   = math.sqrt( kineticMixingSq )
   
   # Convert meV to eV, coupling to 1/GeV
   log10minMass = np.log10(minMass * 10**(-3))
   log10maxMass = np.log10(maxMass * 10**(-3))
-  log10kineticMixing = np.log10(kineticMixing * 10**(-13)) 
-  log10kineticMixing = np.log10(kineticMixing * 10**(-13)) 
-
-  normpower = power / float(4.5 * 10**(-21))
-  normpowersqrt = math.sqrt( ( power / float(4.5 * 10**(-21) ) ))
-  
+  log10kineticMixing = np.log10(kineticMixing * 10**(-14)) 
+  log10kineticMixing = np.log10(kineticMixing * 10**(-14)) 
+ 
   return [log10minMass, log10maxMass], [log10kineticMixing, log10kineticMixing]
 
   #__________________________________________
