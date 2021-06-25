@@ -35,17 +35,24 @@ def main():
   cavity3        = csv_to_lists( 'limits/dp_cavity3.csv' )
   shuket         = csv_to_lists( 'limits/dp_shuket.csv' )
 
-  Adish = 10.0 # dish area in m^2
-  snr=5. # signal to noise
-  effic=0.5 # signal detection efficiency
-  time=1. # integration time in hours
+  # Default values
+  Adish = 10. # dish area in m^2
+  snr   = 5.  # signal to noise
+  effic = 0.5 # signal detection efficiency
+  time  = 1.  # integration time in hours
 
   mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=5., effic=0.5, time=1. )
   mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=1.,  snr=5., effic=0.5, time=1. )
-  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=5., effic=0.1, time=1. )
-  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=5., effic=0.9, time=1. )
-  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=5., effic=0.5, time=0.1 )
-  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=10., effic=0.5, time=0.1 )
+  mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=10.,effic=0.5, time=1. )
+  #mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish=10., snr=5., effic=0.5, time=0.1 )
+
+  l_time = [0.001, 0.01, 0.1, 1, 10]
+  for time in l_time:
+    mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish, snr, effic, time )
+  
+  l_effic = [0.001, 0.01, 0.1, 0.2, 0.5, 0.9, 1.0]
+  for effic in l_effic:
+    mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuket, Adish, snr, effic, time )
   # ----------------------------------------------------------
 
 #__________________________________________
@@ -60,18 +67,18 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   fig.set_size_inches(11, 9)
 
   # Define various colours
-  myLightestBlue = '#deebf7'
-  myLighterBlue  = '#c6dbef'
-  myLightBlue    = '#9ecae1'
-  myMediumBlue   = '#6baed6'
-  myDarkBlue     = '#4292c6'
-  myDarkerBlue   = '#08519c'
+  myLightestBlue   = '#deebf7'
+  myLighterBlue    = '#c6dbef'
+  myLightBlue      = '#9ecae1'
+  myMediumBlue     = '#6baed6'
+  myDarkBlue       = '#4292c6'
+  myDarkerBlue     = '#08519c'
 
-  myLightPurple  = '#bcbddc'
-  myMediumPurple = '#9e9ac8'
-  myPurple       = '#807dba'
-  myDarkPurple   = '#54278f'
-  myDarkerPurple = '#3f007d'
+  myLightPurple    = '#bcbddc'
+  myMediumPurple   = '#9e9ac8'
+  myPurple         = '#807dba'
+  myDarkPurple     = '#54278f'
+  myDarkerPurple   = '#3f007d'
 
   myLightestOrange = '#ffffcc'
   myLighterOrange  = '#ffeda0'
@@ -79,14 +86,14 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   myMediumOrange   = '#fc4e2a'
   myDarkOrange     = '#993404'
 
-  myLightPink     = '#fcc5c0'
-  myDarkPink      = '#ce1256'
-  myMediumGreen   = '#41ab5d'
-  myDarkGreen     = '#006d2c'
+  myLightPink      = '#fcc5c0'
+  myDarkPink       = '#ce1256'
+  myMediumGreen    = '#41ab5d'
+  myDarkGreen      = '#006d2c'
 
-  myLightGray  = '#d9d9d9'
-  myMediumGray = '#969696'
-  myDarkGray   = '#525252'
+  myLightGray      = '#d9d9d9'
+  myMediumGray     = '#969696'
+  myDarkGray       = '#525252'
   # ------------------------------------------------------- 
   # Sensitivity lines and regions
   # ------------------------------------------------------- 
@@ -103,12 +110,6 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   plt.fill(cast['x'],           cast['y'],           myMediumBlue,  linewidth=1, zorder=-1, edgecolor= myDarkerBlue)
   plt.fill(cosmological['x'],   cosmological['y'],   myLightestBlue,linewidth=1, zorder=-1, edgecolor= myDarkerBlue)  
   plt.fill(solar_lifetime['x'], solar_lifetime['y'], myLighterBlue, linewidth=1, zorder=-1, edgecolor= myDarkerBlue) 
-  
-  # Hard code BREAD limits for now
-  #plt.fill([-2.5, -2.2, -2.2, -2.5, -2.5], [-9.3, -9.3, -7, -7, -9.3], myLightestOrange, linewidth=1, edgecolor=myMediumOrange,  zorder=-2) 
-  #plt.fill([-3.5, -1.5, -1.5, -3.5, -3.5], [-13.4, -13.4, -7, -7, -13.4], myLighterOrange, linewidth=1, edgecolor=myDarkOrange, zorder=-3) 
-  #plt.fill([-4, -1, -1, -4, -4], [-15.8, -15.8, -7, -7, -15.8], myLightOrange, linewidth=1, edgecolor=myDarkOrange, zorder=-4) 
-
 
   #-----------------------------
   # Upgrade 2
@@ -238,10 +239,10 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   text_size = 23
 
   # Cavity haloscopes
-  fig.text(0.18, 0.22, r'Cavity',  color=myDarkerBlue, size=text_size)
+  fig.text(0.18, 0.22,  r'Cavity',  color=myDarkerBlue, size=text_size)
   #fig.text(0.18, 0.22, r'ADMX,',  color=myDarkerBlue, size=text_size)
   #fig.text(0.18, 0.18, r'RBF, UF',color=myDarkerBlue, size=text_size)
-  fig.text(0.34, 0.58, r'SHUKET', color=myDarkBlue,   size=text_size, rotation=90)
+  fig.text(0.34, 0.58,  r'SHUKET', color=myDarkBlue,   size=text_size, rotation=90)
   fig.text(0.325, 0.38, r'Qubit',  color=myDarkBlue,   size=text_size, rotation=90)
 
   # Astrophysics
@@ -265,16 +266,8 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   fig.text(0.87, 0.50, r'Photon/second', color=myMediumGray, size=0.5*text_size, rotation=15)
   fig.text(0.87, 0.375, r'Photon/hour',    color=myMediumGray, size=0.5*text_size, rotation=15)
 
-  #fig.text(0.48, 0.66, r'Pilot ($10^{-16}$ W)', color=myMediumOrange, size=text_size)
-  #fig.text(0.48, 0.63, r'$A_\mathrm{antenna} = 1~\mathrm{m}^2$', color=myMediumOrange, size=text_size*0.7)
-  #fig.text(0.45, 0.40, r'BREAD 1 ($10^{-21}$ W)', color=myDarkOrange, size=text_size)
-  #fig.text(0.45, 0.37, r'Ten 1 THz photons per second', color=myDarkOrange, size=text_size*0.7)
-  #fig.text(0.45, 0.24, r'BREAD 2 ($10^{-26}$ W)', color=myDarkOrange, size=text_size)
-  #fig.text(0.45, 0.21, r'Five 1 THz photons per week', color=myDarkOrange, size=text_size*0.7)
-
-  #fig.text(0.77, 0.18, r'$A_\mathrm{antenna} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
   fig.text(0.50, 0.21, r'\textbf{BREAD} $A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
-  fig.text(0.50, 0.175, r'$\mathrm{SNR}' + ' = {0}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0:.1f}$'.format(effic) + ', $\Delta t_\mathrm{int}' + ' = {0}'.format(time) + '~\mathrm{hrs}$', color=myDarkGray, size=text_size*0.68)
+  fig.text(0.50, 0.175, r'$\mathrm{SNR}' + ' = {0}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic) + ', $\Delta t_\mathrm{int}' + ' = {0}'.format(time) + '~\mathrm{hrs}$', color=myDarkGray, size=text_size*0.68)
 
   # Adjust axis ticks
   ax.minorticks_on()
@@ -326,16 +319,14 @@ def calc_darkPhoton_coupling(nep, mirrorArea, minMass, maxMass, snr=5., effic=0.
    - relicDensity = dark matter relic density in GeV/cm^3
   '''
 
-  #kineticMixingSq = ( power / float(4.5 * 10**(-21) ) ) * ( 0.3 / relicDensity ) * ( 10.0 / mirrorArea  ) 
-
-  R        = ( snr / 5. )
+  ratio    = ( snr / 5. )
   noise    = ( nep / 1.0e-21 )
-  A        = ( 10.0 / mirrorArea  ) 
+  area     = ( 10.0 / mirrorArea  ) 
   dt       = math.sqrt( 1. / time )
   epsilon  = ( 0.5 / effic )
   rho      = ( 0.3 / relicDensity )
 
-  kineticMixingSq = 3.7 * R * noise * A * dt * epsilon * rho
+  kineticMixingSq = 3.7 * ratio * noise * area * dt * epsilon * rho
   kineticMixing   = math.sqrt( kineticMixingSq )
   
   # Convert meV to eV, coupling to 1/GeV
@@ -346,7 +337,7 @@ def calc_darkPhoton_coupling(nep, mirrorArea, minMass, maxMass, snr=5., effic=0.
  
   return [log10minMass, log10maxMass], [log10kineticMixing, log10kineticMixing]
 
-  #__________________________________________
+#__________________________________________
 def calc_darkPhoton_coupling_rate(photonsPerHour, mirrorArea, minMass, maxMass):
   '''
   Convert instrument parameters and detected signal power to axion coupling
