@@ -40,18 +40,23 @@ def main():
   time   = 1.  # integration time in hours
   Bfield = 10. # Tesla
 
-  mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, time=1. )
-  mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=1.,  snr=5., effic=0.5, time=1. )
-  mk_plot( cast, cavity1, cavity2, Adish=1.,  Bfield=10., snr=5., effic=0.5, time=1. )
-  mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=10.,effic=0.5, time=1. )
 
-  l_time = [0.001, 0.01, 0.1, 1, 10]
+  #mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=1.,  snr=5., effic=0.5, time=1. )
+  mk_plot( cast, cavity1, cavity2, Adish=10.,  Bfield=10., snr=5., effic=0.5, time=480. )
+  #mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=10.,effic=0.5, time=1. )
+  #mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, time=1. )
+
+  '''
+  
+  l_time = [0.001, 0.01, 0.1, 1, 10, 100, 1e3, 8760]
   for time in l_time:
     mk_plot( cast, cavity1, cavity2, Adish, Bfield, snr, effic, time )
-  
+  time   = 10
   l_effic = [0.001, 0.01, 0.1, 0.2, 0.5, 0.9, 1.0]
   for effic in l_effic:
     mk_plot( cast, cavity1, cavity2, Adish, Bfield, snr, effic, time )
+  '''
+
   # ----------------------------------------------------------
 
 #__________________________________________
@@ -120,37 +125,37 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   #plt.fill(solar_lifetime['x'], solar_lifetime['y'], myLighterBlue, linewidth=1, zorder=-1, edgecolor= myDarkerBlue) 
 
   #-----------------------------
-  # Upgrade 2
+  # 100x run time of stage 1
   #-----------------------------
   # KID [0.2, 5] meV
-  x, y = calc_axion_coupling(1e-24, Adish, Bfield, 0.2, 5, snr, effic, time)
+  x, y = calc_axion_coupling(3e-19, Adish, Bfield, 0.2, 5, snr, effic, time*100)
   plt.plot(x, y, myMediumOrange, alpha=0.7, lw=3, ls='--', linewidth=1, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myLightOrange, alpha=0.2)
 
   # SNSPD [207, 830] meV
-  x, y = calc_axion_coupling(1e-24, Adish, Bfield, 207, 830, snr, effic, time)
+  x, y = calc_axion_coupling(1e-20, Adish, Bfield, 207, 830, snr, effic, time*100)
   plt.plot(x, y, myDarkPink, alpha=0.5,lw=3, ls='--',zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myLightPink, alpha=0.5)
 
   # QCD [6.2] meV
-  x, y = calc_axion_coupling(1e-24, Adish, Bfield, 6.18, 6.22, snr, effic, time)
+  x, y = calc_axion_coupling(1e-22, Adish, Bfield, 6.18, 6.22, snr, effic, time*100)
   plt.fill_between(x, y, [-5, -5], color=myDarkGray, alpha=0.3)
 
   #-----------------------------
-  # Upgrade 1
+  # Stage 1
   #-----------------------------
   # Bolometer [1.65, 83] meV
-  x, y = calc_axion_coupling(2e-20, Adish, Bfield, 0.24, 248, snr, effic, time)
+  x, y = calc_axion_coupling(4e-17, Adish, Bfield, 0.24, 248, snr, effic, time)
   plt.plot(x, y, alpha=0.7,lw=3, ls='-.', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.1)
 
   # KID [0.2, 5] meV
-  x, y = calc_axion_coupling(1e-21, Adish, Bfield, 0.2, 5, snr, effic, time)
+  x, y = calc_axion_coupling(3e-19, Adish, Bfield, 0.2, 5, snr, effic, time)
   plt.plot(x, y, myMediumOrange, alpha=0.7, lw=3, ls='-.', linewidth=1, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myLightOrange, alpha=0.2)
 
   # SNSPD [207, 830] meV
-  x, y = calc_axion_coupling(1e-21, Adish, Bfield, 207, 830, snr, effic, time)
+  x, y = calc_axion_coupling(1e-20, Adish, Bfield, 207, 830, snr, effic, time)
   plt.plot(x, y, myDarkPink, alpha=0.5,lw=3, ls='-.',zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myLightPink, alpha=0.5)
 
@@ -168,6 +173,8 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   plt.plot(x, y, myDarkPurple, alpha=0.9,lw=3, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkPurple, alpha=0.3)
   
+  '''
+  
   # Standard 1.6 K IR Labs bolometer [0.24, 83] meV
   x, y = calc_axion_coupling(1e-13, Adish, Bfield, 83.0, 248.0, snr, effic, time)
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
@@ -177,11 +184,12 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   x, y = calc_axion_coupling(5e-14, Adish, Bfield, 4.0, 83.0, snr, effic, time)
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.15)
-
+  '''
   # Far-IR 1.6 K IR Labs bolometer
-  x, y = calc_axion_coupling(4e-15, Adish, Bfield, 0.24, 4.0, snr, effic, time)
+  x, y = calc_axion_coupling(4e-15, Adish, Bfield, 248, 4.0, snr, effic, time)
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.15)
+  
 
   # SNSPD [207, 830] meV
   x, y = calc_axion_coupling(1e-18, Adish, Bfield, 207, 830, snr, effic, time)
@@ -201,13 +209,13 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   x, y = calc_axion_coupling(1e-20, Adish, Bfield, 1e-6, 1e4, snr=1., effic=1., time=1./3600)
   plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
   
-  x, y = calc_axion_coupling(1e-25, Adish, Bfield, 1e-6, 1e4, snr=1., effic=1., time=1./3600)
-  plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
+  #x, y = calc_axion_coupling(1e-25, Adish, Bfield, 1e-6, 1e4, snr=1., effic=1., time=1./3600)
+  #plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
 
-  plt.plot([1, 1], [1, 1], lw=3, ls='-', c=myDarkGray, label='Baseline') 
-  plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label='Upgrade 1') 
-  plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label='Upgrade 2') 
-  plt.legend(loc='lower right', frameon=False, handlelength=2.8, borderpad=0.8)
+  plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 20 days') 
+  plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 20 days') 
+  plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 2000 days') 
+  plt.legend(loc='lower right', prop={'size':12}, frameon=False, handlelength=2.8, borderpad=0.8)
 
   # ------------------------------------------------------- 
   # Axis properties
@@ -246,19 +254,25 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
 
   # Sensors
   fig.text(0.62, 0.78, r'Bolometer', color=myMediumGray,  size=text_size)
-  fig.text(0.79, 0.80, r'SNSPD',     color=myDarkPink,    size=text_size)
-  fig.text(0.54, 0.69, r'KID',       color=myMediumOrange,size=text_size)
-  fig.text(0.43, 0.64, r'TES',       color=myDarkPurple,  size=text_size)
-  fig.text(0.61, 0.67, r'QCD',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.80, 0.80, r'SNSPD',     color=myDarkPink,    size=text_size)
+  fig.text(0.54, 0.61, r'KID',       color=myMediumOrange,size=text_size)
+  fig.text(0.43, 0.56, r'TES',       color=myDarkPurple,  size=text_size)
+  fig.text(0.61, 0.63, r'QCD',       color=myDarkGray,    size=text_size, rotation=90)
 
   # Eye guides
   fig.text(0.35, 0.65, r'$10^{-15}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
   fig.text(0.35, 0.47, r'$10^{-20}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
-  fig.text(0.35, 0.30, r'$10^{-25}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
+  #fig.text(0.35, 0.30, r'$10^{-25}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
 
   fig.text(0.49, 0.26, r'\textbf{BREAD} $A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
-  fig.text(0.49, 0.22, r'$B = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$, ' + r'$\mathrm{SNR}' + ' = {0}$'.format(snr), color=myDarkGray, size=text_size*0.68)
-  fig.text(0.49, 0.18, r'$\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic) + ', $\Delta t_\mathrm{int}' + ' = {0}'.format(time) + '~\mathrm{hrs}$', color=myDarkGray, size=text_size*0.68)
+  fig.text(0.49, 0.22, r'$B = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$, ' + r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr), color=myDarkGray, size=text_size*0.68)
+  if time == 8760:
+    integrationT = ', $\Delta t_\mathrm{int} = 1~\mathrm{yr}$'
+  elif time == 87600:
+    integrationT = ', $\Delta t_\mathrm{int} = 10~\mathrm{yrs}$'
+  else:
+    integrationT = ', $\Delta t_\mathrm{int}' + ' = {0:.0f}'.format(time) + '~\mathrm{hrs}$'
+  fig.text(0.49, 0.18, r'$\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic) + integrationT, color=myDarkGray, size=text_size*0.68)
 
 
   # Adjust axis ticks
@@ -300,7 +314,7 @@ def csv_to_lists(csv_file):
   return data
 
 #__________________________________________
-def calc_axion_coupling(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity = 0.3):
+def calc_axion_coupling(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity = 0.45):
   '''
   Convert instrument parameters and detected signal power to axion coupling
    - power is units of Watts
