@@ -115,7 +115,7 @@ def mk_plot():
   ax.set_yscale('log')
   # Draw the upper THz axis
   ax2 = ax.twiny()
-  ax2.set_xlim(2.42e-4, 242)
+  ax2.set_xlim(2.42e-5, 242)
   ax2.set_xlabel(r'$\mathrm{Frequency}~[\mathrm{THz}]$', labelpad=20, size=35)
    
   ax2.set_xscale('log')
@@ -152,7 +152,7 @@ def mk_plot():
   save_name = 'photon_rate_qcdaxion'
   print('Saving as {0}'.format(save_name))
   plt.savefig(save_name + '.pdf', format='pdf', dpi=50)
-  plt.savefig(save_name + '.png', format='png', dpi=400)
+  #plt.savefig(save_name + '.png', format='png', dpi=400)
   #plt.savefig(save_name + '.eps', format='eps', dpi=150)
   #plt.savefig(save_name, format='png', dpi=150)
 
