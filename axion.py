@@ -186,7 +186,7 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.15)
   '''
   # Far-IR 1.6 K IR Labs bolometer
-  x, y = calc_axion_coupling(4e-15, Adish, Bfield, 248, 4.0, snr, effic, time)
+  x, y = calc_axion_coupling(4e-15, Adish, Bfield, 0.24, 248, snr, effic, time)
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.15)
   
@@ -203,11 +203,11 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   #-----------------------------
   # General power eye-guides
   #-----------------------------
-  x, y = calc_axion_coupling(1e-15, Adish, Bfield, 1e-6, 1e4, snr=1., effic=1., time=1./3600)
-  plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
+  #x, y = calc_axion_coupling(1e-15, Adish, Bfield, 1e-6, 1e4, snr=1., effic=1., time=1./3600)
+  #plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
 
-  x, y = calc_axion_coupling(1e-20, Adish, Bfield, 1e-6, 1e4, snr=1., effic=1., time=1./3600)
-  plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
+  #x, y = calc_axion_coupling(1e-20, Adish, Bfield, 1e-6, 1e4, snr=1., effic=1., time=1./3600)
+  #plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
   
   #x, y = calc_axion_coupling(1e-25, Adish, Bfield, 1e-6, 1e4, snr=1., effic=1., time=1./3600)
   #plt.plot(x, y, lw=1, ls=':', c=myMediumGray) 
@@ -253,26 +253,28 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   fig.text(0.74, 0.612, r'QCD axion models', color=myMediumGreen, size=text_size, rotation=26)
 
   # Sensors
-  fig.text(0.62, 0.78, r'Bolometer', color=myMediumGray,  size=text_size)
+  fig.text(0.62, 0.78, r'Bolometer',    color=myDarkGray,    size=text_size)
+  fig.text(0.62, 0.76, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
   fig.text(0.80, 0.80, r'SNSPD',     color=myDarkPink,    size=text_size)
   fig.text(0.54, 0.61, r'KID',       color=myMediumOrange,size=text_size)
   fig.text(0.43, 0.56, r'TES',       color=myDarkPurple,  size=text_size)
   fig.text(0.61, 0.63, r'QCD',       color=myDarkGray,    size=text_size, rotation=90)
 
   # Eye guides
-  fig.text(0.35, 0.65, r'$10^{-15}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
-  fig.text(0.35, 0.47, r'$10^{-20}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
+  #fig.text(0.35, 0.65, r'$10^{-15}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
+  #fig.text(0.35, 0.47, r'$10^{-20}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
   #fig.text(0.35, 0.30, r'$10^{-25}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
 
   fig.text(0.49, 0.26, r'\textbf{BREAD} $A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
-  fig.text(0.49, 0.22, r'$B = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$, ' + r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr), color=myDarkGray, size=text_size*0.68)
+  fig.text(0.49, 0.22, r'$B = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$, ' + r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr), color=myDarkGray, size=text_size*0.8)
   if time == 8760:
     integrationT = ', $\Delta t_\mathrm{int} = 1~\mathrm{yr}$'
   elif time == 87600:
     integrationT = ', $\Delta t_\mathrm{int} = 10~\mathrm{yrs}$'
   else:
     integrationT = ', $\Delta t_\mathrm{int}' + ' = {0:.0f}'.format(time) + '~\mathrm{hrs}$'
-  fig.text(0.49, 0.18, r'$\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic) + integrationT, color=myDarkGray, size=text_size*0.68)
+  #fig.text(0.49, 0.18, r'$\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic) + integrationT, color=myDarkGray, size=text_size*0.68)
+  fig.text(0.49, 0.18, r'$\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.8)
 
 
   # Adjust axis ticks
