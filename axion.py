@@ -226,7 +226,7 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
 
   # axes labels
   x_txt = r"$\log_{10}[m_{a} / \mathrm{eV}]$"
-  y_txt = r'$\log_{10}[g_{a\gamma\gamma} / \mathrm{GeV}^{-1}]$'
+  y_txt = r'$\log_{10}[|g_{a\gamma\gamma}| / \mathrm{GeV}^{-1}]$'
     
   # Axis label properties
   plt.xlabel(x_txt, labelpad=20, size=35) 
