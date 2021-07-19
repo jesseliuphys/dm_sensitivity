@@ -172,8 +172,16 @@ def csv_to_lists(csv_file):
   
   return data
 
-  #__________________________________________
+#__________________________________________
 def calc_axion_rate(mirrorArea, Bfield, rhoDM, minMass, maxMass, DFSZ=False):
+  '''
+  Calculate QCD axion photon emission rate with BREAD given input parameters:
+  - mirrorArea in m^2
+  - Bfield in Tesla
+  - rhoDM in GeV/cm^3
+  - minMass, maxMass in eV
+  - DFSZ if True, else KSVZ axion
+  '''
 
   B = Bfield     / 10.
   A = mirrorArea / 10.
