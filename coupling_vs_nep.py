@@ -75,16 +75,16 @@ def mk_plot():
   Bfield = 10.0
 
   # Constant rate
-  x, y = calc_QCDaxion_coupling(1e-14, 1e-22, Adish, Bfield, snr=5., effic=0.5, time=24., relicDensity = 0.45)
+  x, y = calc_QCDaxion_coupling(1e-14, 1e-23, Adish, Bfield, snr=5., effic=0.5, time=24., relicDensity = 0.45)
   plt.plot(x, y, lw=2, ls='-', c=myMediumBlue, label=r'$1~\mathrm{day}$') 
 
-  x, y = calc_QCDaxion_coupling(1e-14, 1e-22, Adish, Bfield, snr=5., effic=0.5, time=24000., relicDensity = 0.45)
+  x, y = calc_QCDaxion_coupling(1e-14, 1e-23, Adish, Bfield, snr=5., effic=0.5, time=24000., relicDensity = 0.45)
   plt.plot(x, y, lw=4, ls='-', c=myMediumOrange, label=r'$1000~\mathrm{days}$') 
 
 
-  plt.plot([1e-13, 1e-22], [2.6, 2.6], lw=2, ls='-.', c=myMediumGray, label=r'$\mathrm{DFSZ}$') 
-  plt.plot([1e-13, 1e-22], [1, 1], lw=2, ls='--', c=myMediumGray, label=r'$\mathrm{DFSZ}$') 
-  plt.plot([2e-20, 2e-20], [0.1, 1e2], lw=3, ls='-', c=myMediumPurple) 
+  plt.plot([1e-13, 1e-23], [2.6, 2.6], lw=2, ls='-.', c=myMediumGray) 
+  plt.plot([1e-13, 1e-23], [1, 1],     lw=2, ls='--', c=myMediumGray) 
+  plt.plot([1e-20, 1e-20], [0.1, 1e2], lw=3, ls='-',  c=myDarkPurple) 
 
   #plt.plot([1, 1], [1, 1], lw=3, ls=':', c=myDarkGray, label=r'$A_\mathrm{dish}/10$') 
   #plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'$B_\mathrm{ext}/10$') 
@@ -94,7 +94,7 @@ def mk_plot():
   # Axis properties
   # ------------------------------------------------------- 
 
-  plt.xlim(1e-16, 1e-22)
+  plt.xlim(5e-23, 1e-16)
   plt.ylim(0.1, 1e5)
 
   # axes labels
@@ -126,12 +126,13 @@ def mk_plot():
   #fig.text(0.77, 0.18, r'$A_\mathrm{antenna} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
   fig.text(0.21, 0.77, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
   fig.text(0.21, 0.71, r'$A_\mathrm{dish} = 10~\mathrm{m}^2, B_\mathrm{ext} = 10~\mathrm{T}$', color=myDarkGray, size=text_size)
-  fig.text(0.21, 0.66, r'$\mathrm{SNR} = 5, \epsilon_s = 0.5$', color=myDarkGray, size=text_size)
+  fig.text(0.21, 0.65, r'$\mathrm{SNR} = 5, \epsilon_s = 0.5$', color=myDarkGray, size=text_size)
 
-  fig.text(0.21, 0.33, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
-  fig.text(0.21, 0.23, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
+  fig.text(0.71, 0.33, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
+  fig.text(0.71, 0.23, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
 
-  fig.text(0.67, 0.48, r'$\mathrm{State~of~the~art}$', color=myMediumPurple, size=text_size)
+  fig.text(0.28, 0.56, r'$\mathrm{State~of~the~art}$', color=myDarkPurple, size=text_size)
+  fig.text(0.28, 0.52, r'$\mathrm{(Quantum~capacitance~detector)}$', color=myDarkPurple, size=text_size*0.8)
 
 
   # Adjust axis ticks
