@@ -75,16 +75,19 @@ def mk_plot():
   Bfield = 10.0
 
   # Constant rate
-  x, y = calc_QCDaxion_coupling(1e-14, 1e-23, Adish, Bfield, snr=5., effic=0.5, time=24., relicDensity = 0.45)
+  x, y = calc_QCDaxion_coupling(1e-20, 0.1, 1000, 0.5, 1000, snr=5., effic=0.5, time=24., relicDensity = 0.45)
   plt.plot(x, y, lw=2, ls='-', c=myMediumBlue, label=r'$1~\mathrm{day}$') 
-
-  x, y = calc_QCDaxion_coupling(1e-14, 1e-23, Adish, Bfield, snr=5., effic=0.5, time=24000., relicDensity = 0.45)
+  print(x)
+  print(y)
+  x, y = calc_QCDaxion_coupling(1e-20, 0.1, 1000, 0.5, 1000, snr=5., effic=0.5, time=24000., relicDensity = 0.45)
   plt.plot(x, y, lw=4, ls='-', c=myMediumOrange, label=r'$1000~\mathrm{days}$') 
 
+  plt.plot([1e-1, 1e7], [2.6, 2.6], lw=2, ls='-.', c=myMediumGray) 
+  plt.plot([1e-1, 1e7], [1, 1],     lw=2, ls='--', c=myMediumGray) 
 
-  plt.plot([1e-13, 1e-23], [2.6, 2.6], lw=2, ls='-.', c=myMediumGray) 
-  plt.plot([1e-13, 1e-23], [1, 1],     lw=2, ls='--', c=myMediumGray) 
-  plt.plot([1e-20, 1e-20], [0.1, 1e2], lw=3, ls='-',  c=myDarkPurple) 
+  plt.plot([1e3, 1e3], [0.1, 2e2],  lw=3, ls='-',  c=myDarkPurple) 
+  plt.plot([1e4, 1e4], [0.1, 30],  lw=2, ls='-',  c=myMediumPurple) 
+  plt.plot([4e4, 4e4], [0.1, 8],  lw=2, ls='--',  c=myMediumPurple) 
 
   #plt.plot([1, 1], [1, 1], lw=3, ls=':', c=myDarkGray, label=r'$A_\mathrm{dish}/10$') 
   #plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'$B_\mathrm{ext}/10$') 
@@ -94,11 +97,11 @@ def mk_plot():
   # Axis properties
   # ------------------------------------------------------- 
 
-  plt.xlim(1e-23, 1e-16)
+  plt.xlim(5e-1, 5e6)
   plt.ylim(0.1, 1e5)
 
   # axes labels
-  x_txt = r'$\mathrm{Noise~equivalent~power~[W/\sqrt{Hz}}]$'
+  x_txt = r'$A_\mathrm{dish}\cdot B_\mathrm{ext}^2~[\mathrm{m}^2~\mathrm{T}^2]$'
   y_txt = r'$\left|g_{a\gamma\gamma} / g_{a\gamma\gamma}^\mathrm{DFSZ}\right|~\mathrm{sensitivity}$'
     
   # Axis label properties
@@ -125,14 +128,23 @@ def mk_plot():
 
   #fig.text(0.77, 0.18, r'$A_\mathrm{antenna} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
   fig.text(0.21, 0.77, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
-  fig.text(0.21, 0.71, r'$A_\mathrm{dish} = 10~\mathrm{m}^2, B_\mathrm{ext} = 10~\mathrm{T}$', color=myDarkGray, size=text_size)
   fig.text(0.21, 0.65, r'$\mathrm{SNR} = 5, \epsilon_s = 0.5$', color=myDarkGray, size=text_size)
+  fig.text(0.21, 0.71, r'$\mathrm{NEP} = 10^{-20}~\mathrm{W~Hz}^{-1/2}$', color=myDarkGray, size=text_size)
 
-  fig.text(0.71, 0.33, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
-  fig.text(0.71, 0.23, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
 
-  fig.text(0.28, 0.55, r'$\mathrm{Quantum~capacitance~detector}$', color=myDarkPurple, size=text_size)
-  fig.text(0.28, 0.50, r'$\mathrm{(State~of~the~art)}$', color=myDarkPurple, size=text_size*0.8)
+  fig.text(0.25, 0.33, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
+  fig.text(0.25, 0.22, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
+  
+  fig.text(0.53, 0.60, r'$A_\mathrm{dish} = 10~\mathrm{m}^2~(R = 0.75~\mathrm{m})$', color=myDarkPurple, size=text_size)
+  fig.text(0.53, 0.55, r'$B_\mathrm{ext} = 10~\mathrm{T}$', color=myDarkPurple, size=text_size)
+
+  fig.text(0.65, 0.50, r'$100~\mathrm{m}^2~(R = 2.4~\mathrm{m})$', color=myMediumPurple, size=text_size)
+  fig.text(0.65, 0.45, r'$10~\mathrm{T}$', color=myMediumPurple, size=text_size)
+
+  fig.text(0.74, 0.43, r'$100~\mathrm{m}^2$', color=myMediumPurple, size=text_size)
+  fig.text(0.74, 0.38, r'$20~\mathrm{T}$', color=myMediumPurple, size=text_size)
+
+  #fig.text(0.28, 0.50, r'$\mathrm{(State~of~the~art)}$', color=myDarkPurple, size=text_size*0.8)
 
 
   # Adjust axis ticks
@@ -149,7 +161,7 @@ def mk_plot():
   plt.tight_layout(pad=0.3)
   plt.subplots_adjust( top=0.85,left=0.17 )
   
-  save_name = 'coupling_vs_nep'
+  save_name = 'coupling_vs_ABsq'
   print('Saving as {0}'.format(save_name))
   plt.savefig(save_name + '.pdf', format='pdf', dpi=50)
   #plt.savefig(save_name + '.png', format='png', dpi=400)
@@ -173,13 +185,13 @@ def csv_to_lists(csv_file):
   return data
 
 #__________________________________________
-def calc_QCDaxion_coupling(minNEP, maxNEP, mirrorArea, Bfield, snr=5., effic=0.5, time=1., relicDensity = 0.45):
+def calc_QCDaxion_coupling(nep, minMirrorArea, maxMirrorArea, minBfield, maxBfield, snr=5., effic=0.5, time=1., relicDensity = 0.45):
   '''
   Convert instrument parameters and detected signal power to axion coupling
    - power is units of Watts
    - mirrorArea units is m^2
    - Bfield units is Tesla
-   - min/maxNEP   = min and max NEP to plot
+   - nep          = NEP considered
    - snr          = required signal to noise ratio 
    - effic        = overall signal power efficiency 
    - time         = integration time in hours
@@ -188,17 +200,18 @@ def calc_QCDaxion_coupling(minNEP, maxNEP, mirrorArea, Bfield, snr=5., effic=0.5
   in units of 10^{-11}/GeV
   '''
   ratio    = ( snr / 5. )
-  noiseMin = ( minNEP / 1.0e-21 )
-  noiseMax = ( maxNEP / 1.0e-21 )
-  area     = ( 10. / mirrorArea  ) 
+  noise   = ( nep / 1.0e-21 )
+  minArea  = ( 10. / minMirrorArea  ) 
+  maxArea  = ( 10. / maxMirrorArea  ) 
   dt       = math.sqrt( 1. / time )
   epsilon  = ( 0.5 / effic )
   rho      = ( 0.45 / relicDensity )
-  magnet   = ( 10. / Bfield )**2 
+  minMagnet   = ( 10. / minBfield )**2 
+  maxMagnet   = ( 10. / maxBfield )**2 
 
-  couplingSqMin = 3.6e-24 * ratio * noiseMin * area * dt * epsilon * rho * magnet 
+  couplingSqMin = 3.6e-24 * ratio * noise * minArea * dt * epsilon * rho * minMagnet 
   couplingMin   = math.sqrt( couplingSqMin )
-  couplingSqMax = 3.6e-24 * ratio * noiseMax * area * dt * epsilon * rho * magnet 
+  couplingSqMax = 3.6e-24 * ratio * noise * maxArea * dt * epsilon * rho * maxMagnet 
   couplingMax  = math.sqrt( couplingSqMax )
 
   gKSVZ = 3.9e-13 #(1/GeV) (mass/meV )
@@ -209,7 +222,10 @@ def calc_QCDaxion_coupling(minNEP, maxNEP, mirrorArea, Bfield, snr=5., effic=0.5
   minCoupling = ( couplingMin ) * (1. / gDFSZ)
   maxCoupling = ( couplingMax ) * (1. / gDFSZ)
 
-  return [minNEP, maxNEP], [minCoupling, maxCoupling]
+  minABsq = minMirrorArea * ( minBfield ** 2 )
+  maxABsq = maxMirrorArea * ( maxBfield ** 2 )
+
+  return [minABsq, maxABsq], [minCoupling, maxCoupling]
 
 #__________________________________________
 def calc_axion_rate(mirrorArea, Bfield, rhoDM, minMass, maxMass, DFSZ=False):
