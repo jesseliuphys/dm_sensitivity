@@ -377,6 +377,7 @@ def calc_darkPhoton_coupling(nep, mirrorArea, minMass, maxMass, snr=5., effic=0.
  
   return [log10minMass, log10maxMass], [log10kineticMixing, log10kineticMixing]
 
+
 #__________________________________________
 def calc_darkPhoton_coupling_rate(photonsPerHour, mirrorArea, minMass, maxMass):
   '''
