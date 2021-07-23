@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 '''
 Plot sensitivity to axion-photon coupling relative to DFSZ
-as a function of photosensor noise equivalent power (NEP)
+as a function of overall emission-to-detection efficiency
 '''
 
 import matplotlib as mplt
@@ -76,30 +76,30 @@ def mk_plot():
   Bfield = 10.0
 
   # Constant rate
-  x, y = calc_QCDaxion_coupling(1e-14, 1e-23, Adish, Bfield, snr=5., effic=0.5, time=24., relicDensity = 0.45)
-  plt.plot(x, y, lw=2, ls='-', c=myMediumBlue, label=r'$1~\mathrm{day}$') 
+  x, y = calc_QCDaxion_coupling(1e-20, Adish, Bfield, snr=5., minEffic=1e-3, maxEffic=1., time=24000., relicDensity = 0.45)
+  plt.plot(x, y, lw=2, ls='-', c=myMediumBlue, label=r'$10^{-20}~\mathrm{W~Hz}^{-1/2}$') 
 
-  x, y = calc_QCDaxion_coupling(1e-14, 1e-23, Adish, Bfield, snr=5., effic=0.5, time=24000., relicDensity = 0.45)
-  plt.plot(x, y, lw=4, ls='-', c=myMediumOrange, label=r'$1000~\mathrm{days}$') 
+  x, y = calc_QCDaxion_coupling(1e-21, Adish, Bfield, snr=5., minEffic=1e-3, maxEffic=1., time=24000., relicDensity = 0.45)
+  plt.plot(x, y, lw=4, ls='-', c=myMediumOrange, label=r'$10^{-21}~\mathrm{W~Hz}^{-1/2}$') 
 
 
-  plt.plot([1e-13, 1e-23], [2.6, 2.6], lw=2, ls='-.', c=myMediumGray) 
-  plt.plot([1e-13, 1e-23], [1, 1],     lw=2, ls='--', c=myMediumGray) 
-  plt.plot([1e-20, 1e-20], [0.1, 1e2], lw=3, ls='-',  c=myDarkPurple) 
+  plt.plot([1e-3, 1], [2.6, 2.6], lw=2, ls='-.', c=myMediumGray) 
+  plt.plot([1e-3, 1], [1, 1],     lw=2, ls='--', c=myMediumGray) 
+  #plt.plot([1e-3, 1], [0.1, 1e2], lw=3, ls='-',  c=myDarkPurple) 
 
   #plt.plot([1, 1], [1, 1], lw=3, ls=':', c=myDarkGray, label=r'$A_\mathrm{dish}/10$') 
   #plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'$B_\mathrm{ext}/10$') 
-  plt.legend(loc='upper right', prop={'size':text_size*0.95}, frameon=False, handlelength=2.8, borderpad=0.8)
+  plt.legend(loc='upper right', prop={'size':text_size*0.95}, frameon=False, handlelength=2.1, borderpad=0.8)
 
   # ------------------------------------------------------- 
   # Axis properties
   # ------------------------------------------------------- 
 
-  plt.xlim(1e-23, 1e-16)
-  plt.ylim(0.1, 1e5)
+  plt.xlim(1e-3, 1)
+  plt.ylim(0.2, 5e3)
 
   # axes labels
-  x_txt = r'$\mathrm{Noise~equivalent~power~[W/\sqrt{Hz}}]$'
+  x_txt = r'$\mathrm{Signal~efficiency}$'
   y_txt = r'$\left|g_{a\gamma\gamma} / g_{a\gamma\gamma}^\mathrm{DFSZ}\right|~\mathrm{sensitivity}$'
     
   # Axis label properties
@@ -127,13 +127,13 @@ def mk_plot():
   #fig.text(0.77, 0.18, r'$A_\mathrm{antenna} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
   fig.text(0.21, 0.77, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
   fig.text(0.21, 0.71, r'$A_\mathrm{dish} = 10~\mathrm{m}^2, B_\mathrm{ext} = 10~\mathrm{T}$', color=myDarkGray, size=text_size)
-  fig.text(0.21, 0.65, r'$\mathrm{SNR} = 5, \epsilon_s = 0.5$', color=myDarkGray, size=text_size)
+  fig.text(0.21, 0.65, r'$\mathrm{SNR} = 5, \Delta t = 1000~\mathrm{days}$', color=myDarkGray, size=text_size)
 
-  fig.text(0.71, 0.33, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
-  fig.text(0.71, 0.23, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
+  fig.text(0.28, 0.33, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
+  fig.text(0.28, 0.22, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
 
-  fig.text(0.28, 0.55, r'$\mathrm{Quantum~capacitance~detector}$', color=myDarkPurple, size=text_size)
-  fig.text(0.28, 0.50, r'$\mathrm{(State~of~the~art)}$', color=myDarkPurple, size=text_size*0.8)
+  #fig.text(0.28, 0.55, r'$\mathrm{Quantum~capacitance~detector}$', color=myDarkPurple, size=text_size)
+  #fig.text(0.28, 0.50, r'$\mathrm{(State~of~the~art)}$', color=myDarkPurple, size=text_size*0.8)
 
 
   # Adjust axis ticks
@@ -150,7 +150,7 @@ def mk_plot():
   plt.tight_layout(pad=0.3)
   plt.subplots_adjust( top=0.85,left=0.17 )
   
-  save_name = 'coupling_vs_nep'
+  save_name = 'coupling_vs_efficiency'
   print('Saving as {0}'.format(save_name))
   plt.savefig(save_name + '.pdf', format='pdf', dpi=50)
   #plt.savefig(save_name + '.png', format='png', dpi=400)
@@ -174,32 +174,32 @@ def csv_to_lists(csv_file):
   return data
 
 #__________________________________________
-def calc_QCDaxion_coupling(minNEP, maxNEP, mirrorArea, Bfield, snr=5., effic=0.5, time=1., relicDensity = 0.45):
+def calc_QCDaxion_coupling(NEP, mirrorArea, Bfield, snr=5., minEffic=1e-4, maxEffic=1.0, time=1., relicDensity = 0.45):
   '''
   Convert instrument parameters and detected signal power to axion coupling
    - power is units of Watts
    - mirrorArea units is m^2
    - Bfield units is Tesla
-   - min/maxNEP   = min and max NEP to plot
+   - NEP          = NEP to plot
    - snr          = required signal to noise ratio 
-   - effic        = overall signal power efficiency 
+   - min/maxEffic = overall signal power efficiency 
    - time         = integration time in hours
    - relicDensity = dark matter relic density in GeV/cm^3
   Returns lowest [minCoupling, maxCoupling] coupling values probed 
   in units of 10^{-11}/GeV
   '''
   ratio    = ( snr / 5. )
-  noiseMin = ( minNEP / 1.0e-21 )
-  noiseMax = ( maxNEP / 1.0e-21 )
+  noise    = ( NEP / 1.0e-21 )
   area     = ( 10. / mirrorArea  ) 
   dt       = math.sqrt( 1. / time )
-  epsilon  = ( 0.5 / effic )
+  minEpsilon  = ( 0.5 / minEffic )
+  maxEpsilon  = ( 0.5 / maxEffic )
   rho      = ( 0.45 / relicDensity )
   magnet   = ( 10. / Bfield )**2 
 
-  couplingSqMin = 3.6e-24 * ratio * noiseMin * area * dt * epsilon * rho * magnet 
+  couplingSqMin = 3.6e-24 * ratio * noise * area * dt * minEpsilon * rho * magnet 
   couplingMin   = math.sqrt( couplingSqMin )
-  couplingSqMax = 3.6e-24 * ratio * noiseMax * area * dt * epsilon * rho * magnet 
+  couplingSqMax = 3.6e-24 * ratio * noise * area * dt * maxEpsilon * rho * magnet 
   couplingMax  = math.sqrt( couplingSqMax )
 
   gKSVZ = 3.9e-13 #(1/GeV) (mass/meV )
@@ -210,7 +210,7 @@ def calc_QCDaxion_coupling(minNEP, maxNEP, mirrorArea, Bfield, snr=5., effic=0.5
   minCoupling = ( couplingMin ) * (1. / gDFSZ)
   maxCoupling = ( couplingMax ) * (1. / gDFSZ)
 
-  return [minNEP, maxNEP], [minCoupling, maxCoupling]
+  return [minEffic, maxEffic], [minCoupling, maxCoupling]
 
 #__________________________________________
 def calc_axion_rate(mirrorArea, Bfield, rhoDM, minMass, maxMass, DFSZ=False):

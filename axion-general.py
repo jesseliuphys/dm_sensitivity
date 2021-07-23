@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 '''
 Axion DM sensitivity plotter
+for a general ideal broadband sensor
 '''
 
 import matplotlib as mplt

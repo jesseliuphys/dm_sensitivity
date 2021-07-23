@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 '''
-Plot signal photon rate
+Plot sensitivity to axion-photon coupling relative to DFSZ
+as a function of area * Bfield^2 
 '''
 
 import matplotlib as mplt
