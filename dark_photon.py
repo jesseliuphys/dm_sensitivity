@@ -244,14 +244,14 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 1000 days') 
-  plt.legend(loc='lower right', prop={'size':12}, frameon=False, handlelength=2.8, borderpad=0.8)
+  plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=2.8, borderpad=0.8)
 
   # ------------------------------------------------------- 
   # Axis properties
   # ------------------------------------------------------- 
 
   plt.xlim(-6, 1)
-  plt.ylim(-17, -6.5)
+  plt.ylim(-18, -6.5)
 
   # axes labels
   x_txt = r"$\log_{10}[m_{A'} / \mathrm{eV}]$"
@@ -272,11 +272,11 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   text_size = 23
 
   # Cavity haloscopes
-  fig.text(0.18, 0.22,  r'Cavity',  color=myDarkerBlue, size=text_size)
+  fig.text(0.18, 0.25,  r'Cavity',  color=myDarkerBlue, size=text_size)
   #fig.text(0.18, 0.22, r'ADMX,',  color=myDarkerBlue, size=text_size)
   #fig.text(0.18, 0.18, r'RBF, UF',color=myDarkerBlue, size=text_size)
-  fig.text(0.34, 0.58,  r'SHUKET', color=myDarkBlue,   size=text_size, rotation=90)
-  fig.text(0.325, 0.38, r'Qubit',  color=myDarkBlue,   size=text_size, rotation=90)
+  fig.text(0.34, 0.59,  r'SHUKET', color=myDarkBlue,   size=text_size, rotation=90)
+  fig.text(0.325, 0.39, r'Qubit',  color=myDarkBlue,   size=text_size, rotation=90)
 
   # Astrophysics
   fig.text(0.22, 0.76, r'Cosmology', color=myDarkerBlue, size=text_size)
@@ -286,13 +286,13 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   # Sensors
   fig.text(0.61, 0.79,r'Pyroelectric', color=myDarkGreen,   size=text_size)
   fig.text(0.61, 0.77,r'(Commercial)', color=myDarkGreen,   size=text_size*0.5)
-  fig.text(0.63,0.62, r'IR Labs',    color=myDarkGray,    size=text_size)
-  fig.text(0.63,0.60, r'(Commercial)',   color=myDarkGray,   size=text_size*0.5)
+  fig.text(0.63,0.64, r'IR Labs',    color=myDarkGray,    size=text_size)
+  fig.text(0.63,0.62, r'(Commercial)',   color=myDarkGray,   size=text_size*0.5)
 
-  fig.text(0.79, 0.48, r'SNSPD',        color=myDarkPink,    size=text_size)
-  fig.text(0.54, 0.41,  r'KID',          color=myMediumOrange,size=text_size)
-  fig.text(0.43, 0.36,  r'TES',          color=myDarkPurple,  size=text_size)
-  fig.text(0.61, 0.37,  r'QCDet',        color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.79, 0.51, r'SNSPD',        color=myDarkPink,    size=text_size)
+  fig.text(0.54, 0.445,  r'KID',          color=myMediumOrange,size=text_size)
+  fig.text(0.43, 0.40,  r'TES',          color=myDarkPurple,  size=text_size)
+  fig.text(0.61, 0.39,  r'QCDet',        color=myDarkGray,    size=text_size, rotation=90)
 
   # Eye guides
   #fig.text(0.89, 0.60,  r'$10^{-15}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size)
@@ -302,7 +302,7 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   #fig.text(0.87, 0.50, r'Photon/second', color=myMediumGray, size=0.5*text_size, rotation=15)
   #fig.text(0.87, 0.375, r'Photon/hour',    color=myMediumGray, size=0.5*text_size, rotation=15)
 
-  fig.text(0.40, 0.21, r'\textbf{BREAD} $A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
+  fig.text(0.36, 0.22, r'\textbf{BREAD} $A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
   
   if time == 8760:
     integrationT = ', $\Delta t_\mathrm{int} = 1~\mathrm{yr}$'
@@ -311,7 +311,7 @@ def mk_plot( cosmological, cast, solar_lifetime, cavity1, cavity2, cavity3, shuk
   else:
     integrationT = ', $\Delta t_\mathrm{int}' + ' = {0:.0f}'.format(time) + '~\mathrm{hrs}$'
   #fig.text(0.40, 0.175, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic) + integrationT, color=myDarkGray, size=text_size*0.68)
-  fig.text(0.40, 0.175, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.8)
+  fig.text(0.36, 0.18, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
 
   # Adjust axis ticks
   ax.minorticks_on()

@@ -224,7 +224,7 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 1000 days') 
-  plt.legend(loc='lower right', prop={'size':14}, frameon=False, handlelength=2.8, borderpad=0.8)
+  plt.legend(loc='lower right', prop={'size':17}, frameon=False, handlelength=2.8, borderpad=0.8)
 
   # ------------------------------------------------------- 
   # Axis properties
@@ -264,18 +264,18 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   # Sensors
   fig.text(0.62, 0.78, r'IR Labs',    color=myDarkGray,    size=text_size)
   fig.text(0.62, 0.76, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
-  fig.text(0.80, 0.80, r'SNSPD',     color=myDarkPink,    size=text_size)
+  fig.text(0.80, 0.73, r'SNSPD',     color=myDarkPink,    size=text_size)
   fig.text(0.54, 0.55, r'KID',       color=myMediumOrange,size=text_size)
   fig.text(0.43, 0.41, r'TES',       color=myDarkPurple,  size=text_size)
-  fig.text(0.61, 0.63, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.61, 0.61, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
   # Eye guides
   #fig.text(0.35, 0.65, r'$10^{-15}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
   #fig.text(0.35, 0.47, r'$10^{-20}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
   #fig.text(0.35, 0.30, r'$10^{-25}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
 
-  fig.text(0.46, 0.26, r'\textbf{BREAD} $A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
-  fig.text(0.46, 0.22, r'$B = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$, ' + r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr), color=myDarkGray, size=text_size*0.8)
+  fig.text(0.66, 0.39, r'\textbf{BREAD}' , color=myDarkGray, size=text_size)
+  fig.text(0.66, 0.345, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$' + r', $B = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$', color=myDarkGray, size=text_size*0.9)
   if time == 8760:
     integrationT = ', $\Delta t_\mathrm{int} = 1~\mathrm{yr}$'
   elif time == 87600:
@@ -283,7 +283,7 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   else:
     integrationT = ', $\Delta t_\mathrm{int}' + ' = {0:.0f}'.format(time) + '~\mathrm{hrs}$'
   #fig.text(0.49, 0.18, r'$\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic) + integrationT, color=myDarkGray, size=text_size*0.68)
-  fig.text(0.46, 0.18, r'$\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.8)
+  fig.text(0.66, 0.305, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + r', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
 
 
   # Adjust axis ticks
