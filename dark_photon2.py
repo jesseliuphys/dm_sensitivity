@@ -78,12 +78,6 @@ def main():
 
   print(stellar)
 
-  text_size = 23
-  fig.text(0.18, 0.27,  r'Haloscopes',  color=myDarkerBlue, size=text_size)
-  fig.text(0.22, 0.63,  r'Cosmology',  color=myDarkBlue, size=text_size)
-  fig.text(0.87, 0.54,  r'Stellar',  color=myDarkBlue, size=text_size)
-  fig.text(0.23, 0.77,  r"$\gamma \to A'$",  color=myDarkBlue, size=text_size)
-  
   # Default values
   Adish = 10. # dish area in m^2
   snr   = 5.  # signal to noise
@@ -95,7 +89,7 @@ def main():
   #-----------------------------
   # Bolometer [1.65, 83] meV
   x, y = calc_darkPhoton_coupling(4e-17, Adish, 0.24, 248, snr, effic, time*100)
-  plt.plot(x, y, alpha=0.7,lw=3, ls='--', c=myMediumGray, zorder=4) 
+  plt.plot(x, y, alpha=0.7,lw=3, ls='--', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.1)
 
   # KID [0.2, 5] meV
@@ -122,7 +116,7 @@ def main():
   #-----------------------------
   # Bolometer [1.65, 83] meV
   x, y = calc_darkPhoton_coupling(4e-17, Adish, 0.24, 248, snr, effic, time)
-  plt.plot(x, y, alpha=0.7,lw=3, ls='-.', c=myMediumGray, zorder=4) 
+  plt.plot(x, y, alpha=0.7,lw=3, ls='-.', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.1, zorder=4)
 
   # KID [0.2, 5] meV
@@ -144,7 +138,7 @@ def main():
   #-----------------------------
   # Far-IR 1.6 K IR Labs bolometer
   x, y = calc_darkPhoton_coupling(4e-15, Adish, 0.24, 248, snr, effic, time)
-  plt.plot(x, y, alpha=0.8,lw=3, c=myMediumGray, zorder=4) 
+  plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.3, zorder=4)
 
   # KID [0.2, 5] meV
@@ -184,16 +178,23 @@ def main():
   x, y = calc_darkPhoton_coupling(1e-18, Adish/10.0, 207, 830, snr, effic, time/10.0)
   plt.plot(x, y, alpha=0.8,lw=1, c=myDarkPink, zorder=4) 
 
+  # Existing constraint labels
+  text_size = 23
+  fig.text(0.18, 0.30,  r'Haloscopes',      color=myDarkBlue, size=text_size)
+  fig.text(0.22, 0.63,  r'Cosmology',       color=myDarkBlue, size=text_size)
+  fig.text(0.87, 0.54,  r'Stellar',         color=myDarkBlue, size=text_size)
+  fig.text(0.23, 0.77,  r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
+  
   # Sensors labels
-  fig.text(0.61, 0.79,r'Pyroelectric', color=myDarkGreen,   size=text_size)
-  fig.text(0.61, 0.77,r'(Commercial)', color=myDarkGreen,   size=text_size*0.5)
-  fig.text(0.63,0.64, r'IR Labs',    color=myDarkGray,    size=text_size)
-  fig.text(0.63,0.62, r'(Commercial)',   color=myDarkGray,   size=text_size*0.5)
+  fig.text(0.61, 0.80,r'Pyroelectric', color=myDarkGreen,   size=text_size)
+  fig.text(0.61, 0.78,r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
+  fig.text(0.63,0.64, r'IR Labs',      color=myDarkGray,    size=text_size)
+  fig.text(0.63,0.62, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
 
-  fig.text(0.79, 0.51, r'SNSPD',        color=myDarkPink,    size=text_size)
-  fig.text(0.54, 0.445,  r'KID',          color=myMediumOrange,size=text_size)
-  fig.text(0.43, 0.40,  r'TES',          color=myDarkPurple,  size=text_size)
-  fig.text(0.61, 0.39,  r'QCDet',        color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.78, 0.51, r'SNSPD',       color=myDarkPink,    size=text_size)
+  fig.text(0.54, 0.435,r'KID',         color=myMediumOrange,size=text_size)
+  fig.text(0.43, 0.39, r'TES',         color=myDarkPurple,  size=text_size)
+  fig.text(0.60, 0.36, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
   # Axis log scale
   ax.set_xscale('log')
@@ -221,6 +222,10 @@ def main():
   ax.xaxis.set_minor_locator(locmin)
   locmaj = mplt.ticker.LogLocator(base=10.0, subs=(1.0, ), numticks=100)
   locmin = mplt.ticker.LogLocator(base=10.0, subs=np.arange(2, 10)*.1,numticks=100)
+  ax2.xaxis.set_major_locator(locmaj)
+  ax2.xaxis.set_minor_locator(locmin)
+  locmaj = mplt.ticker.LogLocator(base=10.0, subs=(1.0, ), numticks=100)
+  locmin = mplt.ticker.LogLocator(base=10.0, subs=np.arange(2, 10)*.1,numticks=100)
   ax.yaxis.set_major_locator(locmaj)
   ax.yaxis.set_minor_locator(locmin)
   ax2.xaxis.set_minor_formatter(mplt.ticker.NullFormatter())
@@ -240,7 +245,7 @@ def main():
   plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 1000 days') 
-  plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=2.8, borderpad=0.8)
+  plt.legend(loc='lower right', prop={'size':15}, frameon=False, handlelength=2.8, borderpad=0.6)
 
   fig.text(0.36, 0.22, r'\textbf{BREAD} $A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
   
@@ -258,7 +263,7 @@ def main():
   plt.subplots_adjust( top=0.85,left=0.15 )
 
   # Save plot to pdf
-  plt.savefig('dp.pdf', format='pdf')
+  plt.savefig('fig_dark_photon_photosensors.pdf', format='pdf')
 
 #__________________________________________
 def calc_darkPhoton_coupling(nep, mirrorArea, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity = 0.45):
