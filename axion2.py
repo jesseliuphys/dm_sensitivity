@@ -221,8 +221,8 @@ def main():
   fig.text(0.63,0.79, r'IR Labs',      color=myDarkGray,    size=text_size)
   fig.text(0.63,0.77, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
 
-  fig.text(0.79, 0.72, r'SNSPD',       color=myDarkPink,    size=text_size)
-  fig.text(0.54, 0.47,r'KID',         color=myMediumOrange,size=text_size)
+  fig.text(0.79, 0.72,  r'SNSPD',       color=myDarkPink,    size=text_size)
+  fig.text(0.54, 0.47,  r'KID',         color=myMediumOrange,size=text_size)
   fig.text(0.435, 0.41, r'TES',         color=myDarkPurple,  size=text_size)
   fig.text(0.605, 0.49, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
@@ -247,6 +247,8 @@ def main():
   ax2.set_xlim(241.79e-6, 2417.9)
   ax2.set_xscale('log')
   ax2.set_xlabel(r'$\nu~[\mathrm{THz}]$', labelpad=18, size=35)
+  ax2.get_xaxis().set_major_formatter(mplt.ticker.ScalarFormatter())
+  ax2.get_xaxis().set_major_formatter(mplt.ticker.FormatStrFormatter(r'$%g$'))
 
   # Force axis ticks to appear in log scale
   locmaj = mplt.ticker.LogLocator(base=10.0, subs=(1.0, ), numticks=100)
@@ -265,6 +267,7 @@ def main():
   ax.xaxis.set_minor_formatter(mplt.ticker.NullFormatter())
   ax.yaxis.set_minor_formatter(mplt.ticker.NullFormatter())
 
+
   # Axis ticks
   ax.tick_params('x', length=12, width=1, which='major', labelsize='28', pad=10, direction="in")
   ax.tick_params('x', length=6,  width=1, which='minor', direction="in") 
@@ -280,7 +283,7 @@ def main():
   plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=2.8, borderpad=0.6)
 
   fig.text(0.65, 0.38, r'\textbf{BREAD}' , color=myDarkGray, size=text_size)
-  fig.text(0.65, 0.34, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$' + r', $B = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$', color=myDarkGray, size=text_size*0.9)
+  fig.text(0.65, 0.34, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$' + r', $B_\mathrm{ext} = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$', color=myDarkGray, size=text_size*0.9)
   if time == 8760:
     integrationT = ', $\Delta t_\mathrm{int} = 1~\mathrm{yr}$'
   elif time == 87600:

@@ -65,6 +65,13 @@ def main():
   dmsearch = pd.read_csv('limits/common/DP_Combined_DarkMatterSearches.txt', sep=' ', lineterminator='\n', names=['x', 'y'])
   plt.fill_between(dmsearch['x'], dmsearch['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)  
 
+  shuket = pd.read_csv('limits/common/DP_SHUKET.txt', sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(shuket['x'], shuket['y'], 1e-1, edgecolor='none', facecolor=myDarkerBlue)  
+
+  tokyo1 = pd.read_csv('limits/common/DP_Tokyo-Tomita.txt', sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.plot(tokyo1['x'],   tokyo1['y'],  color=myDarkerBlue, lw=1, zorder=-2)
+  plt.fill_between(tokyo1['x'], tokyo1['y'], 1e-1, edgecolor='none', facecolor=myDarkerBlue)  
+
   dmcosmo  = pd.read_csv('limits/common/DP_Combined.txt', sep=' ', lineterminator='\n', names=['x', 'y'])
   plt.plot(dmcosmo['x'],   dmcosmo['y'],  color=myLighterBlue, lw=1)
   plt.fill_between(dmcosmo['x'], dmcosmo['y'], 1e-1, edgecolor='none', facecolor=myLightestBlue)
@@ -76,8 +83,6 @@ def main():
   lab      = pd.read_csv('limits/common/DP_Combined_Laboratory.txt', sep=' ', lineterminator='\n', names=['x', 'y'])
   plt.plot(lab['x'], lab['y'], color=myLightBlue, lw=1)
   plt.fill_between(lab['x'], lab['y'], 1e-1, edgecolor='none', facecolor=myLightestBlue)
-
-  print(stellar)
 
   # Default values
   Adish = 10. # dish area in m^2
@@ -181,28 +186,39 @@ def main():
 
   # Existing constraint labels
   text_size = 23
-  fig.text(0.175, 0.45, r'Haloscope',      color=myDarkerBlue, size=text_size)
-  fig.text(0.22, 0.67,  r'Cosmology',       color=myDarkBlue, size=text_size)
-  fig.text(0.86, 0.63,  r'Stellar',         color=myDarkBlue, size=text_size)
-  fig.text(0.23, 0.78,  r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
+  fig.text(0.18, 0.40, r'Haloscope',       color=myDarkBlue, size=text_size)
+  fig.text(0.355,0.545, r'Dish',            color=myDarkerBlue, size=text_size)
+  fig.text(0.20, 0.64, r'Cosmology',       color=myDarkBlue, size=text_size)
+  fig.text(0.86, 0.63, r'Stellar',         color=myDarkBlue, size=text_size)
+  fig.text(0.23, 0.78, r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
   
   # Sensors labels
-  fig.text(0.61, 0.78,r'Pyroelectric', color=myDarkGreen,   size=text_size)
-  fig.text(0.61, 0.755,r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
-  fig.text(0.63,0.62, r'IR Labs',      color=myDarkGray,    size=text_size)
-  fig.text(0.63,0.60, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
+  fig.text(0.61, 0.76,r'Pyroelectric', color=myDarkGreen,   size=text_size)
+  fig.text(0.61, 0.735,r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
+  fig.text(0.63,0.60, r'IR Labs',      color=myDarkGray,    size=text_size)
+  fig.text(0.63,0.58, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
 
-  fig.text(0.78, 0.50, r'SNSPD',       color=myDarkPink,    size=text_size)
-  fig.text(0.54, 0.43,r'KID',         color=myMediumOrange,size=text_size)
-  fig.text(0.43, 0.39, r'TES',         color=myDarkPurple,  size=text_size)
-  fig.text(0.61, 0.35, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.79, 0.465,r'SNSPD',       color=myDarkPink,    size=text_size)
+  fig.text(0.54, 0.395,r'KID',         color=myMediumOrange,size=text_size)
+  fig.text(0.43, 0.35, r'TES',         color=myDarkPurple,  size=text_size)
+  fig.text(0.605,0.31, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+
+  # Arrows for SHUKET nad Tokyo
+  ax.annotate('', xy=(0.21, 0.59),  xycoords='axes fraction',
+            xytext=(0.25, 0.59), textcoords='axes fraction',
+            arrowprops=dict(facecolor=myDarkerBlue, width=1.2, shrink=0.05, lw=0),
+            horizontalalignment='left', verticalalignment='top',)
+  ax.annotate('', xy=(0.295, 0.65),  xycoords='axes fraction',
+            xytext=(0.295, 0.60), textcoords='axes fraction',
+            arrowprops=dict(facecolor=myDarkerBlue, width=1.2, shrink=0.05, lw=0),
+            horizontalalignment='left', verticalalignment='top',)
 
   # Axis log scale
   ax.set_xscale('log')
   ax.set_yscale('log')
   # Axis limits
   ax.set_xlim(1e-6, 10)
-  ax.set_ylim(1e-18, 1e-6)
+  ax.set_ylim(1e-17, 1e-6)
   # Axis labels
   x_txt = r"$m_{A'}~[\mathrm{eV}]$"
   y_txt = r'$\kappa$'
@@ -215,6 +231,8 @@ def main():
   ax2.set_xlim(241.79e-6, 2417.9)
   ax2.set_xscale('log')
   ax2.set_xlabel(r'$\nu~[\mathrm{THz}]$', labelpad=18, size=35)
+  ax2.get_xaxis().set_major_formatter(mplt.ticker.ScalarFormatter())
+  ax2.get_xaxis().set_major_formatter(mplt.ticker.FormatStrFormatter(r'$%g$'))
 
   # Force axis ticks to appear in log scale
   locmaj = mplt.ticker.LogLocator(base=10.0, subs=(1.0, ), numticks=100)
@@ -246,9 +264,10 @@ def main():
   plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 1000 days') 
-  plt.legend(loc='lower right', prop={'size':15}, frameon=False, handlelength=2.8, borderpad=0.6)
+  plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=1.9, handletextpad=0.5, borderpad=0.6, ncol=2, columnspacing=0.6)
 
-  fig.text(0.36, 0.22, r'\textbf{BREAD} $A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
+  fig.text(0.18, 0.26, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
+  fig.text(0.18, 0.22, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
   
   if time == 8760:
     integrationT = ', $\Delta t_\mathrm{int} = 1~\mathrm{yr}$'
@@ -257,7 +276,7 @@ def main():
   else:
     integrationT = ', $\Delta t_\mathrm{int}' + ' = {0:.0f}'.format(time) + '~\mathrm{hrs}$'
   #fig.text(0.40, 0.175, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic) + integrationT, color=myDarkGray, size=text_size*0.68)
-  fig.text(0.36, 0.18, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
+  fig.text(0.18, 0.18, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
 
   # Plot margins
   plt.tight_layout(pad=0.3)
