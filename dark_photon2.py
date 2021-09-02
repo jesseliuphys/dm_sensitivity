@@ -20,6 +20,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 doLogY = False # Draw the y-axis on log scale
 
 mplt.rc("text", usetex=True)
+mplt.rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 
 #__________________________________________
 def main():
@@ -59,18 +60,18 @@ def main():
 
   # Existing constraints from https://arxiv.org/abs/2105.04565 https://github.com/cajohare/AxionLimits/ 
   haloscope= pd.read_csv('limits/common/DP_Combined_Haloscope.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
-  plt.fill_between(haloscope['x'], haloscope['y'], 1e-1, edgecolor='none', facecolor=myDarkBlue)
+  plt.fill_between(haloscope['x'], haloscope['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
 
   dmsearch = pd.read_csv('limits/common/DP_Combined_DarkMatterSearches.txt', sep=' ', lineterminator='\n', names=['x', 'y'])
-  plt.fill_between(dmsearch['x'], dmsearch['y'], 1e-1, edgecolor='none', facecolor=myDarkBlue)  
+  plt.fill_between(dmsearch['x'], dmsearch['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)  
 
   dmcosmo  = pd.read_csv('limits/common/DP_Combined.txt', sep=' ', lineterminator='\n', names=['x', 'y'])
-  plt.plot(dmcosmo['x'],   dmcosmo['y'],  color=myLightBlue, lw=1)
+  plt.plot(dmcosmo['x'],   dmcosmo['y'],  color=myLighterBlue, lw=1)
   plt.fill_between(dmcosmo['x'], dmcosmo['y'], 1e-1, edgecolor='none', facecolor=myLightestBlue)
 
   stellar  = pd.read_csv('limits/common/DP_Combined_Stellar.txt', sep=' ',lineterminator='\n', names=['x', 'y'])
   plt.plot(stellar['x'],   stellar['y'],  color=myLightBlue, lw=1, zorder=-1)
-  plt.fill_between(stellar['x'], stellar['y'], 1e-1, edgecolor='none', facecolor=myLightestBlue)
+  plt.fill_between(stellar['x'], stellar['y'], 1e-1, edgecolor='none', facecolor=myLighterBlue)
   
   lab      = pd.read_csv('limits/common/DP_Combined_Laboratory.txt', sep=' ', lineterminator='\n', names=['x', 'y'])
   plt.plot(lab['x'], lab['y'], color=myLightBlue, lw=1)
@@ -82,7 +83,7 @@ def main():
   Adish = 10. # dish area in m^2
   snr   = 5.  # signal to noise
   effic = 0.5 # signal detection efficiency
-  time  = 1.  # integration time in hours
+  time  = 240.  # integration time in hours
 
   #-----------------------------
   # 10x time of Upgrade 1
@@ -180,28 +181,28 @@ def main():
 
   # Existing constraint labels
   text_size = 23
-  fig.text(0.18, 0.30,  r'Haloscopes',      color=myDarkBlue, size=text_size)
-  fig.text(0.22, 0.63,  r'Cosmology',       color=myDarkBlue, size=text_size)
-  fig.text(0.87, 0.54,  r'Stellar',         color=myDarkBlue, size=text_size)
-  fig.text(0.23, 0.77,  r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
+  fig.text(0.175, 0.45, r'Haloscope',      color=myDarkerBlue, size=text_size)
+  fig.text(0.22, 0.67,  r'Cosmology',       color=myDarkBlue, size=text_size)
+  fig.text(0.86, 0.63,  r'Stellar',         color=myDarkBlue, size=text_size)
+  fig.text(0.23, 0.78,  r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
   
   # Sensors labels
-  fig.text(0.61, 0.80,r'Pyroelectric', color=myDarkGreen,   size=text_size)
-  fig.text(0.61, 0.78,r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
-  fig.text(0.63,0.64, r'IR Labs',      color=myDarkGray,    size=text_size)
-  fig.text(0.63,0.62, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
+  fig.text(0.61, 0.78,r'Pyroelectric', color=myDarkGreen,   size=text_size)
+  fig.text(0.61, 0.755,r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
+  fig.text(0.63,0.62, r'IR Labs',      color=myDarkGray,    size=text_size)
+  fig.text(0.63,0.60, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
 
-  fig.text(0.78, 0.51, r'SNSPD',       color=myDarkPink,    size=text_size)
-  fig.text(0.54, 0.435,r'KID',         color=myMediumOrange,size=text_size)
+  fig.text(0.78, 0.50, r'SNSPD',       color=myDarkPink,    size=text_size)
+  fig.text(0.54, 0.43,r'KID',         color=myMediumOrange,size=text_size)
   fig.text(0.43, 0.39, r'TES',         color=myDarkPurple,  size=text_size)
-  fig.text(0.60, 0.36, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.61, 0.35, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
   # Axis log scale
   ax.set_xscale('log')
   ax.set_yscale('log')
   # Axis limits
   ax.set_xlim(1e-6, 10)
-  ax.set_ylim(1e-17, 1e-6)
+  ax.set_ylim(1e-18, 1e-6)
   # Axis labels
   x_txt = r"$m_{A'}~[\mathrm{eV}]$"
   y_txt = r'$\kappa$'
