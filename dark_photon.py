@@ -109,7 +109,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.15)
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling(1e-21, Adish, 207, 830, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling(1e-20, Adish, 207, 830, snr, effic, time*100)
   plt.plot(x, y, alpha=0.3,lw=3, ls='--', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1)
 
@@ -135,7 +135,7 @@ def main():
   plt.plot(x, y, alpha=0.8, lw=3, ls='-.',c=myDarkPurple, zorder=4) 
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling(1e-21, Adish, 207, 830, snr, effic, time)
+  x, y = calc_darkPhoton_coupling(1e-20, Adish, 207, 830, snr, effic, time)
   plt.plot(x, y, alpha=0.3,lw=3, ls='-.', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1, zorder=4)
 
@@ -208,8 +208,8 @@ def main():
             xytext=(0.26, 0.59), textcoords='axes fraction',
             arrowprops=dict(facecolor=myDarkerBlue, width=1.2, shrink=0.05, lw=0),
             horizontalalignment='left', verticalalignment='top',)
-  ax.annotate('', xy=(0.311, 0.65),  xycoords='axes fraction',
-            xytext=(0.311, 0.60), textcoords='axes fraction',
+  ax.annotate('', xy=(0.312, 0.65),  xycoords='axes fraction',
+            xytext=(0.312, 0.60), textcoords='axes fraction',
             arrowprops=dict(facecolor=myDarkerBlue, width=1.2, shrink=0.05, lw=0),
             horizontalalignment='left', verticalalignment='top',)
 
