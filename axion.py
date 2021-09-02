@@ -130,6 +130,9 @@ def main():
   plt.fill_between(x, y1, y2, color=myMediumGreen,linewidth=0,alpha=0.2,zorder=-5)
   #plt.fill_between(x, y1, y2, myMediumGreen,alpha=0.6,linewidth=2,linestyle='-', zorder=-1)
 
+  # Cogenesis cayy=1, 
+  plt.plot([1.03535e-8, 0.999511], [5.79881e-14, 5.72150e-10], color=myMediumGreen, lw=2, ls='dotted', zorder=-1)
+
   # Default values
   Adish  = 10. # dish area in m^2
   Bfield = 10. # Tesla
@@ -229,6 +232,8 @@ def main():
   fig.text(0.29, 0.28, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
   fig.text(0.22, 0.18, r'QCD axion models', color=myMediumGreen, size=text_size, rotation=26)
 
+  fig.text(0.31, 0.425, r'Cogenesis', color=myMediumGreen, size=text_size*0.9, rotation=14)
+ 
   # Axis log scale
   ax.set_xscale('log')
   ax.set_yscale('log')
@@ -236,7 +241,7 @@ def main():
   ax.set_xlim(1e-6, 4.13567)
   ax.set_ylim(1e-16, 1e-6)
   # Axis labels
-  x_txt = r"$m_{a}~[\mathrm{eV}]$"
+  x_txt = r"$m_{a}~[\mathrm{meV}]$"
   y_txt = r'$|g_{a\gamma\gamma}|~[\mathrm{GeV}^{-1}]$'
   # Rescale axis from eV to meV
   scale_x=1e3
