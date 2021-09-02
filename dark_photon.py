@@ -187,9 +187,9 @@ def main():
   # Existing constraint labels
   text_size = 23
   fig.text(0.18, 0.40, r'Haloscope',       color=myDarkerBlue, size=text_size)
-  fig.text(0.355,0.545,r'Dish',            color=myDarkerBlue, size=text_size)
-  fig.text(0.20, 0.64, r'Cosmology',       color=myDarkBlue, size=text_size)
-  fig.text(0.86, 0.63, r'Stellar',         color=myDarkBlue, size=text_size)
+  fig.text(0.35, 0.545,r'Dish',            color=myDarkerBlue, size=text_size)
+  fig.text(0.19, 0.64, r'Cosmology',       color=myDarkBlue, size=text_size)
+  fig.text(0.87, 0.63, r'Stellar',         color=myDarkBlue, size=text_size)
   fig.text(0.23, 0.78, r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
   
   # Sensors labels
@@ -198,18 +198,18 @@ def main():
   fig.text(0.63,0.60, r'IR Labs',      color=myDarkGray,    size=text_size)
   fig.text(0.63,0.58, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
 
-  fig.text(0.79, 0.465,r'SNSPD',       color=myDarkPink,    size=text_size)
+  fig.text(0.80, 0.465,r'SNSPD',       color=myDarkPink,    size=text_size)
   fig.text(0.54, 0.395,r'KID',         color=myMediumOrange,size=text_size)
   fig.text(0.43, 0.35, r'TES',         color=myDarkPurple,  size=text_size)
-  fig.text(0.605,0.31, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.615,0.31, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
   # Arrows for SHUKET nad Tokyo
-  ax.annotate('', xy=(0.21, 0.59),  xycoords='axes fraction',
-            xytext=(0.25, 0.59), textcoords='axes fraction',
+  ax.annotate('', xy=(0.22, 0.59),  xycoords='axes fraction',
+            xytext=(0.26, 0.59), textcoords='axes fraction',
             arrowprops=dict(facecolor=myDarkerBlue, width=1.2, shrink=0.05, lw=0),
             horizontalalignment='left', verticalalignment='top',)
-  ax.annotate('', xy=(0.295, 0.65),  xycoords='axes fraction',
-            xytext=(0.295, 0.60), textcoords='axes fraction',
+  ax.annotate('', xy=(0.311, 0.65),  xycoords='axes fraction',
+            xytext=(0.311, 0.60), textcoords='axes fraction',
             arrowprops=dict(facecolor=myDarkerBlue, width=1.2, shrink=0.05, lw=0),
             horizontalalignment='left', verticalalignment='top',)
 
@@ -217,20 +217,24 @@ def main():
   ax.set_xscale('log')
   ax.set_yscale('log')
   # Axis limits
-  ax.set_xlim(1e-6, 10)
+  ax.set_xlim(1e-6, 4.13567)
   ax.set_ylim(1e-17, 1e-6)
   # Axis labels
-  x_txt = r"$m_{A'}~[\mathrm{eV}]$"
+  x_txt = r"$m_{A'}~[\mathrm{meV}]$"
   y_txt = r'$\kappa$'
+  # Rescale axis from eV to meV
+  scale_x=1e3
+  ticks_x = mplt.ticker.FuncFormatter(lambda x, pos: r'${0:g}$'.format(x*scale_x))
+  ax.xaxis.set_major_formatter(ticks_x)
   # Axis label properties
-  plt.xlabel(x_txt, labelpad=20, size=35) 
-  plt.ylabel(y_txt, labelpad=20, size=35)
+  plt.xlabel(x_txt, labelpad=15, size=38) 
+  plt.ylabel(y_txt, labelpad=5, size=38)
 
   # Draw the upper THz axis
   ax2 = ax.twiny()
-  ax2.set_xlim(241.79e-6, 2417.9)
+  ax2.set_xlim(241.79e-6, 1000)
   ax2.set_xscale('log')
-  ax2.set_xlabel(r'$\nu~[\mathrm{THz}]$', labelpad=18, size=35)
+  ax2.set_xlabel(r'$\nu~[\mathrm{THz}]$', labelpad=18, size=38)
   ax2.get_xaxis().set_major_formatter(mplt.ticker.ScalarFormatter())
   ax2.get_xaxis().set_major_formatter(mplt.ticker.FormatStrFormatter(r'$%g$'))
 
@@ -266,8 +270,8 @@ def main():
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 1000 days') 
   plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=1.9, handletextpad=0.5, borderpad=0.6, ncol=2, columnspacing=0.6)
 
-  fig.text(0.18, 0.26, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
-  fig.text(0.18, 0.22, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
+  fig.text(0.16, 0.26, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
+  fig.text(0.16, 0.22, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
   
   if time == 8760:
     integrationT = ', $\Delta t_\mathrm{int} = 1~\mathrm{yr}$'
@@ -276,11 +280,11 @@ def main():
   else:
     integrationT = ', $\Delta t_\mathrm{int}' + ' = {0:.0f}'.format(time) + '~\mathrm{hrs}$'
   #fig.text(0.40, 0.175, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic) + integrationT, color=myDarkGray, size=text_size*0.68)
-  fig.text(0.18, 0.18, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
+  fig.text(0.16, 0.18, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
 
   # Plot margins
   plt.tight_layout(pad=0.3)
-  plt.subplots_adjust( top=0.85,left=0.15 )
+  plt.subplots_adjust( top=0.85,left=0.13 )
 
   # Save plot to pdf
   plt.savefig('fig_dark_photon_photosensors.pdf', format='pdf')

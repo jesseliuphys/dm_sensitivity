@@ -214,39 +214,43 @@ def main():
   text_size = 23
   fig.text(0.19, 0.38,  r'Haloscope',  color=myDarkerBlue, size=text_size)
   fig.text(0.22, 0.68,  r'CAST',       color=myDarkBlue, size=text_size)
-  fig.text(0.88, 0.63,  r'Stellar',    color=myDarkBlue, size=text_size)
-  fig.text(0.82, 0.48,  r'Telescope',  color=myDarkBlue, size=text_size)
+  fig.text(0.87, 0.57,  r'Stellar',    color=myDarkBlue, size=text_size)
+  fig.text(0.82, 0.46,  r'Telescope',  color=myDarkBlue, size=text_size)
   
   # Sensors labels
-  fig.text(0.63,  0.79, r'IR Labs',     color=myDarkGray,    size=text_size)
-  fig.text(0.63,  0.77, r'(Commercial)',color=myDarkGray,    size=text_size*0.5)
-  fig.text(0.79,  0.72, r'SNSPD',       color=myDarkPink,    size=text_size)
+  fig.text(0.65,  0.79, r'IR Labs',     color=myDarkGray,    size=text_size)
+  fig.text(0.65,  0.77, r'(Commercial)',color=myDarkGray,    size=text_size*0.5)
+  fig.text(0.81,  0.72, r'SNSPD',       color=myDarkPink,    size=text_size)
   fig.text(0.54,  0.47, r'KID',         color=myMediumOrange,size=text_size)
-  fig.text(0.435, 0.41, r'TES',         color=myDarkPurple,  size=text_size)
-  fig.text(0.605, 0.49, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.435, 0.40, r'TES',         color=myDarkPurple,  size=text_size)
+  fig.text(0.627, 0.49,  r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
   # QCD axions
-  fig.text(0.30, 0.29, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
-  fig.text(0.24, 0.20, r'QCD axion models', color=myMediumGreen, size=text_size, rotation=26)
+  fig.text(0.29, 0.28, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
+  fig.text(0.22, 0.18, r'QCD axion models', color=myMediumGreen, size=text_size, rotation=26)
 
   # Axis log scale
   ax.set_xscale('log')
   ax.set_yscale('log')
   # Axis limits
-  ax.set_xlim(1e-6, 10)
+  ax.set_xlim(1e-6, 4.13567)
   ax.set_ylim(1e-16, 1e-6)
   # Axis labels
   x_txt = r"$m_{a}~[\mathrm{eV}]$"
   y_txt = r'$|g_{a\gamma\gamma}|~[\mathrm{GeV}^{-1}]$'
+  # Rescale axis from eV to meV
+  scale_x=1e3
+  ticks_x = mplt.ticker.FuncFormatter(lambda x, pos: r'${0:g}$'.format(x*scale_x))
+  ax.xaxis.set_major_formatter(ticks_x)
   # Axis label properties
-  plt.xlabel(x_txt, labelpad=20, size=35) 
-  plt.ylabel(y_txt, labelpad=15, size=35)
+  plt.xlabel(x_txt, labelpad=15, size=38) 
+  plt.ylabel(y_txt, labelpad=10, size=38)
 
   # Draw the upper THz axis
   ax2 = ax.twiny()
-  ax2.set_xlim(241.79e-6, 2417.9)
+  ax2.set_xlim(241.79e-6, 1000)
   ax2.set_xscale('log')
-  ax2.set_xlabel(r'$\nu~[\mathrm{THz}]$', labelpad=18, size=35)
+  ax2.set_xlabel(r'$\nu~[\mathrm{THz}]$', labelpad=18, size=38)
   ax2.get_xaxis().set_major_formatter(mplt.ticker.ScalarFormatter())
   ax2.get_xaxis().set_major_formatter(mplt.ticker.FormatStrFormatter(r'$%g$'))
 
@@ -282,15 +286,15 @@ def main():
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 1000 days') 
   plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=2.8, borderpad=0.6)
 
-  fig.text(0.65, 0.38, r'\textbf{BREAD}' , color=myDarkGray, size=text_size)
-  fig.text(0.65, 0.34, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$' + r', $B_\mathrm{ext} = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$', color=myDarkGray, size=text_size*0.9)
+  fig.text(0.65, 0.37, r'\textbf{BREAD}' , color=myDarkGray, size=text_size)
+  fig.text(0.65, 0.33, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$' + r', $B_\mathrm{ext} = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$', color=myDarkGray, size=text_size*0.9)
   if time == 8760:
     integrationT = ', $\Delta t_\mathrm{int} = 1~\mathrm{yr}$'
   elif time == 87600:
     integrationT = ', $\Delta t_\mathrm{int} = 10~\mathrm{yrs}$'
   else:
     integrationT = ', $\Delta t_\mathrm{int}' + ' = {0:.0f}'.format(time) + '~\mathrm{hrs}$'
-  fig.text(0.65, 0.30, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + r', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
+  fig.text(0.65, 0.29, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + r', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
 
   # Plot margins
   plt.tight_layout(pad=0.3)
