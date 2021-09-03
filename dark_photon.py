@@ -193,8 +193,8 @@ def main():
   fig.text(0.23, 0.78, r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
   
   # Sensors labels
-  fig.text(0.61, 0.76,r'Pyroelectric', color=myDarkGreen,   size=text_size)
-  fig.text(0.61, 0.735,r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
+  fig.text(0.63, 0.76,r'Gentec', color=myDarkGreen,   size=text_size)
+  fig.text(0.63, 0.735,r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
   fig.text(0.63,0.60, r'IR Labs',      color=myDarkGray,    size=text_size)
   fig.text(0.63,0.58, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
 
