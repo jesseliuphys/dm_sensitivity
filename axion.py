@@ -143,6 +143,11 @@ def main():
   #-----------------------------
   # 100x run time of stage 1
   #-----------------------------
+  # Bolometer [1.65, 83] meV
+  x, y = calc_axion_coupling(4e-17, Adish, Bfield, 0.24, 248, snr, effic, time*100)
+  plt.plot(x, y, alpha=0.7,lw=3, ls='--', c=myDarkGray, zorder=4) 
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.1, zorder=4)
+
   # KID [0.2, 5] meV
   x, y = calc_axion_coupling(3e-21, Adish, Bfield, 0.2, 5, snr, effic, time*100)
   plt.plot(x, y, myMediumOrange, alpha=0.7, lw=3, ls='--', zorder=4) 
@@ -216,7 +221,7 @@ def main():
   # Existing constraint labels
   text_size = 23
   fig.text(0.19, 0.38,  r'Haloscope',  color=myDarkerBlue, size=text_size)
-  fig.text(0.22, 0.68,  r'CAST',       color=myDarkBlue, size=text_size)
+  fig.text(0.22, 0.72,  r'CAST',       color=myDarkBlue, size=text_size)
   fig.text(0.87, 0.57,  r'Stellar',    color=myDarkBlue, size=text_size)
   fig.text(0.82, 0.46,  r'Telescope',  color=myDarkBlue, size=text_size)
   
@@ -226,7 +231,7 @@ def main():
   fig.text(0.81,  0.72, r'SNSPD',       color=myDarkPink,    size=text_size)
   fig.text(0.54,  0.47, r'KID',         color=myMediumOrange,size=text_size)
   fig.text(0.435, 0.40, r'TES',         color=myDarkPurple,  size=text_size)
-  fig.text(0.627, 0.49,  r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.627, 0.48, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
   # QCD axions
   fig.text(0.29, 0.28, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
