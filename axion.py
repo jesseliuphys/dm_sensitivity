@@ -164,8 +164,10 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.5, zorder=4)
 
   # QCD [6.2] meV
-  x, y = calc_axion_coupling(1e-22, Adish, Bfield, 6.18, 6.22, snr, effic, time*100)
-  plt.fill_between(x, y, [1e-1, 1e-1], color=myDarkGray, alpha=0.3, zorder=4)
+  x, y = calc_axion_coupling(1e-22, Adish, Bfield, 5.8, 6.6, snr, effic, time*100)
+  #plt.fill_between(x, y, [1e-1, 1e-1], color=myDarkGray, alpha=0.3, zorder=4)
+  plt.plot(x, y, alpha=0.3,lw=3, ls='--', c=myDarkGray, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', color=myDarkGray, alpha=0.3, zorder=4)
 
   #-----------------------------
   # Stage 1
@@ -215,8 +217,10 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.7, zorder=4)
 
   # QCD [6.2] meV
-  x, y = calc_axion_coupling(1e-20, Adish, Bfield, 6.18, 6.22, snr, effic, time)
-  plt.fill_between(x, y, [1e-1, 1e-1], color=myDarkGray, alpha=0.8, zorder=4)
+  x, y = calc_axion_coupling(1e-20, Adish, Bfield, 5.8, 6.6, snr, effic, time)
+  #plt.fill_between(x, y, [1e-1, 1e-1], color=myDarkGray, alpha=0.8, zorder=4)
+  plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
+  plt.fill_between(x, y, 1e-1, edgecolor='none', color=myDarkGray, alpha=0.6, zorder=4)
 
   # Existing constraint labels
   text_size = 23
@@ -231,7 +235,7 @@ def main():
   fig.text(0.81,  0.72, r'SNSPD',       color=myDarkPink,    size=text_size)
   fig.text(0.54,  0.47, r'KID',         color=myMediumOrange,size=text_size)
   fig.text(0.435, 0.40, r'TES',         color=myDarkPurple,  size=text_size)
-  fig.text(0.627, 0.48, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.63, 0.48,  r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
   # QCD axions
   fig.text(0.29, 0.28, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)

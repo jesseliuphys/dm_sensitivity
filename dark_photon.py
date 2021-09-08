@@ -114,8 +114,9 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1)
 
   # QCD [6.2] meV
-  x, y = calc_darkPhoton_coupling(1e-22, Adish, 6.18, 6.22, snr, effic, time*100)
-  plt.fill_between(x, y, 1e-1, color=myDarkGray, alpha=0.3, zorder=4)
+  x, y = calc_darkPhoton_coupling(1e-22, Adish, 5.8, 6.6, snr, effic, time*100)
+  plt.plot(x, y, alpha=0.3,lw=3, ls='--', c=myDarkGray, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', color=myDarkGray, alpha=0.3, zorder=4)
 
   #-----------------------------
   # Upgrade 1
@@ -163,9 +164,9 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightPink, alpha=0.6, zorder=4)
 
   # QCD [6.2] meV
-  x, y = calc_darkPhoton_coupling(1e-20, Adish, 6.18, 6.22, snr, effic, time)
-  #plt.plot(x, y, myMediumGray, alpha=0.8,lw=3, c=myDarkGray, zorder=4, label=r'$\mathrm{QCD}~10^{-20}~\mathrm{W}~\mathrm{Hz}^{-1/2}$') 
-  plt.fill_between(x, y, 1e-1, color=myDarkGray, alpha=0.9, zorder=4)
+  x, y = calc_darkPhoton_coupling(1e-20, Adish, 5.8, 6.6, snr, effic, time)
+  plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
+  plt.fill_between(x, y, 1e-1, edgecolor='none', color=myDarkGray, alpha=0.6, zorder=4)
 
   # Gentec [0.4, 120] meV
   x, y = calc_darkPhoton_coupling(1e-8, Adish, 0.4, 120, snr, effic, time)
@@ -201,7 +202,7 @@ def main():
   fig.text(0.80, 0.465,r'SNSPD',       color=myDarkPink,    size=text_size)
   fig.text(0.54, 0.395,r'KID',         color=myMediumOrange,size=text_size)
   fig.text(0.43, 0.35, r'TES',         color=myDarkPurple,  size=text_size)
-  fig.text(0.615,0.31, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.62,0.31,  r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
   # Arrows for SHUKET nad Tokyo
   ax.annotate('', xy=(0.22, 0.59),  xycoords='axes fraction',
