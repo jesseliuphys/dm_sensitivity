@@ -159,9 +159,9 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPurple, alpha=0.2, zorder=4)
 
   # SNSPD [207, 830] meV
-  x, y = calc_axion_coupling(1e-20, Adish, Bfield, 207, 830, snr, effic, time*100)
+  x, y = calc_axion_coupling_dcr(1e-6, Adish, Bfield, 207, 830, snr, effic, time*100)
   plt.plot(x, y, myDarkPink, alpha=0.5,lw=3, ls='--',zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.5, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.3, zorder=4)
 
   # QCD [6.2] meV
   x, y = calc_axion_coupling(1e-22, Adish, Bfield, 5.8, 6.6, snr, effic, time*100)
@@ -187,9 +187,9 @@ def main():
   plt.plot(x, y, myDarkPurple, alpha=0.9,lw=3, ls='-.', zorder=4) 
 
   # SNSPD [207, 830] meV
-  x, y = calc_axion_coupling(1e-20, Adish, Bfield, 207, 830, snr, effic, time)
+  x, y = calc_axion_coupling_dcr(1e-6, Adish, Bfield, 207, 830, snr, effic, time)
   plt.plot(x, y, myDarkPink, alpha=0.5,lw=3, ls='-.',zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.5, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.3, zorder=4)
 
   #-----------------------------
   # Baseline
@@ -210,11 +210,10 @@ def main():
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.15, zorder=4)
   
-
   # SNSPD [207, 830] meV
-  x, y = calc_axion_coupling(1e-18, Adish, Bfield, 207, 830, snr, effic, time)
+  x, y = calc_axion_coupling_dcr(1e-4, Adish, Bfield, 207, 830, snr, effic, time)
   plt.plot(x, y, myDarkPink, alpha=0.8,lw=3, zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.7, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.3, zorder=4)
 
   # QCD [6.2] meV
   x, y = calc_axion_coupling(1e-20, Adish, Bfield, 5.8, 6.6, snr, effic, time)
@@ -227,7 +226,7 @@ def main():
   fig.text(0.19, 0.38,  r'Haloscope',  color=myDarkerBlue, size=text_size)
   fig.text(0.22, 0.72,  r'CAST',       color=myDarkBlue, size=text_size)
   fig.text(0.87, 0.57,  r'Stellar',    color=myDarkBlue, size=text_size)
-  fig.text(0.82, 0.46,  r'Telescope',  color=myDarkBlue, size=text_size)
+  fig.text(0.92, 0.38,  r'Telescope',  color=myDarkBlue, size=text_size, rotation=90)
   
   # Sensors labels
   fig.text(0.65,  0.79, r'IR Labs',     color=myDarkGray,    size=text_size)
@@ -235,7 +234,7 @@ def main():
   fig.text(0.81,  0.72, r'SNSPD',       color=myDarkPink,    size=text_size)
   fig.text(0.54,  0.47, r'KID',         color=myMediumOrange,size=text_size)
   fig.text(0.435, 0.40, r'TES',         color=myDarkPurple,  size=text_size)
-  fig.text(0.63, 0.48,  r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.63,  0.48,  r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
   # QCD axions
   fig.text(0.29, 0.28, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
@@ -321,9 +320,9 @@ def main():
 def calc_axion_coupling(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity = 0.45):
   '''
   Convert instrument parameters and detected signal power to axion coupling
-   - power is units of Watts
-   - mirrorArea units is m^2
-   - Bfield units is Tesla
+   - nep          = noise equivalent power is units of Watts per sqrt(Hz)
+   - mirrorArea   = dish area in m^2
+   - Bfield       = magnetic field strength in units of Tesla
    - min/maxMass  = min and max mass to plot
    - snr          = required signal to noise ratio 
    - effic        = overall signal power efficiency 
@@ -346,6 +345,40 @@ def calc_axion_coupling(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic
   # For the input min and max masses, calculate corresponding couplings
   minCoupling = ( minMass ) / massOverCoupling
   maxCoupling = ( maxMass ) / massOverCoupling
+
+  return [minMass*1e-3, maxMass*1e-3], [minCoupling*1e-12, maxCoupling*1e-12]
+
+#__________________________________________
+def calc_axion_coupling_dcr(dcr, mirrorArea, Bfield, minMass, maxMass, Zsignif=5., effic=0.5, time=1., relicDensity = 0.45):
+  '''
+  Convert instrument parameters and detected signal power to axion coupling
+   - dcr          = dark count rate in Hz
+   - mirrorArea   = dish area in m^2
+   - Bfield       = magnetic field in Tesla
+   - min/maxMass  = min and max mass to plot
+   - Zsignif      = required significance 
+   - effic        = overall signal power efficiency 
+   - time         = integration time in hours
+   - relicDensity = dark matter relic density in GeV/cm^3
+  Returns lowest [minCoupling, maxCoupling] coupling values probed 
+  in units of 10^{-11}/GeV for [minMass, maxMass] 
+  '''
+  ratio    = ( Zsignif / 5. )
+  noise    = ( dcr / 1.0 )
+  area     = ( 10. / mirrorArea  ) 
+  dt       = math.sqrt( 1. / time )
+  epsilon  = ( 0.5 / effic )
+  rho      = ( 0.3 / relicDensity )
+  magnet   = ( 10. / Bfield )**2 
+
+  massOverCouplingSqMin = 1. / ( 5.8 * ratio * noise * area * dt * epsilon * rho * magnet * (minMass / 10.0) )
+  massOverCouplingSqMax = 1. / ( 5.8 * ratio * noise * area * dt * epsilon * rho * magnet * (maxMass / 10.0) )
+  massOverCouplingMin = math.sqrt( massOverCouplingSqMin )
+  massOverCouplingMax = math.sqrt( massOverCouplingSqMax )
+
+  # For the input min and max masses, calculate corresponding couplings
+  minCoupling = ( minMass ) / massOverCouplingMin
+  maxCoupling = ( maxMass ) / massOverCouplingMax
 
   return [minMass*1e-3, maxMass*1e-3], [minCoupling*1e-12, maxCoupling*1e-12]
 

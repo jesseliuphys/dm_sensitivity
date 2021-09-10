@@ -109,7 +109,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.15)
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling(1e-20, Adish, 207, 830, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling_dcr(1e-6, Adish, 207, 830, snr, effic, time*100)
   plt.plot(x, y, alpha=0.3,lw=3, ls='--', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1)
 
@@ -136,7 +136,7 @@ def main():
   plt.plot(x, y, alpha=0.8, lw=3, ls='-.',c=myDarkPurple, zorder=4) 
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling(1e-20, Adish, 207, 830, snr, effic, time)
+  x, y = calc_darkPhoton_coupling_dcr(1e-6, Adish, 207, 830, snr, effic, time)
   plt.plot(x, y, alpha=0.3,lw=3, ls='-.', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1, zorder=4)
 
@@ -159,7 +159,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.15, zorder=4)
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling(1e-18, Adish, 207, 830, snr, effic, time)
+  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 207, 830, snr, effic, time)
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightPink, alpha=0.6, zorder=4)
 
@@ -182,7 +182,7 @@ def main():
   plt.plot(x, y, alpha=0.8,lw=1, c=myDarkGray, zorder=4) 
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling(1e-18, Adish/10.0, 207, 830, snr, effic, time/10.0)
+  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish/10.0, 207, 830, snr, effic, time/10.0)
   plt.plot(x, y, alpha=0.8,lw=1, c=myDarkPink, zorder=4) 
 
   # Existing constraint labels
@@ -314,6 +314,33 @@ def calc_darkPhoton_coupling(nep, mirrorArea, minMass, maxMass, snr=5., effic=0.
   kineticMixing   = math.sqrt( kineticMixingSq ) * 1e-14
  
   return [minMass*1e-3, maxMass*1e-3], [kineticMixing, kineticMixing]
+
+#__________________________________________
+def calc_darkPhoton_coupling_dcr(dcr, mirrorArea, minMass, maxMass, Zsignif=5., effic=0.5, time=1., relicDensity = 0.45):
+  '''
+  Convert instrument parameters and detected signal power to dark photon coupling
+   - dcr          = overall dark count rate of photonsensor in Hz
+   - mirrorArea   = area of dish antenna units is m^2
+   - min/maxMass  = min and max mass to plot (input in meV, output in eV)
+   - snr          = required signal to noise ratio 
+   - effic        = overall signal power efficiency 
+   - time         = integration time in hours
+   - relicDensity = dark matter relic density in GeV/cm^3
+  '''
+
+  ratio    = ( Zsignif / 5. )
+  noise    = math.sqrt( dcr / 1.0 )
+  area     = ( 10.0 / mirrorArea  ) 
+  dt       = math.sqrt( 1. / time )
+  epsilon  = ( 0.5 / effic )
+  rho      = ( 0.3 / relicDensity )
+
+  kineticMixingSqMin = 5.9 * ratio * noise * area * dt * epsilon * rho * ( minMass / 10.0 )
+  kineticMixingSqMax = 5.9 * ratio * noise * area * dt * epsilon * rho * ( maxMass / 10.0 )
+  kineticMixingMin   = math.sqrt( kineticMixingSqMin ) * 1e-14
+  kineticMixingMax   = math.sqrt( kineticMixingSqMax ) * 1e-14
+ 
+  return [minMass*1e-3, maxMass*1e-3], [kineticMixingMin, kineticMixingMax]
 
 #_________________________________________________________________________
 def mkdir(dirPath):
