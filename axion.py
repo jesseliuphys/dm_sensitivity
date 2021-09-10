@@ -231,10 +231,10 @@ def main():
   # Sensors labels
   fig.text(0.65,  0.79, r'IR Labs',     color=myDarkGray,    size=text_size)
   fig.text(0.65,  0.77, r'(Commercial)',color=myDarkGray,    size=text_size*0.5)
-  fig.text(0.81,  0.72, r'SNSPD',       color=myDarkPink,    size=text_size)
+  fig.text(0.81,  0.67, r'SNSPD',       color=myDarkPink,    size=text_size)
   fig.text(0.54,  0.47, r'KID',         color=myMediumOrange,size=text_size)
   fig.text(0.435, 0.40, r'TES',         color=myDarkPurple,  size=text_size)
-  fig.text(0.63,  0.48,  r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.63,  0.48, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
   # QCD axions
   fig.text(0.29, 0.28, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
@@ -364,23 +364,19 @@ def calc_axion_coupling_dcr(dcr, mirrorArea, Bfield, minMass, maxMass, Zsignif=5
   in units of 10^{-11}/GeV for [minMass, maxMass] 
   '''
   ratio    = ( Zsignif / 5. )
-  noise    = ( dcr / 1.0 )
+  noise    = ( dcr / 0.01 )
   area     = ( 10. / mirrorArea  ) 
   dt       = math.sqrt( 1. / time )
   epsilon  = ( 0.5 / effic )
-  rho      = ( 0.3 / relicDensity )
+  rho      = ( 0.45 / relicDensity )
   magnet   = ( 10. / Bfield )**2 
 
-  massOverCouplingSqMin = 1. / ( 5.8 * ratio * noise * area * dt * epsilon * rho * magnet * (minMass / 10.0) )
-  massOverCouplingSqMax = 1. / ( 5.8 * ratio * noise * area * dt * epsilon * rho * magnet * (maxMass / 10.0) )
-  massOverCouplingMin = math.sqrt( massOverCouplingSqMin )
-  massOverCouplingMax = math.sqrt( massOverCouplingSqMax )
+  couplingSqMin = 5.7 * ratio * noise * area * dt * epsilon * rho * magnet * (minMass )**3 
+  couplingSqMax = 5.7 * ratio * noise * area * dt * epsilon * rho * magnet * (maxMass )**3 
+  couplingMin = math.sqrt( couplingSqMin )
+  couplingMax = math.sqrt( couplingSqMax )
 
-  # For the input min and max masses, calculate corresponding couplings
-  minCoupling = ( minMass ) / massOverCouplingMin
-  maxCoupling = ( maxMass ) / massOverCouplingMax
-
-  return [minMass*1e-3, maxMass*1e-3], [minCoupling*1e-12, maxCoupling*1e-12]
+  return [minMass*1e-3, maxMass*1e-3], [couplingMin*1e-13, couplingMax*1e-13]
 
 #_________________________________________________________________________
 def mkdir(dirPath):

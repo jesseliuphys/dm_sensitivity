@@ -199,7 +199,7 @@ def main():
   fig.text(0.63,0.60, r'IR Labs',      color=myDarkGray,    size=text_size)
   fig.text(0.63,0.58, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
 
-  fig.text(0.80, 0.465,r'SNSPD',       color=myDarkPink,    size=text_size)
+  fig.text(0.80, 0.53, r'SNSPD',       color=myDarkPink,    size=text_size)
   fig.text(0.54, 0.395,r'KID',         color=myMediumOrange,size=text_size)
   fig.text(0.43, 0.35, r'TES',         color=myDarkPurple,  size=text_size)
   fig.text(0.62,0.31,  r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
@@ -308,7 +308,7 @@ def calc_darkPhoton_coupling(nep, mirrorArea, minMass, maxMass, snr=5., effic=0.
   area     = ( 10.0 / mirrorArea  ) 
   dt       = math.sqrt( 1. / time )
   epsilon  = ( 0.5 / effic )
-  rho      = ( 0.3 / relicDensity )
+  rho      = ( 0.45 / relicDensity )
 
   kineticMixingSq = 3.7 * ratio * noise * area * dt * epsilon * rho
   kineticMixing   = math.sqrt( kineticMixingSq ) * 1e-14
@@ -329,14 +329,14 @@ def calc_darkPhoton_coupling_dcr(dcr, mirrorArea, minMass, maxMass, Zsignif=5., 
   '''
 
   ratio    = ( Zsignif / 5. )
-  noise    = math.sqrt( dcr / 1.0 )
+  noise    = math.sqrt( dcr / 0.01 )
   area     = ( 10.0 / mirrorArea  ) 
   dt       = math.sqrt( 1. / time )
   epsilon  = ( 0.5 / effic )
-  rho      = ( 0.3 / relicDensity )
+  rho      = ( 0.45 / relicDensity )
 
-  kineticMixingSqMin = 5.9 * ratio * noise * area * dt * epsilon * rho * ( minMass / 10.0 )
-  kineticMixingSqMax = 5.9 * ratio * noise * area * dt * epsilon * rho * ( maxMass / 10.0 )
+  kineticMixingSqMin = 5.95 * ratio * noise * area * dt * epsilon * rho * minMass
+  kineticMixingSqMax = 5.95 * ratio * noise * area * dt * epsilon * rho * maxMass
   kineticMixingMin   = math.sqrt( kineticMixingSqMin ) * 1e-14
   kineticMixingMax   = math.sqrt( kineticMixingSqMax ) * 1e-14
  
