@@ -195,16 +195,16 @@ def main():
   
   # Sensors labels
   fig.text(0.63, 0.76,r'Gentec', color=myDarkGreen,   size=text_size)
-  fig.text(0.63, 0.735,r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
+  fig.text(0.63, 0.74,r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
   fig.text(0.63,0.60, r'IR Labs',      color=myDarkGray,    size=text_size)
   fig.text(0.63,0.58, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
 
-  fig.text(0.80, 0.53, r'SNSPD',       color=myDarkPink,    size=text_size)
-  fig.text(0.54, 0.395,r'KID',         color=myMediumOrange,size=text_size)
-  fig.text(0.43, 0.35, r'TES',         color=myDarkPurple,  size=text_size)
-  fig.text(0.62,0.31,  r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.80, 0.37, r'SNSPD',       color=myDarkPink,    size=text_size)
+  fig.text(0.54, 0.40, r'KID',         color=myMediumOrange,size=text_size)
+  fig.text(0.43, 0.355,r'TES',         color=myDarkPurple,  size=text_size)
+  fig.text(0.62, 0.31, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
 
-  # Arrows for SHUKET nad Tokyo
+  # Arrows for SHUKET and Tokyo dish antenna
   ax.annotate('', xy=(0.22, 0.59),  xycoords='axes fraction',
             xytext=(0.26, 0.59), textcoords='axes fraction',
             arrowprops=dict(facecolor=myDarkerBlue, width=1.2, shrink=0.05, lw=0),
@@ -271,8 +271,8 @@ def main():
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 1000 days') 
   plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=1.9, handletextpad=0.5, borderpad=0.6, ncol=2, columnspacing=0.6)
 
-  fig.text(0.16, 0.26, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
-  fig.text(0.16, 0.22, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
+  fig.text(0.16, 0.28, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
+  fig.text(0.16, 0.24, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
   
   if time == 8760:
     integrationT = ', $\Delta t_\mathrm{int} = 1~\mathrm{yr}$'
@@ -281,8 +281,10 @@ def main():
   else:
     integrationT = ', $\Delta t_\mathrm{int}' + ' = {0:.0f}'.format(time) + '~\mathrm{hrs}$'
   #fig.text(0.40, 0.175, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic) + integrationT, color=myDarkGray, size=text_size*0.68)
-  fig.text(0.16, 0.18, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
+  fig.text(0.16, 0.20, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
 
+  fig.text(0.16, 0.17, r'SNSPD: NEP $\to$ DCR, SNR $\rightarrow Z = S/\sqrt{N}$', color=myMediumGray, size=text_size*0.4)
+ 
   # Plot margins
   plt.tight_layout(pad=0.3)
   plt.subplots_adjust( top=0.85,left=0.13 )

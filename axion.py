@@ -231,7 +231,7 @@ def main():
   # Sensors labels
   fig.text(0.65,  0.79, r'IR Labs',     color=myDarkGray,    size=text_size)
   fig.text(0.65,  0.77, r'(Commercial)',color=myDarkGray,    size=text_size*0.5)
-  fig.text(0.81,  0.67, r'SNSPD',       color=myDarkPink,    size=text_size)
+  fig.text(0.81,  0.63, r'SNSPD',       color=myDarkPink,    size=text_size)
   fig.text(0.54,  0.47, r'KID',         color=myMediumOrange,size=text_size)
   fig.text(0.435, 0.40, r'TES',         color=myDarkPurple,  size=text_size)
   fig.text(0.63,  0.48, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
@@ -241,6 +241,9 @@ def main():
   fig.text(0.22, 0.18, r'QCD axion models', color=myMediumGreen, size=text_size, rotation=26)
 
   fig.text(0.31, 0.425, r'Cogenesis', color=myMediumGreen, size=text_size*0.9, rotation=14)
+  fig.text(0.36, 0.415, r'$c_{a\gamma\gamma} = 1$', color=myMediumGreen, size=text_size*0.5, rotation=14)
+
+  fig.text(0.28, 0.17, r'SNSPD: NEP $\to$ DCR, SNR $\rightarrow Z = S/\sqrt{N}$', color=myMediumGray, size=text_size*0.4)
  
   # Axis log scale
   ax.set_xscale('log')
@@ -300,14 +303,14 @@ def main():
   plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=2.8, borderpad=0.6)
 
   fig.text(0.65, 0.37, r'\textbf{BREAD}' , color=myDarkGray, size=text_size)
-  fig.text(0.65, 0.33, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$' + r', $B_\mathrm{ext} = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$', color=myDarkGray, size=text_size*0.9)
+  fig.text(0.65, 0.325, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$' + r', $B_\mathrm{ext} = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$', color=myDarkGray, size=text_size*0.9)
   if time == 8760:
     integrationT = ', $\Delta t_\mathrm{int} = 1~\mathrm{yr}$'
   elif time == 87600:
     integrationT = ', $\Delta t_\mathrm{int} = 10~\mathrm{yrs}$'
   else:
     integrationT = ', $\Delta t_\mathrm{int}' + ' = {0:.0f}'.format(time) + '~\mathrm{hrs}$'
-  fig.text(0.65, 0.29, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + r', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
+  fig.text(0.65, 0.285, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + r', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
 
   # Plot margins
   plt.tight_layout(pad=0.3)
@@ -364,15 +367,15 @@ def calc_axion_coupling_dcr(dcr, mirrorArea, Bfield, minMass, maxMass, Zsignif=5
   in units of 10^{-11}/GeV for [minMass, maxMass] 
   '''
   ratio    = ( Zsignif / 5. )
-  noise    = ( dcr / 0.01 )
+  noise    = math.sqrt( dcr / 0.01 )
   area     = ( 10. / mirrorArea  ) 
   dt       = math.sqrt( 1. / time )
   epsilon  = ( 0.5 / effic )
   rho      = ( 0.45 / relicDensity )
   magnet   = ( 10. / Bfield )**2 
 
-  couplingSqMin = 5.67 * ratio * noise * area * dt * epsilon * rho * magnet * (minMass )**3 
-  couplingSqMax = 5.67 * ratio * noise * area * dt * epsilon * rho * magnet * (maxMass )**3 
+  couplingSqMin = 5.67 * ratio * noise * area * dt * epsilon * rho * magnet * ( minMass )**3 
+  couplingSqMax = 5.67 * ratio * noise * area * dt * epsilon * rho * magnet * ( maxMass )**3 
   couplingMin = math.sqrt( couplingSqMin )
   couplingMax = math.sqrt( couplingSqMax )
 
