@@ -335,10 +335,10 @@ def calc_darkPhoton_coupling_dcr(dcr, mirrorArea, minMass, maxMass, Zsignif=5., 
   epsilon  = ( 0.5 / effic )
   rho      = ( 0.45 / relicDensity )
 
-  kineticMixingSqMin = 5.95 * ratio * noise * area * dt * epsilon * rho * minMass
-  kineticMixingSqMax = 5.95 * ratio * noise * area * dt * epsilon * rho * maxMass
-  kineticMixingMin   = math.sqrt( kineticMixingSqMin ) * 1e-14
-  kineticMixingMax   = math.sqrt( kineticMixingSqMax ) * 1e-14
+  kineticMixingSqMin = 5.93 * ratio * noise * area * dt * epsilon * rho * minMass
+  kineticMixingSqMax = 5.93 * ratio * noise * area * dt * epsilon * rho * maxMass
+  kineticMixingMin   = math.sqrt( kineticMixingSqMin ) * 1e-15
+  kineticMixingMax   = math.sqrt( kineticMixingSqMax ) * 1e-15
  
   return [minMass*1e-3, maxMass*1e-3], [kineticMixingMin, kineticMixingMax]
 

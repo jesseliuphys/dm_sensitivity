@@ -371,8 +371,8 @@ def calc_axion_coupling_dcr(dcr, mirrorArea, Bfield, minMass, maxMass, Zsignif=5
   rho      = ( 0.45 / relicDensity )
   magnet   = ( 10. / Bfield )**2 
 
-  couplingSqMin = 5.7 * ratio * noise * area * dt * epsilon * rho * magnet * (minMass )**3 
-  couplingSqMax = 5.7 * ratio * noise * area * dt * epsilon * rho * magnet * (maxMass )**3 
+  couplingSqMin = 5.67 * ratio * noise * area * dt * epsilon * rho * magnet * (minMass )**3 
+  couplingSqMax = 5.67 * ratio * noise * area * dt * epsilon * rho * magnet * (maxMass )**3 
   couplingMin = math.sqrt( couplingSqMin )
   couplingMax = math.sqrt( couplingSqMax )
 
