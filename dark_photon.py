@@ -168,21 +168,21 @@ def main():
   plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', color=myDarkGray, alpha=0.6, zorder=4)
 
-  # Gentec [0.4, 120] meV
-  x, y = calc_darkPhoton_coupling(1e-8, Adish, 0.4, 120, snr, effic, time)
-  plt.plot(x, y, lw=3, ls='-', c=myDarkGreen) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGreen, alpha=0.3, zorder=4)
-
   #-----------------------------
   # Pilot dish size and 1 day 
   #-----------------------------
 
+  # Gentec [0.4, 120] meV
+  x, y = calc_darkPhoton_coupling(1e-8, Adish*(0.7/10), 0.4, 120, snr, effic, time/10.0)
+  plt.plot(x, y, lw=1, ls='-', c=myDarkGreen) 
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGreen, alpha=0.3, zorder=4)
+
   # Far-IR 1.6 K IR Labs bolometer
-  x, y = calc_darkPhoton_coupling(4e-15, Adish/10.0, 0.24, 248, snr, effic, time/10.0)
+  x, y = calc_darkPhoton_coupling(4e-15, Adish*(0.7/10), 0.24, 248, snr, effic, time/10.0)
   plt.plot(x, y, alpha=0.8,lw=1, c=myDarkGray, zorder=4) 
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish/10.0, 207, 830, snr, effic, time/10.0)
+  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish*(0.7/10), 207, 830, snr, effic, time/10.0)
   plt.plot(x, y, alpha=0.8,lw=1, c=myDarkPink, zorder=4) 
 
   # Existing constraint labels
@@ -194,12 +194,12 @@ def main():
   fig.text(0.23, 0.78, r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
   
   # Sensors labels
-  fig.text(0.63, 0.76,r'Gentec', color=myDarkGreen,   size=text_size)
-  fig.text(0.63, 0.74,r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
-  fig.text(0.63,0.60, r'IR Labs',      color=myDarkGray,    size=text_size)
-  fig.text(0.63,0.58, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
+  fig.text(0.63, 0.795,r'Gentec', color=myDarkGreen,   size=text_size)
+  fig.text(0.63, 0.77,r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
+  fig.text(0.63,0.585,  r'IR Labs',      color=myDarkGray,    size=text_size)
+  fig.text(0.63,0.565,  r'(1.2 K Commercial)', color=myDarkGray,    size=text_size*0.5)
 
-  fig.text(0.80, 0.37, r'SNSPD',       color=myDarkPink,    size=text_size)
+  fig.text(0.80, 0.38, r'SNSPD',       color=myDarkPink,    size=text_size)
   fig.text(0.54, 0.40, r'KID',         color=myMediumOrange,size=text_size)
   fig.text(0.43, 0.355,r'TES',         color=myDarkPurple,  size=text_size)
   fig.text(0.62, 0.31, r'QCDet',       color=myDarkGray,    size=text_size, rotation=90)
@@ -265,7 +265,7 @@ def main():
   ax.tick_params('y', length=6,  width=1, which='minor', direction="in", right="on") 
 
   # Legend
-  plt.plot([1, 1], [1, 1], lw=1, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 1 day, $A_\mathrm{dish}/10$') 
+  plt.plot([1, 1], [1, 1], lw=1, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 1 day, $A_\mathrm{dish}/14$') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 1000 days') 

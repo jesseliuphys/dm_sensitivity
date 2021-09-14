@@ -36,10 +36,10 @@ def main():
   # ------------------------------------------------------- 
   # Sensitivity lines and regions
   # ------------------------------------------------------- 
-  Adish = 10.0 # m^2
+  Adish = 0.7 # m^2
   Bfield = 10.0
-  hours = 24000 # hours
-  nep = 1e-21 # W/sqrt(Hz)
+  hours = 240 # hours
+  nep = 1e-14 # W/sqrt(Hz)
 
   # Constant rate
   couplingKSVZ, couplingDFSZ = calc_QCDaxion_coupling(nep, Adish, Bfield, snr=5., effic=0.5, time=hours, relicDensity = 0.45)
