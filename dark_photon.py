@@ -97,7 +97,7 @@ def main():
   # 10x time of Upgrade 1
   #-----------------------------
   # Bolometer [1.65, 83] meV
-  x, y = calc_darkPhoton_coupling(4e-17, Adish, 0.24, 248, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling(5e-16, Adish, 0.24, 248, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.1)
 
@@ -125,26 +125,26 @@ def main():
   # Upgrade 1
   #-----------------------------
   # Bolometer [1.65, 83] meV
-  x, y = calc_darkPhoton_coupling(4e-17, Adish, 0.24, 248, snr, effic, time)
+  x, y = calc_darkPhoton_coupling(5e-14, Adish, 0.24, 248, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.1, zorder=4)
 
   # KID [0.2, 5] meV
-  x, y = calc_darkPhoton_coupling(3e-21, Adish, 0.2, 5, snr, effic, time)
+  x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 5, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkRed, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
   
   # TES [0.2, 1.2] meV
-  x, y = calc_darkPhoton_coupling(2e-21, Adish, 0.19, 1.2, snr, effic, time)
+  x, y = calc_darkPhoton_coupling(2e-19, Adish, 0.19, 1.2, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6, lw=3, ls='-.',c=myDarkPurple, zorder=4) 
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling_dcr(1e-6, Adish, 207, 830, snr, effic, time)
+  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 207, 830, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1, zorder=4)
   
   # QCD [6.2] meV
-  x, y = calc_darkPhoton_coupling(3e-22, Adish, 2, 125, snr, effic, time)
+  x, y = calc_darkPhoton_coupling(3e-20, Adish, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myMediumOrange, zorder=4)
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.2, zorder=4)
 
@@ -152,28 +152,28 @@ def main():
   # Baseline
   #-----------------------------
   # Far-IR 1.6 K IR Labs bolometer
-  x, y = calc_darkPhoton_coupling(4e-15, Adish, 0.24, 248, snr, effic, time)
-  plt.plot(x, y, alpha=0.8,lw=3, c=myDarkGray, zorder=4) 
+  x, y = calc_darkPhoton_coupling(5e-14, Adish, 0.24, 248, snr, effic, time)
+  plt.plot(x, y, alpha=0.9,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.2, zorder=4)
 
   # KID [0.2, 5] meV
   x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 5, snr, effic, time)
-  plt.plot(x, y, alpha=0.8,lw=3, c=myDarkRed, zorder=4) 
+  plt.plot(x, y, alpha=0.9,lw=3, c=myDarkRed, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
 
   # TES [0.2, 1.2] meV
   x, y = calc_darkPhoton_coupling(2e-19, Adish, 0.19, 1.2, snr, effic, time)
-  plt.plot(x, y, alpha=0.8,lw=3, c=myDarkPurple, zorder=4) 
+  plt.plot(x, y, alpha=0.9,lw=3, c=myDarkPurple, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.15, zorder=4)
 
   # SNSPD [207, 830] meV
   x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 207, 830, snr, effic, time)
-  plt.plot(x, y, alpha=0.8,lw=3, c=myDarkPink, zorder=4) 
+  plt.plot(x, y, alpha=0.9,lw=3, c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightPink, alpha=0.3, zorder=4)
 
   # QCD [6.2] meV
   x, y = calc_darkPhoton_coupling(3e-20, Adish, 2, 125, snr, effic, time)
-  plt.plot(x, y, alpha=0.8,lw=3, c=myMediumOrange, zorder=4) 
+  plt.plot(x, y, alpha=0.9,lw=3, c=myMediumOrange, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.2, zorder=4)
 
   #-----------------------------
@@ -186,12 +186,12 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGreen, alpha=0.3, zorder=4)
 
   # Far-IR 1.6 K IR Labs bolometer
-  x, y = calc_darkPhoton_coupling(4e-15, Adish*(0.7/10), 0.24, 248, snr, effic, time/10.0)
-  plt.plot(x, y, alpha=0.8,lw=1, c=myDarkGray, zorder=4) 
+  x, y = calc_darkPhoton_coupling(5e-14, Adish*(0.7/10), 0.24, 248, snr, effic, time/10.0)
+  plt.plot(x, y, alpha=0.9,lw=1, c=myDarkGray, zorder=4) 
 
   # SNSPD [207, 830] meV
   x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish*(0.7/10), 207, 830, snr, effic, time/10.0)
-  plt.plot(x, y, alpha=0.8,lw=1, c=myDarkPink, zorder=4) 
+  plt.plot(x, y, alpha=0.9,lw=1, c=myDarkPink, zorder=4) 
 
   # Existing constraint labels
   text_size = 23
@@ -202,14 +202,14 @@ def main():
   fig.text(0.23, 0.78, r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
   
   # Sensors labels
-  fig.text(0.63, 0.795,r'\textbf{Gentec}', color=myDarkGreen,   size=text_size)
-  fig.text(0.63, 0.77, r'(293 K commercial)', color=myDarkGreen,   size=text_size*0.5)
-  fig.text(0.63,0.61, r'\textbf{IR Labs}',      color=myDarkGray,    size=text_size)
-  fig.text(0.63,0.59, r'(1.2 K commercial)', color=myDarkGray,    size=text_size*0.5)
+  fig.text(0.63, 0.795,r'\textbf{Gentec}',    color=myDarkGreen, size=text_size)
+  fig.text(0.63, 0.77, r'(293 K commercial)', color=myDarkGreen, size=text_size*0.5)
+  fig.text(0.63,0.645, r'\textbf{IR Labs}',    color=myDarkGray,  size=text_size)
+  fig.text(0.63,0.625, r'(1.2 K commercial)',  color=myDarkGray,  size=text_size*0.5)
 
   fig.text(0.80, 0.38, r'\textbf{SNSPD}',       color=myDarkPink,    size=text_size)
   fig.text(0.54, 0.40, r'\textbf{KID}',         color=myDarkRed,     size=text_size)
-  fig.text(0.43, 0.355,r'\textbf{TES}',         color=myDarkPurple,  size=text_size)
+  fig.text(0.43, 0.36,r'\textbf{TES}',         color=myDarkPurple,  size=text_size)
   fig.text(0.63, 0.37, r'\textbf{QCDet}',       color=myMediumOrange,size=text_size)
 
   # Arrows for SHUKET and Tokyo dish antenna
@@ -275,7 +275,7 @@ def main():
   # Legend
   plt.plot([1, 1], [1, 1], lw=1, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 1 day, $A_\mathrm{dish}/14$') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 10 days') 
-  plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 10 days') 
+  plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'NEP$_\mathsf{today}$, 1000 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 1000 days') 
   plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=1.9, handletextpad=0.5, borderpad=0.6, ncol=2, columnspacing=0.6)
 
