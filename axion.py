@@ -179,8 +179,8 @@ def main():
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.1, zorder=4)
 
-  # KID [0.2, 5] meV
-  x, y = calc_axion_coupling(3e-19, Adish, Bfield, 0.2, 5, snr, effic, time*100)
+  # KID [0.2, 12] meV
+  x, y = calc_axion_coupling(3e-19, Adish, Bfield, 0.2, 12, snr, effic, time*100)
   plt.plot(x, y, myDarkRed, alpha=0.6, lw=3, ls='-.', zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
 
@@ -203,7 +203,7 @@ def main():
   #-----------------------------
 
   # KID [0.2, 5] meV
-  x, y = calc_axion_coupling(3e-19, Adish, Bfield, 0.2, 5, snr, effic, time)
+  x, y = calc_axion_coupling(3e-19, Adish, Bfield, 0.2, 12, snr, effic, time)
   plt.plot(x, y, myDarkRed, alpha=0.9,lw=3, zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
 

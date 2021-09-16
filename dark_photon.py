@@ -101,8 +101,8 @@ def main():
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.1)
 
-  # KID [0.2, 5] meV
-  x, y = calc_darkPhoton_coupling(3e-21, Adish, 0.2, 5, snr, effic, time*100)
+  # KID [0.2, 12] meV
+  x, y = calc_darkPhoton_coupling(3e-21, Adish, 0.2, 12, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkRed, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.1)
 
@@ -129,8 +129,8 @@ def main():
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.1, zorder=4)
 
-  # KID [0.2, 5] meV
-  x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 5, snr, effic, time*100)
+  # KID [0.2, 12] meV
+  x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 12, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkRed, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
   
@@ -157,7 +157,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.1, zorder=4)
 
   # KID [0.2, 5] meV
-  x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 5, snr, effic, time)
+  x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 12, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkRed, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
 
@@ -202,15 +202,15 @@ def main():
   fig.text(0.23, 0.78, r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
   
   # Sensors labels
-  fig.text(0.63, 0.795,r'\textbf{Gentec}',    color=myDarkGreen, size=text_size)
-  fig.text(0.63, 0.77, r'(293 K commercial)', color=myDarkGreen, size=text_size*0.5)
-  fig.text(0.63,0.645, r'\textbf{IR Labs}',   color=myDarkGray,  size=text_size)
-  fig.text(0.63,0.625, r'(1.6 K commercial)', color=myDarkGray,  size=text_size*0.5)
+  fig.text(0.65, 0.795,r'\textbf{Gentec}',    color=myDarkGreen, size=text_size)
+  fig.text(0.65, 0.77, r'(293 K commercial)', color=myDarkGreen, size=text_size*0.5)
+  fig.text(0.65,0.645, r'\textbf{IR Labs}',   color=myDarkGray,  size=text_size)
+  fig.text(0.65,0.625, r'(1.6 K commercial)', color=myDarkGray,  size=text_size*0.5)
 
   fig.text(0.80, 0.38, r'\textbf{SNSPD}',       color=myDarkPink,    size=text_size)
   fig.text(0.54, 0.40, r'\textbf{KID}',         color=myDarkRed,     size=text_size)
   fig.text(0.43, 0.36, r'\textbf{TES}',         color=myDarkPurple,  size=text_size)
-  fig.text(0.63, 0.365,r'\textbf{QCDet}',       color=myMediumOrange,size=text_size)
+  fig.text(0.65, 0.365,r'\textbf{QCDet}',       color=myMediumOrange,size=text_size)
 
   # Arrows for SHUKET and Tokyo dish antenna
   ax.annotate('', xy=(0.22, 0.59),  xycoords='axes fraction',
