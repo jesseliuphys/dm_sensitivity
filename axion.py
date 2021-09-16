@@ -152,7 +152,7 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.1, zorder=4)
 
   # KID [0.2, 5] meV
-  x, y = calc_axion_coupling(3e-21, Adish, Bfield, 0.2, 5, snr, effic, time*100)
+  x, y = calc_axion_coupling(3e-21, Adish, Bfield, 0.2, 12, snr, effic, time*100)
   plt.plot(x, y, myDarkRed, alpha=0.4, lw=3, ls='--', zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
 
@@ -162,7 +162,7 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPurple, alpha=0.1, zorder=4)
 
   # SNSPD [207, 830] meV
-  x, y = calc_axion_coupling_dcr(1e-6, Adish, Bfield, 207, 830, snr, effic, time*100)
+  x, y = calc_axion_coupling_dcr(1e-6, Adish, Bfield, 124, 830, snr, effic, time*100)
   plt.plot(x, y, myDarkPink, alpha=0.4,lw=3, ls='--',zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPink, alpha=0.1, zorder=4)
 
@@ -189,7 +189,7 @@ def main():
   plt.plot(x, y, myDarkPurple, alpha=0.6,lw=3, ls='-.', zorder=4) 
 
   # SNSPD [207, 830] meV
-  x, y = calc_axion_coupling_dcr(1e-4, Adish, Bfield, 207, 830, snr, effic, time*100)
+  x, y = calc_axion_coupling_dcr(1e-4, Adish, Bfield, 124, 830, snr, effic, time*100)
   plt.plot(x, y, myDarkPink, alpha=0.6,lw=3, ls='-.', zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.1, zorder=4)
 
@@ -218,7 +218,7 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.1, zorder=4)
   
   # SNSPD [207, 830] meV
-  x, y = calc_axion_coupling_dcr(1e-4, Adish, Bfield, 207, 830, snr, effic, time)
+  x, y = calc_axion_coupling_dcr(1e-4, Adish, Bfield, 124, 830, snr, effic, time)
   plt.plot(x, y, myDarkPink, alpha=0.9,lw=3, zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.1, zorder=4)
 
@@ -237,7 +237,7 @@ def main():
   # Sensors labels
   fig.text(0.61,  0.76, r'\textbf{IR Labs}',   color=myDarkGray,    size=text_size, rotation=25)
   fig.text(0.615, 0.74, r'(1.6 K commercial)', color=myDarkGray,    size=text_size*0.5, rotation=25)
-  fig.text(0.81,  0.58, r'\textbf{SNSPD}',     color=myDarkPink,    size=text_size, rotation=35)
+  fig.text(0.78,  0.55, r'\textbf{SNSPD}',     color=myDarkPink,    size=text_size, rotation=35)
   fig.text(0.54,  0.51, r'\textbf{KID}',       color=myDarkRed,     size=text_size, rotation=25)
   fig.text(0.435, 0.405,r'\textbf{TES}',       color=myDarkPurple,  size=text_size, rotation=25)
   fig.text(0.68,  0.555,r'\textbf{QCDet}',     color=myMediumOrange,size=text_size, rotation=25)

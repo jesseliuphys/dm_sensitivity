@@ -112,7 +112,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.1)
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling_dcr(1e-6, Adish, 207, 830, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling_dcr(1e-6, Adish, 124, 830, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1)
 
@@ -139,7 +139,7 @@ def main():
   plt.plot(x, y, alpha=0.6, lw=3, ls='-.',c=myDarkPurple, zorder=4) 
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 207, 830, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 124, 830, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1, zorder=4)
   
@@ -167,7 +167,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.1, zorder=4)
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 207, 830, snr, effic, time)
+  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 124, 830, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightPink, alpha=0.1, zorder=4)
 
@@ -190,7 +190,7 @@ def main():
   plt.plot(x, y, alpha=0.9,lw=1, c=myDarkGray, zorder=4) 
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish*(0.7/10), 207, 830, snr, effic, time/10.0)
+  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish*(0.7/10), 124, 830, snr, effic, time/10.0)
   plt.plot(x, y, alpha=0.9,lw=1, c=myDarkPink, zorder=4) 
 
   # Existing constraint labels
@@ -207,7 +207,7 @@ def main():
   fig.text(0.65,0.645, r'\textbf{IR Labs}',   color=myDarkGray,  size=text_size)
   fig.text(0.65,0.625, r'(1.6 K commercial)', color=myDarkGray,  size=text_size*0.5)
 
-  fig.text(0.80, 0.38, r'\textbf{SNSPD}',       color=myDarkPink,    size=text_size)
+  fig.text(0.77, 0.37, r'\textbf{SNSPD}',       color=myDarkPink,    size=text_size)
   fig.text(0.54, 0.40, r'\textbf{KID}',         color=myDarkRed,     size=text_size)
   fig.text(0.43, 0.36, r'\textbf{TES}',         color=myDarkPurple,  size=text_size)
   fig.text(0.65, 0.365,r'\textbf{QCDet}',       color=myMediumOrange,size=text_size)
