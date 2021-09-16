@@ -117,7 +117,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1)
 
   # QCD [6.2] meV
-  x, y = calc_darkPhoton_coupling(3e-22, Adish, 2, 125, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling(2e-22, Adish, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myMediumOrange, zorder=4)
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -144,7 +144,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1, zorder=4)
   
   # QCD [6.2] meV
-  x, y = calc_darkPhoton_coupling(3e-20, Adish, 2, 125, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling(2e-20, Adish, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myMediumOrange, zorder=4)
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.2, zorder=4)
 
@@ -172,7 +172,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightPink, alpha=0.3, zorder=4)
 
   # QCD [6.2] meV
-  x, y = calc_darkPhoton_coupling(3e-20, Adish, 2, 125, snr, effic, time)
+  x, y = calc_darkPhoton_coupling(2e-20, Adish, 2, 125, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myMediumOrange, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.2, zorder=4)
 
@@ -205,7 +205,7 @@ def main():
   fig.text(0.63, 0.795,r'\textbf{Gentec}',    color=myDarkGreen, size=text_size)
   fig.text(0.63, 0.77, r'(293 K commercial)', color=myDarkGreen, size=text_size*0.5)
   fig.text(0.63,0.645, r'\textbf{IR Labs}',    color=myDarkGray,  size=text_size)
-  fig.text(0.63,0.625, r'(1.2 K commercial)',  color=myDarkGray,  size=text_size*0.5)
+  fig.text(0.63,0.625, r'(1.6 K commercial)',  color=myDarkGray,  size=text_size*0.5)
 
   fig.text(0.80, 0.38, r'\textbf{SNSPD}',       color=myDarkPink,    size=text_size)
   fig.text(0.54, 0.40, r'\textbf{KID}',         color=myDarkRed,     size=text_size)

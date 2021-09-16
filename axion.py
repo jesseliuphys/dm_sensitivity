@@ -167,7 +167,7 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.1, zorder=4)
 
   # QCD [6.2] meV
-  x, y = calc_axion_coupling(3e-22, Adish, Bfield, 2, 125, snr, effic, time*100)
+  x, y = calc_axion_coupling(2e-22, Adish, Bfield, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myMediumOrange, zorder=4)
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.2, zorder=4)
 
@@ -194,7 +194,7 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.3, zorder=4)
 
   # QCD [6.2] meV
-  x, y = calc_axion_coupling(3e-20, Adish, Bfield, 2, 125, snr, effic, time*100)
+  x, y = calc_axion_coupling(2e-20, Adish, Bfield, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, c=myMediumOrange, ls='-.', zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.2, zorder=4)
 
@@ -223,7 +223,7 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.3, zorder=4)
 
   # QCD [6.2] meV
-  x, y = calc_axion_coupling(3e-20, Adish, Bfield, 2, 125, snr, effic, time)
+  x, y = calc_axion_coupling(2e-20, Adish, Bfield, 2, 125, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myMediumOrange, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.2, zorder=4)
 
@@ -236,7 +236,7 @@ def main():
   
   # Sensors labels
   fig.text(0.61,  0.76, r'\textbf{IR Labs}',   color=myDarkGray,    size=text_size, rotation=25)
-  fig.text(0.615,  0.74, r'(1.2 K commercial)', color=myDarkGray,    size=text_size*0.5, rotation=25)
+  fig.text(0.615,  0.74, r'(1.6 K commercial)', color=myDarkGray,    size=text_size*0.5, rotation=25)
   fig.text(0.81,  0.58, r'\textbf{SNSPD}',     color=myDarkPink,    size=text_size, rotation=35)
   fig.text(0.54,  0.51, r'\textbf{KID}',       color=myDarkRed,     size=text_size, rotation=25)
   fig.text(0.435, 0.405,r'\textbf{TES}',       color=myDarkPurple,  size=text_size, rotation=25)
