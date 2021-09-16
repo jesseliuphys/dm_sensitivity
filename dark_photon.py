@@ -109,7 +109,7 @@ def main():
   # TES [0.2, 1.2] meV
   x, y = calc_darkPhoton_coupling(2e-21, Adish, 0.19, 1.2, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkPurple, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.15)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.1)
 
   # SNSPD [207, 830] meV
   x, y = calc_darkPhoton_coupling_dcr(1e-6, Adish, 207, 830, snr, effic, time*100)
@@ -119,7 +119,7 @@ def main():
   # QCD [6.2] meV
   x, y = calc_darkPhoton_coupling(2e-22, Adish, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myMediumOrange, zorder=4)
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.15, zorder=4)
 
   #-----------------------------
   # Upgrade 1
@@ -146,7 +146,7 @@ def main():
   # QCD [6.2] meV
   x, y = calc_darkPhoton_coupling(2e-20, Adish, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myMediumOrange, zorder=4)
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.2, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.15, zorder=4)
 
   #-----------------------------
   # Baseline
@@ -154,7 +154,7 @@ def main():
   # Far-IR 1.6 K IR Labs bolometer
   x, y = calc_darkPhoton_coupling(5e-14, Adish, 0.24, 248, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkGray, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.2, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.1, zorder=4)
 
   # KID [0.2, 5] meV
   x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 5, snr, effic, time)
@@ -164,17 +164,17 @@ def main():
   # TES [0.2, 1.2] meV
   x, y = calc_darkPhoton_coupling(2e-19, Adish, 0.19, 1.2, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkPurple, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.15, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.1, zorder=4)
 
   # SNSPD [207, 830] meV
   x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 207, 830, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkPink, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightPink, alpha=0.3, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightPink, alpha=0.1, zorder=4)
 
   # QCD [6.2] meV
   x, y = calc_darkPhoton_coupling(2e-20, Adish, 2, 125, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myMediumOrange, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.2, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.15, zorder=4)
 
   #-----------------------------
   # Pilot dish size and 1 day 
@@ -204,13 +204,13 @@ def main():
   # Sensors labels
   fig.text(0.63, 0.795,r'\textbf{Gentec}',    color=myDarkGreen, size=text_size)
   fig.text(0.63, 0.77, r'(293 K commercial)', color=myDarkGreen, size=text_size*0.5)
-  fig.text(0.63,0.645, r'\textbf{IR Labs}',    color=myDarkGray,  size=text_size)
-  fig.text(0.63,0.625, r'(1.6 K commercial)',  color=myDarkGray,  size=text_size*0.5)
+  fig.text(0.63,0.645, r'\textbf{IR Labs}',   color=myDarkGray,  size=text_size)
+  fig.text(0.63,0.625, r'(1.6 K commercial)', color=myDarkGray,  size=text_size*0.5)
 
   fig.text(0.80, 0.38, r'\textbf{SNSPD}',       color=myDarkPink,    size=text_size)
   fig.text(0.54, 0.40, r'\textbf{KID}',         color=myDarkRed,     size=text_size)
-  fig.text(0.43, 0.36,r'\textbf{TES}',         color=myDarkPurple,  size=text_size)
-  fig.text(0.63, 0.37, r'\textbf{QCDet}',       color=myMediumOrange,size=text_size)
+  fig.text(0.43, 0.36, r'\textbf{TES}',         color=myDarkPurple,  size=text_size)
+  fig.text(0.63, 0.365,r'\textbf{QCDet}',       color=myMediumOrange,size=text_size)
 
   # Arrows for SHUKET and Tokyo dish antenna
   ax.annotate('', xy=(0.22, 0.59),  xycoords='axes fraction',
