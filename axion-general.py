@@ -268,10 +268,10 @@ def main():
   plt.tight_layout(pad=0.3)
   plt.subplots_adjust( top=0.85,left=0.16 )
   
-  save_name = 'fig_axion_Adish{0}_Bfield{1}_snr{2}_effic{3}_time{4}'.format(Adish, Bfield, snr, effic, time)
+  save_name = 'fig_axion_general_varyNEP1000days'
   
   print('Saving as {0}'.format(save_name))
-  plt.savefig(save_name + '_general.pdf', format='pdf', dpi=50)
+  plt.savefig(save_name + '.pdf', format='pdf', dpi=50)
   #plt.savefig(save_name + '_photosensors.png', format='png', dpi=400)
   #plt.savefig(save_name + '.eps', format='eps', dpi=150)
   #plt.savefig(save_name, format='png', dpi=150)
