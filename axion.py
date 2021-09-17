@@ -55,8 +55,9 @@ def main():
   myLightPink      = '#fcc5c0'
   myDarkPink       = '#ce1256'
   myMediumGreen    = '#41ab5d'
-  myDarkGreen      = '#006d2c'
 
+  myDarkGreen      = '#006d2c'
+  myDarkerGreen    = '#00441b'
   myLightGray      = '#d9d9d9'
   myMediumGray     = '#969696'
   myDarkGray       = '#525252'
@@ -129,7 +130,8 @@ def main():
   x  = np.array([3.97923878e-8,9.977])
   y1 = np.array([1.0221156e-16,2.53104578e-8])
   y2 = np.array([2.4677434e-18,5.1074015e-10])
-  plt.plot([2.74789415e-7,9.88553094657], [1.0471285e-16,3.84591782e-9], myDarkGreen,linewidth=2,linestyle='-', zorder=-5) # KSVZ
+  plt.plot([2.74789415e-7,9.88553094657], [1.0471285e-16,3.84591782e-9], myDarkerGreen,linewidth=2,linestyle='-', zorder=-5) # KSVZ
+  plt.plot([2.74789415e-7,9.88553094657], [0.391*1.0471285e-16,0.391*3.84591782e-9], myDarkGreen, linewidth=2,linestyle='-', zorder=-5) # DFSZ
   plt.fill_between(x, y1, y2, color=myMediumGreen,linewidth=0,alpha=0.2,zorder=-5)
   #plt.fill_between(x, y1, y2, myMediumGreen,alpha=0.6,linewidth=2,linestyle='-', zorder=-1)
 
@@ -243,13 +245,15 @@ def main():
   fig.text(0.68,  0.555,r'\textbf{QCDet}',     color=myMediumOrange,size=text_size, rotation=25)
 
   # QCD axions
-  fig.text(0.29, 0.28, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
-  fig.text(0.22, 0.18, r'QCD axion models', color=myMediumGreen, size=text_size, rotation=26)
+  #fig.text(0.29, 0.28, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
+  fig.text(0.23, 0.235,r'KSVZ', color=myDarkerGreen, size=text_size, rotation=28)
+  fig.text(0.23, 0.16, r'DFSZ', color=myDarkGreen, size=text_size, rotation=28)
+  fig.text(0.32, 0.19, r'QCD axion models', color=myMediumGreen, size=text_size, rotation=26)
 
   fig.text(0.31, 0.425, r'Cogenesis', color=myMediumGreen, size=text_size*0.9, rotation=14)
   fig.text(0.36, 0.415, r'$c_{a\gamma\gamma} = 1$', color=myMediumGreen, size=text_size*0.5, rotation=14)
 
-  fig.text(0.28, 0.17, r'SNSPD: NEP $\to$ DCR, SNR $\rightarrow Z = S/\sqrt{N}$', color=myMediumGray, size=text_size*0.4)
+  fig.text(0.35, 0.17, r'SNSPD: NEP $\to$ DCR, SNR $\rightarrow Z = S/\sqrt{N}$', color=myMediumGray, size=text_size*0.4)
  
   # Axis log scale
   ax.set_xscale('log')
