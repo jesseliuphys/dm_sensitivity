@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''
 Axion DM sensitivity plotter
 for a general ideal broadband sensor
@@ -8,6 +8,7 @@ import matplotlib as mplt
 mplt.use('Agg') # So we can use without X forwarding
 
 import numpy as np
+import pandas as pd
 import os, json, math, csv, argparse, datetime
 import matplotlib.pyplot  as plt
 import matplotlib.lines   as mlines
@@ -20,53 +21,11 @@ from matplotlib.backends.backend_pdf import PdfPages
 doLogY = False # Draw the y-axis on log scale
 
 mplt.rc("text", usetex=True)
+mplt.rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 
 #__________________________________________
 def main():
 
-  #mkdir('figs') # For the figures
-
-  # ----------------------------------------------------------
-  # Input the contours to plot
-  cosmological   = csv_to_lists( 'limits/dp_cosmological.csv' )
-  cast           = csv_to_lists( 'limits/ax_cast.csv' )
-  solar_lifetime = csv_to_lists( 'limits/dp_solar_lifetime.csv' )
-  cavity1        = csv_to_lists( 'limits/ax_cavity1.csv' )
-  cavity2        = csv_to_lists( 'limits/ax_cavity2.csv' )
-
-  # Default values
-  Adish  = 10. # dish area in m^2
-  snr    = 5.  # signal to noise
-  effic  = 0.5 # signal detection efficiency
-  time   = 1.  # integration time in hours
-  Bfield = 10. # Tesla
-
-
-  #mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=1.,  snr=5., effic=0.5, time=1. )
-  mk_plot( cast, cavity1, cavity2, Adish=10.,  Bfield=10., snr=5., effic=0.5, time=24 )
-  mk_plot( cast, cavity1, cavity2, Adish=10.,  Bfield=10., snr=5., effic=0.5, time=24000 )
-  #mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=10.,effic=0.5, time=1. )
-  #mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, time=1. )
-
-  '''
-  
-  l_time = [0.001, 0.01, 0.1, 1, 10, 100, 1e3, 8760]
-  for time in l_time:
-    mk_plot( cast, cavity1, cavity2, Adish, Bfield, snr, effic, time )
-  time   = 10
-  l_effic = [0.001, 0.01, 0.1, 0.2, 0.5, 0.9, 1.0]
-  for effic in l_effic:
-    mk_plot( cast, cavity1, cavity2, Adish, Bfield, snr, effic, time )
-  '''
-
-  # ----------------------------------------------------------
-
-#__________________________________________
-def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, time=1.):
-  '''
-  This plots the contours from the raw (x,y) values of each contour
-  '''
-  print('Plotting contours for' )
  
   # Figures
   fig, ax = plt.subplots()
@@ -101,42 +60,99 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   myMediumGray     = '#969696'
   myDarkGray       = '#525252'
 
-  # ------------------------------------------------------- 
-  # Sensitivity lines and region
-  # ------------------------------------------------------- 
+  # Existing constraints from https://arxiv.org/abs/2105.04565 https://github.com/cajohare/AxionLimits/ 
+  # Haloscope
+  admx= pd.read_csv('limits/common/Ax_ADMX.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(admx['x'], admx['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+  admx1= pd.read_csv('limits/common/Ax_ADMX2018.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(admx1['x'], admx1['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+  admx2= pd.read_csv('limits/common/Ax_ADMX2018.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(admx2['x'], admx2['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+  admx3= pd.read_csv('limits/common/Ax_ADMX2018.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(admx3['x'], admx3['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
 
-  # Existing haloscopes
-  plt.fill(cavity1['x'], cavity1['y'], myDarkBlue, linewidth=1, zorder=-1, edgecolor= myDarkerBlue) 
-  plt.fill(cavity2['x'], cavity2['y'], myDarkBlue, linewidth=1, zorder=-1, edgecolor= myDarkerBlue)
+  capp1= pd.read_csv('limits/common/Ax_CAPP-1.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(capp1['x'], capp1['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+  capp2= pd.read_csv('limits/common/Ax_CAPP-2.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(capp2['x'], capp2['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+  capp3= pd.read_csv('limits/common/Ax_CAPP-3.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(capp3['x'], capp3['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
 
-  # QCD axion
-  x  = np.array([-7.4002,0.9990])
-  y1 = np.array([-15.9905,-7.5967])
-  y2 = np.array([-17.6077,-9.2918])
-  plt.plot([-6.561,0.9950], [-15.98,-8.415], myDarkGreen,linewidth=2,linestyle='-', zorder=-5) # KSVZ
+  haystac= pd.read_csv('limits/common/Ax_HAYSTAC_highres.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(haystac['x'], haystac['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+  haystac2= pd.read_csv('limits/common/Ax_HAYSTAC_2020_highres.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(haystac2['x'], haystac2['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+
+  rbf = pd.read_csv('limits/common/Ax_RBF_UF_Haloscopes.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(rbf['x'], rbf['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+
+  organ = pd.read_csv('limits/common/Ax_ORGAN.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(organ['x'], organ['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+
+  quax = pd.read_csv('limits/common/Ax_QUAX.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(quax['x'], quax['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+  quax2 = pd.read_csv('limits/common/Ax_QUAX2.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(quax2['x'], quax2['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+
+  rades = pd.read_csv('limits/common/Ax_RADES.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(rades['x'], rades['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+
+  muse = pd.read_csv('limits/common/Ax_Telescopes_MUSE.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(muse['x'], muse['y'], 1e-1, edgecolor='none', facecolor=myLighterBlue, zorder=-1, alpha=0.8)
+  vimos = pd.read_csv('limits/common/Ax_Telescopes_VIMOS.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(vimos['x'], vimos['y'], 1e-1, edgecolor='none', facecolor=myLighterBlue, zorder=-1, alpha=0.8)
+
+  # Neutron star
+  ns0 = pd.read_csv('limits/common/Ax_NeutronStar.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(ns0['x'], ns0['y'], 1e-1, edgecolor='none', facecolor=myLighterBlue)
+  ns1 = pd.read_csv('limits/common/Ax_NeutronStars_Battye.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(ns1['x'], ns1['y']*100, 1e-1, edgecolor='none', facecolor=myLighterBlue) #x100 following https://github.com/cajohare/AxionLimits/blob/master/AxionPhoton_Closeups.ipynb
+  ns2 = pd.read_csv('limits/common/Ax_NeutronStars_GreenBank.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(ns2['x'], ns2['y'], 1e-1, edgecolor='none', facecolor=myLighterBlue)
+  ns3 = pd.read_csv('limits/common/Ax_NeutronStars_VLA.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(ns3['x'], ns3['y'], 1e-1, edgecolor='none', facecolor=myLighterBlue)
+
+  # Stellar
+  hb= pd.read_csv('limits/common/Ax_HorizontalBranch.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.plot(hb['x'],   hb['y'],  color=myLightBlue, lw=1, zorder=0)
+  plt.fill_between(hb['x'], hb['y'], 1e-1, edgecolor='none', facecolor=myLighterBlue, alpha=0.8)
+
+  cast= pd.read_csv('limits/common/Ax_CAST.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.plot(cast['x'],   cast['y'],  color=myLightBlue, lw=1, zorder=2)
+  plt.fill_between(cast['x'], cast['y'], 1e-1, edgecolor='none', facecolor=myLightestBlue)
+  cast2= pd.read_csv('limits/common/Ax_CAST_highm.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.plot(cast2['x'],   cast2['y'],  color=myLightBlue, lw=1, zorder=-1)
+  plt.fill_between(cast2['x'], cast2['y'], 1e-1, edgecolor='none', facecolor=myLightestBlue)
+
+  # QCD axion band
+  x  = np.array([3.97923878e-8,9.977])
+  y1 = np.array([1.0221156e-16,2.53104578e-8])
+  y2 = np.array([2.4677434e-18,5.1074015e-10])
+  plt.plot([2.74789415e-7,9.88553094657], [1.0471285e-16,3.84591782e-9], myDarkGreen,linewidth=2,linestyle='-', zorder=-5) # KSVZ
   plt.fill_between(x, y1, y2, color=myMediumGreen,linewidth=0,alpha=0.2,zorder=-5)
   #plt.fill_between(x, y1, y2, myMediumGreen,alpha=0.6,linewidth=2,linestyle='-', zorder=-1)
-  
-  # HAYSTAC
-  plt.plot([-4.627, -4.627], [-9, -13.6], myDarkBlue, linewidth=2, linestyle='-', zorder=-2) 
-  #plt.fill(shuket['x'], shuket['y'], myLightPurple, linewidth=1, zorder=-1, edgecolor= myDarkPurple) 
 
-  # Astro constraints
-  plt.fill(cast['x'], cast['y'], myLightestBlue, linewidth=1, zorder=-1, edgecolor= myDarkBlue)
-  #plt.fill(cosmological['x'], cosmological['y'], myLightBlue, linewidth=1, zorder=-1, edgecolor= myDarkerBlue)  
-  #plt.fill(solar_lifetime['x'], solar_lifetime['y'], myLighterBlue, linewidth=1, zorder=-1, edgecolor= myDarkerBlue) 
+  # Cogenesis cayy=1, 
+  plt.plot([1.03535e-8, 0.999511], [5.79881e-14, 5.72150e-10], color=myMediumGreen, lw=2, ls='dotted', zorder=-1)
+
+  # Default values
+  Adish  = 10. # dish area in m^2
+  Bfield = 10. # Tesla
+  snr    = 5.  # signal to noise
+  effic  = 0.5 # signal detection efficiency
+  time   = 24000.  # integration time in hours
 
   #-----------------------------
   # 100x run time of stage 1
   #-----------------------------
   # Bolometer [1.65, 83] meV
   x, y = calc_axion_coupling(1e-21, Adish, Bfield, 0.05, 1000, snr, effic, time)
-  plt.plot(x, y, alpha=0.7,lw=1, ls='--', c=myDarkPurple, zorder=4) 
-  plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myMediumPurple, alpha=0.1)
+  plt.plot(x, y, alpha=0.7,lw=1, ls='--', c=myMediumOrange, zorder=4) 
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightOrange, alpha=0.1)
 
   # Bolometer [1.65, 83] meV
   x, y = calc_axion_coupling(1e-20, Adish, Bfield, 0.05, 1000, snr, effic, time)
-  plt.plot(x, y, alpha=0.7,lw=3, ls='--', c=myDarkPurple, zorder=4) 
+  plt.plot(x, y, alpha=0.7,lw=3, ls='--', c=myMediumOrange, zorder=4) 
   #plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.1)
   
   #-----------------------------
@@ -144,7 +160,7 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   #-----------------------------
   # Bolometer [1.65, 83] meV
   x, y = calc_axion_coupling(1e-17, Adish, Bfield, 0.05, 1000, snr, effic, time)
-  plt.plot(x, y, alpha=0.7,lw=1, ls='-', c=myDarkPurple, zorder=4) 
+  plt.plot(x, y, alpha=0.7,lw=1, ls='-', c=myMediumOrange, zorder=4) 
   #plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.1)
 
   #-----------------------------
@@ -152,61 +168,34 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   #-----------------------------
   # Far-IR 1.6 K IR Labs bolometer
   x, y = calc_axion_coupling(1e-14, Adish, Bfield, 0.05, 1000, snr, effic, time)
-  plt.plot(x, y, alpha=0.8,lw=3, ls='-', c=myDarkPurple, zorder=4) 
+  plt.plot(x, y, alpha=0.8,lw=3, ls='-', c=myMediumOrange, zorder=4) 
   #plt.fill_between(x, y, [-5, -5], edgecolor='none', facecolor=myDarkGray, alpha=0.15)
 
   #-----------------------------
   # General power eye-guides
   #-----------------------------
 
-  plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkPurple, label=r'NEP $= 10^{-14}$ W Hz$^{-1/2}$') 
-  plt.plot([1, 1], [1, 1], lw=1, ls='-',  c=myDarkPurple, label=r'NEP $= 10^{-17}$ W Hz$^{-1/2}$') 
-  plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkPurple, label=r'NEP $= 10^{-20}$ W Hz$^{-1/2}$') 
-  plt.plot([1, 1], [1, 1], lw=1, ls='--', c=myDarkPurple, label=r'NEP $= 10^{-21}$ W Hz$^{-1/2}$') 
+  plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myMediumOrange, label=r'NEP $= 10^{-14}$ W Hz$^{-1/2}$') 
+  plt.plot([1, 1], [1, 1], lw=1, ls='-',  c=myMediumOrange, label=r'NEP $= 10^{-17}$ W Hz$^{-1/2}$') 
+  plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myMediumOrange, label=r'NEP $= 10^{-20}$ W Hz$^{-1/2}$') 
+  plt.plot([1, 1], [1, 1], lw=1, ls='--', c=myMediumOrange, label=r'NEP $= 10^{-21}$ W Hz$^{-1/2}$') 
   plt.legend(loc='lower right', prop={'size':18}, frameon=False, handlelength=2.8, borderpad=0.8)
-
-  # ------------------------------------------------------- 
-  # Axis properties
-  # ------------------------------------------------------- 
-
-  plt.xlim(-6, 1)
-  plt.ylim(-16, -6)
-
-  # axes labels
-  x_txt = r"$\log_{10}[m_{a} / \mathrm{eV}]$"
-  y_txt = r'$\log_{10}[|g_{a\gamma\gamma}| / \mathrm{GeV}^{-1}]$'
-    
-  # Axis label properties
-  plt.xlabel(x_txt, labelpad=20, size=35) 
-  plt.ylabel(y_txt, labelpad=10, size=35)
-
-  # Draw the upper THz axis
-  ax2 = ax.twiny()
-  ax2.set_xlim(-3.62, 3.38)
-  ax2.set_xlabel(r'$\log_{10}[\nu/\mathrm{THz}]$', labelpad=10, size=35)
    
   # ------------------------------------------------------- 
   # Add plot text
   # ------------------------------------------------------- 
   text_size = 23
+  fig.text(0.19, 0.38,  r'Haloscope',  color=myDarkerBlue, size=text_size)
+  fig.text(0.22, 0.72,  r'CAST',       color=myDarkBlue, size=text_size)
+  fig.text(0.87, 0.57,  r'Stellar',    color=myDarkBlue, size=text_size)
+  fig.text(0.92, 0.38,  r'Telescope',  color=myDarkBlue, size=text_size, rotation=90)
 
-  #fig.text(0.22, 0.20, r'ADMX',    color=myDarkerBlue, size=text_size)
-  fig.text(0.22, 0.285, r'Cavity', color=myDarkerBlue, size=text_size)
-  #fig.text(0.34, 0.62, r'SHUKET', color=myMediumPurple, size=text_size, rotation=90)
-  fig.text(0.325, 0.52, r'HAYSTAC',color=myDarkBlue, size=text_size, rotation=90)
+  # QCD axions
+  fig.text(0.29, 0.28, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
+  fig.text(0.22, 0.18, r'QCD axion models', color=myMediumGreen, size=text_size, rotation=26)
 
-  #fig.text(0.22, 0.76, r'Cosmology', color=myDarkerBlue, size=text_size)
-  fig.text(0.25, 0.74, r'CAST', color=myDarkerBlue, size=text_size)
-  fig.text(0.68, 0.56, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
-  fig.text(0.74, 0.612, r'QCD axion models', color=myMediumGreen, size=text_size, rotation=26)
-
-  # Sensors
-  #fig.text(0.62, 0.78, r'Bolometer',    color=myDarkGray,    size=text_size)
-  #fig.text(0.62, 0.76, r'(Commercial)', color=myDarkGray,    size=text_size*0.5)
-  #fig.text(0.80, 0.80, r'SNSPD',     color=myDarkPink,    size=text_size)
-  #fig.text(0.54, 0.61, r'KID',       color=myMediumOrange,size=text_size)
-  #fig.text(0.43, 0.56, r'TES',       color=myDarkPurple,  size=text_size)
-  #fig.text(0.61, 0.63, r'QCD',       color=myDarkGray,    size=text_size, rotation=90)
+  fig.text(0.31, 0.425, r'Cogenesis', color=myMediumGreen, size=text_size*0.9, rotation=14)
+  fig.text(0.36, 0.415, r'$c_{a\gamma\gamma} = 1$', color=myMediumGreen, size=text_size*0.5, rotation=14)
 
   # Eye guides
   #fig.text(0.35, 0.65, r'$10^{-15}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size, rotation=25)
@@ -225,20 +214,62 @@ def mk_plot( cast, cavity1, cavity2, Adish=10., Bfield=10., snr=5., effic=0.5, t
   fig.text(0.40, 0.18, integrationT, color=myDarkGray, size=text_size*0.8)
   #fig.text(0.49, 0.18, r'$\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.8)
 
+  # ------------------------------------------------------- 
+  # Axis properties
+  # ------------------------------------------------------- 
+  # Axis log scale
+  ax.set_xscale('log')
+  ax.set_yscale('log')
+  # Axis limits
+  ax.set_xlim(1e-6, 4.13567)
+  ax.set_ylim(1e-16, 1e-6)
+  # Axis labels
+  x_txt = r"$m_{a}~[\mathrm{meV}]$"
+  y_txt = r'$|g_{a\gamma\gamma}|~[\mathrm{GeV}^{-1}]$'
+  # Rescale axis from eV to meV
+  scale_x=1e3
+  ticks_x = mplt.ticker.FuncFormatter(lambda x, pos: r'${0:g}$'.format(x*scale_x))
+  ax.xaxis.set_major_formatter(ticks_x)
+  # Axis label properties
+  plt.xlabel(x_txt, labelpad=15, size=38) 
+  plt.ylabel(y_txt, labelpad=10, size=38)
 
-  # Adjust axis ticks
-  ax.minorticks_on()
-  ax2.minorticks_on()
+  # Draw the upper THz axis
+  ax2 = ax.twiny()
+  ax2.set_xlim(241.79e-6, 1000)
+  ax2.set_xscale('log')
+  ax2.set_xlabel(r'$\nu~[\mathrm{THz}]$', labelpad=18, size=38)
+  ax2.get_xaxis().set_major_formatter(mplt.ticker.ScalarFormatter())
+  ax2.get_xaxis().set_major_formatter(mplt.ticker.FormatStrFormatter(r'$%g$'))
 
-  ax.tick_params('x', length=12, width=1, which='major', labelsize='28', pad=10)
-  ax.tick_params('x', length=6,  width=1, which='minor') 
-  ax2.tick_params('x', length=12, width=1, which='major', labelsize='28', pad=10)
-  ax2.tick_params('x', length=6,  width=1, which='minor') 
-  ax.tick_params('y', length=12, width=1, which='major', labelsize='28', pad=10)
-  ax.tick_params('y', length=6,  width=1, which='minor') 
+  # Force axis ticks to appear in log scale
+  locmaj = mplt.ticker.LogLocator(base=10.0, subs=(1.0, ), numticks=100)
+  locmin = mplt.ticker.LogLocator(base=10.0, subs=np.arange(2, 10)*.1,numticks=100)
+  ax.xaxis.set_major_locator(locmaj)
+  ax.xaxis.set_minor_locator(locmin)
+  locmaj = mplt.ticker.LogLocator(base=10.0, subs=(1.0, ), numticks=100)
+  locmin = mplt.ticker.LogLocator(base=10.0, subs=np.arange(2, 10)*.1,numticks=100)
+  ax2.xaxis.set_major_locator(locmaj)
+  ax2.xaxis.set_minor_locator(locmin)
+  locmaj = mplt.ticker.LogLocator(base=10.0, subs=(1.0, ), numticks=100)
+  locmin = mplt.ticker.LogLocator(base=10.0, subs=np.arange(2, 10)*.1,numticks=100)
+  ax.yaxis.set_major_locator(locmaj)
+  ax.yaxis.set_minor_locator(locmin)
+  ax2.xaxis.set_minor_formatter(mplt.ticker.NullFormatter())
+  ax.xaxis.set_minor_formatter(mplt.ticker.NullFormatter())
+  ax.yaxis.set_minor_formatter(mplt.ticker.NullFormatter())
+
+  # Axis ticks
+  ax.tick_params('x', length=12, width=1, which='major', labelsize='28', pad=10, direction="in")
+  ax.tick_params('x', length=6,  width=1, which='minor', direction="in") 
+  ax2.tick_params('x', length=12, width=1, which='major', labelsize='28', pad=10, direction="in")
+  ax2.tick_params('x', length=6,  width=1, which='minor', direction="in") 
+  ax.tick_params('y', length=12, width=1, which='major', labelsize='28', pad=10, direction="in", right="on")
+  ax.tick_params('y', length=6,  width=1, which='minor', direction="in", right="on") 
    
+  # Plot margins
   plt.tight_layout(pad=0.3)
-  plt.subplots_adjust( top=0.85,left=0.15 )
+  plt.subplots_adjust( top=0.85,left=0.16 )
   
   save_name = 'fig_axion_Adish{0}_Bfield{1}_snr{2}_effic{3}_time{4}'.format(Adish, Bfield, snr, effic, time)
   
@@ -268,9 +299,9 @@ def csv_to_lists(csv_file):
 def calc_axion_coupling(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity = 0.45):
   '''
   Convert instrument parameters and detected signal power to axion coupling
-   - power is units of Watts
-   - mirrorArea units is m^2
-   - Bfield units is Tesla
+   - nep          = noise equivalent power is units of Watts per sqrt(Hz)
+   - mirrorArea   = dish area in m^2
+   - Bfield       = magnetic field strength in units of Tesla
    - min/maxMass  = min and max mass to plot
    - snr          = required signal to noise ratio 
    - effic        = overall signal power efficiency 
@@ -294,13 +325,37 @@ def calc_axion_coupling(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic
   minCoupling = ( minMass ) / massOverCoupling
   maxCoupling = ( maxMass ) / massOverCoupling
 
-  # Convert meV to eV, coupling to 1/GeV
-  log10minMass = np.log10(minMass * 10**(-3))
-  log10maxMass = np.log10(maxMass * 10**(-3))
-  log10minCoupling = np.log10(minCoupling * 10**(-12)) 
-  log10maxCoupling = np.log10(maxCoupling * 10**(-12)) 
+  return [minMass*1e-3, maxMass*1e-3], [minCoupling*1e-12, maxCoupling*1e-12]
 
-  return [log10minMass, log10maxMass], [log10minCoupling, log10maxCoupling]
+#__________________________________________
+def calc_axion_coupling_dcr(dcr, mirrorArea, Bfield, minMass, maxMass, Zsignif=5., effic=0.5, time=1., relicDensity = 0.45):
+  '''
+  Convert instrument parameters and detected signal power to axion coupling
+   - dcr          = dark count rate in Hz
+   - mirrorArea   = dish area in m^2
+   - Bfield       = magnetic field in Tesla
+   - min/maxMass  = min and max mass to plot
+   - Zsignif      = required significance 
+   - effic        = overall signal power efficiency 
+   - time         = integration time in hours
+   - relicDensity = dark matter relic density in GeV/cm^3
+  Returns lowest [minCoupling, maxCoupling] coupling values probed 
+  in units of 10^{-11}/GeV for [minMass, maxMass] 
+  '''
+  ratio    = ( Zsignif / 5. )
+  noise    = math.sqrt( dcr / 0.01 )
+  area     = ( 10. / mirrorArea  ) 
+  dt       = math.sqrt( 1. / time )
+  epsilon  = ( 0.5 / effic )
+  rho      = ( 0.45 / relicDensity )
+  magnet   = ( 10. / Bfield )**2 
+
+  couplingSqMin = 5.67 * ratio * noise * area * dt * epsilon * rho * magnet * ( minMass )**3 
+  couplingSqMax = 5.67 * ratio * noise * area * dt * epsilon * rho * magnet * ( maxMass )**3 
+  couplingMin = math.sqrt( couplingSqMin )
+  couplingMax = math.sqrt( couplingSqMax )
+
+  return [minMass*1e-3, maxMass*1e-3], [couplingMin*1e-13, couplingMax*1e-13]
   
 #_________________________________________________________________________
 def mkdir(dirPath):
