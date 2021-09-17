@@ -151,7 +151,7 @@ def main():
   time   = 24000.  # integration time in hours
 
   #-----------------------------
-  # 100x run time of stage 1
+  # Projections
   #-----------------------------
   x, y = calc_axion_coupling(1e-21, Adish, Bfield, 0.05, 500, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=4, ls='-', c=myMediumOrange, zorder=4)   

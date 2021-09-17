@@ -151,27 +151,27 @@ def main():
   # Bolometer [1.65, 83] meV
   x, y = calc_axion_coupling(5e-16, Adish, Bfield, 0.24, 248, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkGray, zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.05, zorder=4)
 
   # KID [0.2, 5] meV
   x, y = calc_axion_coupling(3e-21, Adish, Bfield, 0.2, 12, snr, effic, time*100)
   plt.plot(x, y, myDarkRed, alpha=0.4, lw=3, ls='--', zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myMediumRed, alpha=0.05, zorder=4)
 
   # TES [0.2, 1.2] meV
   x, y = calc_axion_coupling(2e-21, Adish, Bfield, 0.19, 1.2, snr, effic, time*100)
   plt.plot(x, y, myDarkPurple, alpha=0.4,lw=3, ls='--', zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPurple, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPurple, alpha=0.05, zorder=4)
 
   # SNSPD [207, 830] meV
   x, y = calc_axion_coupling_dcr(1e-6, Adish, Bfield, 124, 830, snr, effic, time*100)
   plt.plot(x, y, myDarkPink, alpha=0.4,lw=3, ls='--',zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPink, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPink, alpha=0.05, zorder=4)
 
   # QCD [6.2] meV
   x, y = calc_axion_coupling(2e-22, Adish, Bfield, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myMediumOrange, zorder=4)
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.15, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
   #-----------------------------
   # Stage 1
@@ -179,12 +179,12 @@ def main():
   # Bolometer [1.65, 83] meV
   x, y = calc_axion_coupling(5e-14, Adish, Bfield, 0.24, 248, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkGray, zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.05, zorder=4)
 
   # KID [0.2, 12] meV
   x, y = calc_axion_coupling(3e-19, Adish, Bfield, 0.2, 12, snr, effic, time*100)
   plt.plot(x, y, myDarkRed, alpha=0.6, lw=3, ls='-.', zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myMediumRed, alpha=0.05, zorder=4)
 
   # TES [0.2, 1.2] meV
   x, y = calc_axion_coupling(2e-19, Adish, Bfield, 0.19, 1.2, snr, effic, time*100)
@@ -193,12 +193,12 @@ def main():
   # SNSPD [207, 830] meV
   x, y = calc_axion_coupling_dcr(1e-4, Adish, Bfield, 124, 830, snr, effic, time*100)
   plt.plot(x, y, myDarkPink, alpha=0.6,lw=3, ls='-.', zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.05, zorder=4)
 
   # QCD [6.2] meV
   x, y = calc_axion_coupling(2e-20, Adish, Bfield, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, c=myMediumOrange, ls='-.', zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.15, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
   #-----------------------------
   # Baseline
@@ -207,27 +207,27 @@ def main():
   # KID [0.2, 5] meV
   x, y = calc_axion_coupling(3e-19, Adish, Bfield, 0.2, 12, snr, effic, time)
   plt.plot(x, y, myDarkRed, alpha=0.9,lw=3, zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myMediumRed, alpha=0.05, zorder=4)
 
   # TES [0.2, 1.2] meV
   x, y = calc_axion_coupling(2e-19, Adish, Bfield, 0.19, 1.2, snr, effic, time)
   plt.plot(x, y, myDarkPurple, alpha=0.9,lw=3, zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPurple, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPurple, alpha=0.05, zorder=4)
 
   # Far-IR 1.6 K IR Labs bolometer
   x, y = calc_axion_coupling(5e-14, Adish, Bfield, 0.24, 248, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkGray, zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.05, zorder=4)
   
   # SNSPD [207, 830] meV
   x, y = calc_axion_coupling_dcr(1e-4, Adish, Bfield, 124, 830, snr, effic, time)
   plt.plot(x, y, myDarkPink, alpha=0.9,lw=3, zorder=4) 
-  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.05, zorder=4)
 
   # QCD [6.2] meV
   x, y = calc_axion_coupling(2e-20, Adish, Bfield, 2, 125, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myMediumOrange, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.15, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
   # Existing constraint labels
   text_size = 23

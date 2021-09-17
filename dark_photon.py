@@ -99,27 +99,27 @@ def main():
   # Bolometer [1.65, 83] meV
   x, y = calc_darkPhoton_coupling(5e-16, Adish, 0.24, 248, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkGray, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.1)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05)
 
   # KID [0.2, 12] meV
   x, y = calc_darkPhoton_coupling(3e-21, Adish, 0.2, 12, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkRed, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.1)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.05)
 
   # TES [0.2, 1.2] meV
   x, y = calc_darkPhoton_coupling(2e-21, Adish, 0.19, 1.2, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkPurple, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.1)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.05)
 
   # SNSPD [207, 830] meV
   x, y = calc_darkPhoton_coupling_dcr(1e-6, Adish, 124, 830, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkPink, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.05)
 
   # QCD [6.2] meV
   x, y = calc_darkPhoton_coupling(2e-22, Adish, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myMediumOrange, zorder=4)
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.15, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
   #-----------------------------
   # Upgrade 1
@@ -127,12 +127,12 @@ def main():
   # Bolometer [1.65, 83] meV
   x, y = calc_darkPhoton_coupling(5e-14, Adish, 0.24, 248, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkGray, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05, zorder=4)
 
   # KID [0.2, 12] meV
   x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 12, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkRed, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.05, zorder=4)
   
   # TES [0.2, 1.2] meV
   x, y = calc_darkPhoton_coupling(2e-19, Adish, 0.19, 1.2, snr, effic, time*100)
@@ -141,12 +141,12 @@ def main():
   # SNSPD [207, 830] meV
   x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 124, 830, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkPink, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.05, zorder=4)
   
   # QCD [6.2] meV
   x, y = calc_darkPhoton_coupling(2e-20, Adish, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myMediumOrange, zorder=4)
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.15, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
   #-----------------------------
   # Baseline
@@ -154,27 +154,27 @@ def main():
   # Far-IR 1.6 K IR Labs bolometer
   x, y = calc_darkPhoton_coupling(5e-14, Adish, 0.24, 248, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkGray, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05, zorder=4)
 
   # KID [0.2, 5] meV
   x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 12, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkRed, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.05, zorder=4)
 
   # TES [0.2, 1.2] meV
   x, y = calc_darkPhoton_coupling(2e-19, Adish, 0.19, 1.2, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkPurple, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.05, zorder=4)
 
   # SNSPD [207, 830] meV
   x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 124, 830, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkPink, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightPink, alpha=0.1, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightPink, alpha=0.05, zorder=4)
 
   # QCD [6.2] meV
   x, y = calc_darkPhoton_coupling(2e-20, Adish, 2, 125, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myMediumOrange, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.15, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
   #-----------------------------
   # Pilot dish size and 1 day 
@@ -183,7 +183,7 @@ def main():
   # Gentec [0.4, 120] meV
   x, y = calc_darkPhoton_coupling(1e-8, Adish*(0.7/10), 0.4, 120, snr, effic, time/10.0)
   plt.plot(x, y, lw=1, ls='-', c=myDarkGreen, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGreen, alpha=0.3, zorder=4)
+  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGreen, alpha=0.2, zorder=4)
 
   # Far-IR 1.6 K IR Labs bolometer
   x, y = calc_darkPhoton_coupling(5e-14, Adish*(0.7/10), 0.24, 248, snr, effic, time/10.0)
