@@ -101,13 +101,8 @@ def main():
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05)
 
-  # KID [0.2, 12] meV
-  x, y = calc_darkPhoton_coupling(3e-21, Adish, 0.2, 12, snr, effic, time*100)
-  plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkRed, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.05)
-
-  # TES [0.2, 1.2] meV
-  x, y = calc_darkPhoton_coupling(2e-21, Adish, 0.19, 1.2, snr, effic, time*100)
+  # TES/KID [0.2, 125] meV
+  x, y = calc_darkPhoton_coupling(3e-21, Adish, 0.2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkPurple, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.05)
 
@@ -129,13 +124,8 @@ def main():
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05, zorder=4)
 
-  # KID [0.2, 12] meV
-  x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 12, snr, effic, time*100)
-  plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkRed, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.05, zorder=4)
-  
-  # TES [0.2, 1.2] meV
-  x, y = calc_darkPhoton_coupling(2e-19, Adish, 0.19, 1.2, snr, effic, time*100)
+  # TES/KID [0.2, 125] meV
+  x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6, lw=3, ls='-.',c=myDarkPurple, zorder=4) 
 
   # SNSPD [207, 830] meV
@@ -156,13 +146,8 @@ def main():
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05, zorder=4)
 
-  # KID [0.2, 5] meV
-  x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 12, snr, effic, time)
-  plt.plot(x, y, alpha=0.9,lw=3, c=myDarkRed, zorder=4) 
-  plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumRed, alpha=0.05, zorder=4)
-
-  # TES [0.2, 1.2] meV
-  x, y = calc_darkPhoton_coupling(2e-19, Adish, 0.19, 1.2, snr, effic, time)
+  # TES/KID [0.2, 125] meV
+  x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 125, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkPurple, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.05, zorder=4)
 
@@ -207,10 +192,9 @@ def main():
   fig.text(0.65,0.645, r'\textbf{IR Labs}',   color=myDarkGray,  size=text_size)
   fig.text(0.65,0.625, r'(1.6 K commercial)', color=myDarkGray,  size=text_size*0.5)
 
-  fig.text(0.77, 0.37, r'\textbf{SNSPD}',       color=myDarkPink,    size=text_size)
-  fig.text(0.54, 0.40, r'\textbf{KID}',         color=myDarkRed,     size=text_size)
-  fig.text(0.43, 0.36, r'\textbf{TES}',         color=myDarkPurple,  size=text_size)
-  fig.text(0.65, 0.365,r'\textbf{QCDet}',       color=myMediumOrange,size=text_size)
+  fig.text(0.775,0.305, r'\textbf{SNSPD}',     color=myDarkPink,    size=text_size, rotation=10)
+  fig.text(0.43, 0.40, r'\textbf{KID/TES}',   color=myDarkPurple,  size=text_size)
+  fig.text(0.65, 0.327,r'\textbf{QCDet}',     color=myMediumOrange,size=text_size)
 
   # Arrows for SHUKET and Tokyo dish antenna
   ax.annotate('', xy=(0.22, 0.59),  xycoords='axes fraction',
@@ -273,10 +257,10 @@ def main():
   ax.tick_params('y', length=6,  width=1, which='minor', direction="in", right="on") 
 
   # Legend
-  plt.plot([1, 1], [1, 1], lw=1, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 1 day, $A_\mathrm{dish}/14$') 
-  plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'NEP$_\mathsf{today}$, 10 days') 
-  plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'NEP$_\mathsf{today}$, 1000 days') 
-  plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP$_\mathsf{today}/100$, 1000 days') 
+  plt.plot([1, 1], [1, 1], lw=1, ls='-',  c=myDarkGray, label=r'1 day, $A_\mathrm{dish}/14$') 
+  plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'10 days') 
+  plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'1000 days') 
+  plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP/100, 1000 days') 
   plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=1.9, handletextpad=0.5, borderpad=0.6, ncol=2, columnspacing=0.6)
 
   fig.text(0.16, 0.28, r'\textbf{BREAD}', color=myDarkGray, size=text_size*1.1)
