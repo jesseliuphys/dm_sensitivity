@@ -218,7 +218,7 @@ def main():
   text_size = 23
   fig.text(0.19, 0.41,  r'Haloscope',  color=myDarkerBlue, size=text_size)
   fig.text(0.22, 0.74,  r'CAST',       color=myDarkBlue, size=text_size)
-  fig.text(0.872, 0.69,  r'Stellar',    color=myDarkBlue, size=text_size)
+  fig.text(0.872,0.69,  r'Stellar',    color=myDarkBlue, size=text_size)
   fig.text(0.92, 0.48,  r'Telescope',  color=myDarkBlue, size=text_size, rotation=90)
   
   # Sensors labels
@@ -293,7 +293,7 @@ def main():
   # Legend
   plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'1000 days') 
-  plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP/100, 1000 days') 
+  plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'1000 days, NEP/100') 
   plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=2.8, borderpad=0.6)
 
   fig.text(0.68, 0.410, r'\textbf{BREAD}' , color=myDarkGray, size=text_size*1.1)

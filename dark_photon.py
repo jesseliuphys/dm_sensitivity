@@ -257,11 +257,11 @@ def main():
   ax.tick_params('y', length=6,  width=1, which='minor', direction="in", right="on") 
 
   # Legend
-  plt.plot([1, 1], [1, 1], lw=1, ls='-',  c=myDarkGray, label=r'1 day, $A_\mathrm{dish}/14$') 
+  plt.plot([1, 1], [1, 1], lw=1, ls='-',  c=myDarkGray, label=r'1 day, $A_\mathrm{dish}$/14') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'1000 days') 
-  plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'NEP/100, 1000 days') 
-  plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=1.9, handletextpad=0.5, borderpad=0.6, ncol=2, columnspacing=0.6)
+  plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'1000 days, NEP/100') 
+  plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=2.7, handletextpad=0.5, borderpad=0.6, ncol=2, columnspacing=0.6)
 
   fig.text(0.16, 0.28, r'\textbf{BREAD}', color=myDarkGray, size=text_size*1.1)
   fig.text(0.16, 0.24, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
