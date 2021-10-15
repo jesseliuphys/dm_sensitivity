@@ -96,7 +96,7 @@ def mk_plot():
   # ------------------------------------------------------- 
 
   plt.xlim(1e-3, 1)
-  plt.ylim(0.1, 7e3)
+  plt.ylim(0.1, 6e3)
 
   # axes labels
   x_txt = r'$\mathrm{Signal~efficiency}$'

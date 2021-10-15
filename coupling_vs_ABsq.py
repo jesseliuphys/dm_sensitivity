@@ -97,7 +97,7 @@ def mk_plot():
   # ------------------------------------------------------- 
 
   plt.xlim(10, 1e6)
-  plt.ylim(0.1, 5e3)
+  plt.ylim(0.1, 6e3)
 
   # axes labels
   x_txt = r'$A_\mathrm{dish}\cdot B_\mathrm{ext}^2~[\mathrm{m}^2~\mathrm{T}^2]$'
