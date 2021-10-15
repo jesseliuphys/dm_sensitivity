@@ -39,7 +39,7 @@ def mk_plot():
   # Figures
   fig, ax = plt.subplots()
   fig.set_size_inches(11, 9)
-  text_size = 28
+  text_size = 38
 
   # Define various colours
   myLightestBlue = '#deebf7'
@@ -89,66 +89,55 @@ def mk_plot():
 
   #plt.plot([1, 1], [1, 1], lw=3, ls=':', c=myDarkGray, label=r'$A_\mathrm{dish}/10$') 
   #plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'$B_\mathrm{ext}/10$') 
-  plt.legend(loc='upper right', prop={'size':text_size*0.95}, frameon=False, handlelength=2.1, borderpad=0.8)
+  plt.legend(loc='upper right', prop={'size':text_size*0.95}, frameon=False, handlelength=2.1, borderpad=0.6, handletextpad=0.1)
 
   # ------------------------------------------------------- 
   # Axis properties
   # ------------------------------------------------------- 
 
   plt.xlim(1e-3, 1)
-  plt.ylim(0.2, 5e3)
+  plt.ylim(0.1, 7e3)
 
   # axes labels
   x_txt = r'$\mathrm{Signal~efficiency}$'
   y_txt = r'$\left|g_{a\gamma\gamma} / g_{a\gamma\gamma}^\mathrm{DFSZ}\right|~\mathrm{sensitivity}$'
     
   # Axis label properties
-  plt.xlabel(x_txt, labelpad=20, size=35) 
-  plt.ylabel(y_txt, labelpad=20, size=35)
+  plt.xlabel(x_txt, labelpad=10, size=40) 
+  plt.ylabel(y_txt, labelpad=5, size=40)
 
   ax.set_xscale('log')
   ax.set_yscale('log')
-  # Draw the upper THz axis
-  #ax2 = ax.twiny()
-  #ax2.set_xlim(2.42e-5, 242)
-  #ax2.set_xlabel(r'$\mathrm{Frequency}~[\mathrm{THz}]$', labelpad=20, size=35) 
-  #ax2.set_xscale('log')
+  ax.get_xaxis().set_major_formatter(mplt.ticker.ScalarFormatter())
+  ax.get_xaxis().set_major_formatter(mplt.ticker.FormatStrFormatter(r'$%g$'))
+  ax.get_yaxis().set_major_formatter(mplt.ticker.ScalarFormatter())
+  ax.get_yaxis().set_major_formatter(mplt.ticker.FormatStrFormatter(r'$%g$'))
 
   # ------------------------------------------------------- 
   # Add plot text
   # ------------------------------------------------------- 
 
 
-  #fig.text(0.89, 0.263, r'$10^{-25}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size)
-
-  #fig.text(0.87, 0.50, r'Photon/second', color=myMediumGray, size=0.5*text_size, rotation=15)
-  #fig.text(0.87, 0.375, r'Photon/hour',    color=myMediumGray, size=0.5*text_size, rotation=15)
-
   #fig.text(0.77, 0.18, r'$A_\mathrm{antenna} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
-  fig.text(0.21, 0.77, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
-  fig.text(0.21, 0.71, r'$A_\mathrm{dish} = 10~\mathrm{m}^2, B_\mathrm{ext} = 10~\mathrm{T}$', color=myDarkGray, size=text_size)
-  fig.text(0.21, 0.65, r'$\mathrm{SNR} = 5, \Delta t = 1000~\mathrm{days}$', color=myDarkGray, size=text_size)
+  fig.text(0.23, 0.88, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
+  fig.text(0.23, 0.80, r'$A_\mathrm{dish} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
+  fig.text(0.23, 0.73, r'$B_\mathrm{ext} = 10~\mathrm{T}$',    color=myDarkGray, size=text_size)
+  fig.text(0.23, 0.65, r'$\mathrm{SNR} = 5, \Delta t = 1000~\mathrm{days}$', color=myDarkGray, size=text_size)
 
-  fig.text(0.28, 0.33, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
-  fig.text(0.28, 0.22, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
-
-  #fig.text(0.28, 0.55, r'$\mathrm{Quantum~capacitance~detector}$', color=myDarkPurple, size=text_size)
-  #fig.text(0.28, 0.50, r'$\mathrm{(State~of~the~art)}$', color=myDarkPurple, size=text_size*0.8)
-
+  fig.text(0.28, 0.42, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
+  fig.text(0.28, 0.27, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
 
   # Adjust axis ticks
   ax.minorticks_on()
   #ax2.minorticks_on()
 
-  ax.tick_params('x', length=12, width=1, which='major', labelsize='28', pad=10)
+  ax.tick_params('x', length=12, width=1, which='major', labelsize='35', pad=20)
   ax.tick_params('x', length=6,  width=1, which='minor') 
-  #ax2.tick_params('x', length=12, width=1, which='major', labelsize='28', pad=10)
-  #ax2.tick_params('x', length=6,  width=1, which='minor') 
-  ax.tick_params('y', length=12, width=1, which='major', labelsize='28', pad=10)
+  ax.tick_params('y', length=12, width=1, which='major', labelsize='35', pad=20)
   ax.tick_params('y', length=6,  width=1, which='minor') 
    
   plt.tight_layout(pad=0.3)
-  plt.subplots_adjust( top=0.85,left=0.17 )
+  plt.subplots_adjust( top=0.97, left=0.19, bottom=0.17 )
   
   save_name = 'coupling_vs_efficiency'
   print('Saving as {0}'.format(save_name))
