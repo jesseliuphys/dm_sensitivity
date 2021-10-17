@@ -20,17 +20,10 @@ from matplotlib.backends.backend_pdf import PdfPages
 doLogY = False # Draw the y-axis on log scale
 
 mplt.rc("text", usetex=True)
+mplt.rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 
 #__________________________________________
 def main():
-
-  #mkdir('figs') # For the figures
-
-  mk_plot()
-  # ----------------------------------------------------------
-
-#__________________________________________
-def mk_plot():
   '''
   This plots the contours from the raw (x,y) values of each contour
   '''
@@ -42,33 +35,12 @@ def mk_plot():
   text_size = 38
 
   # Define various colours
-  myLightestBlue = '#deebf7'
-  myLighterBlue  = '#c6dbef'
-  myLightBlue    = '#9ecae1'
   myMediumBlue   = '#6baed6'
-  myDarkBlue     = '#4292c6'
-  myDarkerBlue   = '#08519c'
-
-  myLightPurple  = '#bcbddc'
-  myMediumPurple = '#9e9ac8'
-  myPurple       = '#807dba'
   myDarkPurple   = '#54278f'
-  myDarkerPurple = '#3f007d'
+  myMediumOrange = '#fc4e2a'
+  myMediumGray   = '#969696'
+  myDarkGray     = '#525252'
 
-  myLightestOrange = '#ffffcc'
-  myLighterOrange  = '#ffeda0'
-  myLightOrange    = '#fed976'
-  myMediumOrange   = '#fc4e2a'
-  myDarkOrange     = '#993404'
-
-  myLightPink     = '#fcc5c0'
-  myDarkPink      = '#ce1256'
-  myMediumGreen   = '#41ab5d'
-  myDarkGreen     = '#006d2c'
-
-  myLightGray  = '#d9d9d9'
-  myMediumGray = '#969696'
-  myDarkGray   = '#525252'
   # ------------------------------------------------------- 
   # Sensitivity lines and regions
   # ------------------------------------------------------- 
@@ -88,9 +60,6 @@ def mk_plot():
   plt.plot([1e-13, 1e-23], [2.6, 2.6], lw=2, ls='-.', c=myMediumGray) 
   plt.plot([1e-13, 1e-23], [1, 1],     lw=2, ls='--', c=myMediumGray) 
   plt.plot([1e-20, 1e-20], [0.1, 35], lw=3, ls='-',  c=myDarkPurple) 
-
-  #plt.plot([1, 1], [1, 1], lw=3, ls=':', c=myDarkGray, label=r'$A_\mathrm{dish}/10$') 
-  #plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'$B_\mathrm{ext}/10$') 
   plt.legend(loc='upper right', prop={'size':text_size*0.95}, frameon=False, handlelength=2.1, borderpad=0.6, handletextpad=0.1)
 
   # ------------------------------------------------------- 
@@ -128,11 +97,10 @@ def mk_plot():
   
   # Adjust axis ticks
   ax.minorticks_on()
-
-  ax.tick_params('x', length=12, width=1, which='major', labelsize='35', pad=20)
-  ax.tick_params('x', length=6,  width=1, which='minor') 
-  ax.tick_params('y', length=12, width=1, which='major', labelsize='35', pad=20)
-  ax.tick_params('y', length=6,  width=1, which='minor') 
+  ax.tick_params('x', length=12, width=1, which='major', labelsize='35', pad=20, direction="in", top="on")
+  ax.tick_params('x', length=6,  width=1, which='minor', direction="in", top="on") 
+  ax.tick_params('y', length=12, width=1, which='major', labelsize='35', pad=20, direction="in", right="on")
+  ax.tick_params('y', length=6,  width=1, which='minor', direction="in", right="on") 
    
   plt.tight_layout(pad=0.3)
   plt.subplots_adjust( top=0.97, left=0.19, bottom=0.17 )

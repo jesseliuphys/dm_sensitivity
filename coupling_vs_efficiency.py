@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''
 Plot sensitivity to axion-photon coupling relative to DFSZ
 as a function of overall emission-to-detection efficiency
@@ -20,17 +20,10 @@ from matplotlib.backends.backend_pdf import PdfPages
 doLogY = False # Draw the y-axis on log scale
 
 mplt.rc("text", usetex=True)
+mplt.rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 
 #__________________________________________
 def main():
-
-  #mkdir('figs') # For the figures
-
-  mk_plot()
-  # ----------------------------------------------------------
-
-#__________________________________________
-def mk_plot():
   '''
   This plots the contours from the raw (x,y) values of each contour
   '''
@@ -42,33 +35,11 @@ def mk_plot():
   text_size = 38
 
   # Define various colours
-  myLightestBlue = '#deebf7'
-  myLighterBlue  = '#c6dbef'
-  myLightBlue    = '#9ecae1'
   myMediumBlue   = '#6baed6'
-  myDarkBlue     = '#4292c6'
-  myDarkerBlue   = '#08519c'
-
-  myLightPurple  = '#bcbddc'
-  myMediumPurple = '#9e9ac8'
-  myPurple       = '#807dba'
   myDarkPurple   = '#54278f'
-  myDarkerPurple = '#3f007d'
-
-  myLightestOrange = '#ffffcc'
-  myLighterOrange  = '#ffeda0'
-  myLightOrange    = '#fed976'
-  myMediumOrange   = '#fc4e2a'
-  myDarkOrange     = '#993404'
-
-  myLightPink     = '#fcc5c0'
-  myDarkPink      = '#ce1256'
-  myMediumGreen   = '#41ab5d'
-  myDarkGreen     = '#006d2c'
-
-  myLightGray  = '#d9d9d9'
-  myMediumGray = '#969696'
-  myDarkGray   = '#525252'
+  myMediumOrange = '#fc4e2a'
+  myMediumGray   = '#969696'
+  myDarkGray     = '#525252'
   # ------------------------------------------------------- 
   # Sensitivity lines and regions
   # ------------------------------------------------------- 
@@ -87,9 +58,7 @@ def mk_plot():
   plt.plot([1e-3, 1], [1, 1],     lw=2, ls='--', c=myMediumGray) 
   #plt.plot([1e-3, 1], [0.1, 1e2], lw=3, ls='-',  c=myDarkPurple) 
 
-  #plt.plot([1, 1], [1, 1], lw=3, ls=':', c=myDarkGray, label=r'$A_\mathrm{dish}/10$') 
-  #plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'$B_\mathrm{ext}/10$') 
-  plt.legend(loc='upper right', prop={'size':text_size*0.95}, frameon=False, handlelength=2.1, borderpad=0.6, handletextpad=0.1)
+  plt.legend(loc='upper right', prop={'size':text_size*0.95}, frameon=False, handlelength=1.5, borderpad=0.6, handletextpad=0.4)
 
   # ------------------------------------------------------- 
   # Axis properties
@@ -120,21 +89,19 @@ def mk_plot():
 
   #fig.text(0.77, 0.18, r'$A_\mathrm{antenna} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
   fig.text(0.23, 0.88, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
-  fig.text(0.23, 0.80, r'$A_\mathrm{dish} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
-  fig.text(0.23, 0.73, r'$B_\mathrm{ext} = 10~\mathrm{T}$',    color=myDarkGray, size=text_size)
-  fig.text(0.23, 0.65, r'$\mathrm{SNR} = 5, \Delta t = 1000~\mathrm{days}$', color=myDarkGray, size=text_size)
+  fig.text(0.23, 0.81, r'$A_\mathrm{dish} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
+  fig.text(0.23, 0.74, r'$B_\mathrm{ext} = 10~\mathrm{T}$',    color=myDarkGray, size=text_size)
+  fig.text(0.23, 0.66, r'$\mathrm{SNR} = 5, \Delta t = 1000~\mathrm{days}$', color=myDarkGray, size=text_size)
 
   fig.text(0.28, 0.42, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
   fig.text(0.28, 0.27, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
 
   # Adjust axis ticks
   ax.minorticks_on()
-  #ax2.minorticks_on()
-
-  ax.tick_params('x', length=12, width=1, which='major', labelsize='35', pad=20)
-  ax.tick_params('x', length=6,  width=1, which='minor') 
-  ax.tick_params('y', length=12, width=1, which='major', labelsize='35', pad=20)
-  ax.tick_params('y', length=6,  width=1, which='minor') 
+  ax.tick_params('x', length=12, width=1, which='major', labelsize='35', pad=20, direction="in", top="on")
+  ax.tick_params('x', length=6,  width=1, which='minor', direction="in", top="on") 
+  ax.tick_params('y', length=12, width=1, which='major', labelsize='35', pad=20, direction="in", right="on")
+  ax.tick_params('y', length=6,  width=1, which='minor', direction="in", right="on") 
    
   plt.tight_layout(pad=0.3)
   plt.subplots_adjust( top=0.97, left=0.19, bottom=0.17 )

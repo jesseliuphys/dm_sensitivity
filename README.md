@@ -1,6 +1,6 @@
 # DM sensitivity
 Basic plotting scripts for projecting BREAD sensitivity in axion (spin 0) and dark photon (spin 1) scenarios.
-Prerequisites are numpy, pandas, matplotlib, and a tex backend installed. 
+Packages used are numpy (1.19.4), pandas (1.1.4), matplotlib (3.3.3), and a tex (TeX Live 2016) backend. 
 These scripts create one plot per run. 
 
 # Scripts for plots in paper
