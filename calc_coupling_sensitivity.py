@@ -1,51 +1,30 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''
 Printout sensitivity to various couplings
 Given various experimental parameters of BREAD
 '''
 
-import matplotlib as mplt
-mplt.use('Agg') # So we can use without X forwarding
-
-import numpy as np
-import os, json, math, csv, argparse, datetime
-import matplotlib.pyplot  as plt
-import matplotlib.lines   as mlines
-import matplotlib.patches as mpatches
-import matplotlib.ticker  as ticker
-
-# So we can produce PDFs
-from matplotlib.backends.backend_pdf import PdfPages
-
-doLogY = False # Draw the y-axis on log scale
-
-mplt.rc("text", usetex=True)
+import math
 
 #__________________________________________
 def main():
   '''
-  This plots the contours from the raw (x,y) values of each contour
+  Display sensitivity to couplings given experimental parameters
   '''
-  print('Plotting contours for' )
- 
-  # Figures
-  fig, ax = plt.subplots()
-  fig.set_size_inches(11, 9)
-  text_size = 28
 
   # ------------------------------------------------------- 
   # Sensitivity lines and regions
   # ------------------------------------------------------- 
-  Adish = 0.7 # m^2
-  Bfield = 10.0
-  hours = 240 # hours
-  nep = 1e-14 # W/sqrt(Hz)
+  Adish  = 0.7 # m^2
+  Bfield = 10.0 # Tesla
+  hours  = 240 # hours
+  nep    = 1e-14 # W/sqrt(Hz)
 
   # Constant rate
   couplingKSVZ, couplingDFSZ = calc_QCDaxion_coupling(nep, Adish, Bfield, snr=5., effic=0.5, time=hours, relicDensity = 0.45)
   kineticMix = calc_darkPhoton_coupling(nep, Adish, snr=5., effic=0.5, time=hours, relicDensity = 0.45)
 
-  printout = 'axion/KSVZ: {0}, axion/DFSZ: {1}, dark-photon/1e-14: {2}'.format(couplingKSVZ, couplingDFSZ, kineticMix)
+  printout = 'axion/KSVZ: {0}\naxion/DFSZ: {1}\ndark-photon/1e-14: {2}'.format(couplingKSVZ, couplingDFSZ, kineticMix)
   print(printout)
 
 #__________________________________________
@@ -108,17 +87,6 @@ def calc_QCDaxion_coupling(nep, mirrorArea, Bfield, snr=5., effic=0.5, time=1., 
   couplingDFSZ = ( coupling ) * (1. / gDFSZ)
 
   return couplingKSVZ, couplingDFSZ
-
-#_________________________________________________________________________
-def mkdir(dirPath):
-  '''
-  make directory for given input path
-  '''
-  try:
-    os.makedirs(dirPath)
-    print('Successfully made new directory ' + dirPath)
-  except OSError:
-    pass
 
 #__________________________________________
 if __name__ == "__main__":

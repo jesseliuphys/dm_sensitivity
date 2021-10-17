@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''
 Plot signal photon rate
 '''
@@ -19,26 +19,19 @@ from matplotlib.backends.backend_pdf import PdfPages
 doLogY = False # Draw the y-axis on log scale
 
 mplt.rc("text", usetex=True)
+mplt.rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 
 #__________________________________________
 def main():
-
-  #mkdir('figs') # For the figures
-
-  mk_plot()
-  # ----------------------------------------------------------
-
-#__________________________________________
-def mk_plot():
   '''
-  This plots the contours from the raw (x,y) values of each contour
+  This plots the photon rate vs QCD axion mass
   '''
   print('Plotting contours for' )
  
   # Figures
   fig, ax = plt.subplots()
   fig.set_size_inches(11, 9)
-  text_size = 28
+  text_size = 32
 
   # Define various colours
   myLightestBlue = '#deebf7'
@@ -104,50 +97,66 @@ def mk_plot():
   plt.ylim(0.5, 5e6)
 
   # axes labels
-  x_txt = r'$\mathrm{Axion~mass~[eV}]$'
+  x_txt = r'$\mathrm{Axion~mass~[meV}]$'
   y_txt = r'$\mathrm{Emitted~photons~[day}^{-1}]$'
     
   # Axis label properties
-  plt.xlabel(x_txt, labelpad=20, size=35) 
-  plt.ylabel(y_txt, labelpad=20, size=35)
+  plt.xlabel(x_txt, labelpad=20, size=40) 
+  plt.ylabel(y_txt, labelpad=20, size=40)
 
   ax.set_xscale('log')
   ax.set_yscale('log')
+
   # Draw the upper THz axis
   ax2 = ax.twiny()
-  ax2.set_xlim(2.42e-5, 242)
+  ax2.set_xlim(2.42e-4, 2417.98)
   ax2.set_xlabel(r'$\mathrm{Frequency}~[\mathrm{THz}]$', labelpad=20, size=35)
-   
   ax2.set_xscale('log')
+
+  # Rescale axis from eV to meV
+  scale_x=1e3
+  ticks_x = mplt.ticker.FuncFormatter(lambda x, pos: r'${0:g}$'.format(x*scale_x))
+  ax.xaxis.set_major_formatter(ticks_x)
+  ticks_x = mplt.ticker.FuncFormatter(lambda x, pos: r'${0:g}$'.format(x))
+  ax2.xaxis.set_major_formatter(ticks_x)
 
   # ------------------------------------------------------- 
   # Add plot text
   # ------------------------------------------------------- 
-
-
-  #fig.text(0.89, 0.263, r'$10^{-25}~\mathrm{W}$', color=myMediumGray, size=0.7*text_size)
-
-  #fig.text(0.87, 0.50, r'Photon/second', color=myMediumGray, size=0.5*text_size, rotation=15)
-  #fig.text(0.87, 0.375, r'Photon/hour',    color=myMediumGray, size=0.5*text_size, rotation=15)
-
-  #fig.text(0.77, 0.18, r'$A_\mathrm{antenna} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
-  fig.text(0.21, 0.30, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
-  fig.text(0.21, 0.24, r'$A_\mathrm{dish} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
-  fig.text(0.21, 0.18, r'$B_\mathrm{ext} = 10~\mathrm{T}$', color=myDarkGray, size=text_size)
+  fig.text(0.21, 0.34, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
+  fig.text(0.21, 0.28, r'$A_\mathrm{dish} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
+  fig.text(0.21, 0.22, r'$B_\mathrm{ext} = 10~\mathrm{T}$', color=myDarkGray, size=text_size)
 
   # Adjust axis ticks
   ax.minorticks_on()
   #ax2.minorticks_on()
 
-  ax.tick_params('x', length=12, width=1, which='major', labelsize='28', pad=10)
-  ax.tick_params('x', length=6,  width=1, which='minor') 
-  ax2.tick_params('x', length=12, width=1, which='major', labelsize='28', pad=10)
-  ax2.tick_params('x', length=6,  width=1, which='minor') 
-  ax.tick_params('y', length=12, width=1, which='major', labelsize='28', pad=10)
-  ax.tick_params('y', length=6,  width=1, which='minor') 
+  ax.tick_params('x', length=12, width=1, which='major', labelsize='33', pad=10, direction="in")
+  ax.tick_params('x', length=6,  width=1, which='minor', direction="in") 
+  ax2.tick_params('x', length=12, width=1, which='major', labelsize='33', pad=10, direction="in")
+  ax2.tick_params('x', length=6,  width=1, which='minor', direction="in") 
+  ax.tick_params('y', length=12, width=1, which='major', labelsize='33', pad=10, direction="in", right="on")
+  ax.tick_params('y', length=6,  width=1, which='minor', direction="in", right="on") 
    
+  # Force axis ticks to appear in log scale
+  locmaj = mplt.ticker.LogLocator(base=10.0, subs=(1.0, ), numticks=100)
+  locmin = mplt.ticker.LogLocator(base=10.0, subs=np.arange(2, 10)*.1,numticks=100)
+  ax.xaxis.set_major_locator(locmaj)
+  ax.xaxis.set_minor_locator(locmin)
+  locmaj = mplt.ticker.LogLocator(base=10.0, subs=(1.0, ), numticks=100)
+  locmin = mplt.ticker.LogLocator(base=10.0, subs=np.arange(2, 10)*.1,numticks=100)
+  ax2.xaxis.set_major_locator(locmaj)
+  ax2.xaxis.set_minor_locator(locmin)
+  locmaj = mplt.ticker.LogLocator(base=10.0, subs=(1.0, ), numticks=100)
+  locmin = mplt.ticker.LogLocator(base=10.0, subs=np.arange(2, 10)*.1,numticks=100)
+  ax.yaxis.set_major_locator(locmaj)
+  ax.yaxis.set_minor_locator(locmin)
+  ax2.xaxis.set_minor_formatter(mplt.ticker.NullFormatter())
+  ax.xaxis.set_minor_formatter(mplt.ticker.NullFormatter())
+  ax.yaxis.set_minor_formatter(mplt.ticker.NullFormatter())
+
   plt.tight_layout(pad=0.3)
-  plt.subplots_adjust( top=0.85,left=0.17 )
+  plt.subplots_adjust( top=0.83,left=0.17, bottom=0.18 )
   
   save_name = 'photon_rate_qcdaxion'
   print('Saving as {0}'.format(save_name))
@@ -155,22 +164,6 @@ def mk_plot():
   #plt.savefig(save_name + '.png', format='png', dpi=400)
   #plt.savefig(save_name + '.eps', format='eps', dpi=150)
   #plt.savefig(save_name, format='png', dpi=150)
-
-#__________________________________________
-def csv_to_lists(csv_file):
-  '''
-  converts csv to dictionary of lists containing columns
-  the dictionary keys is the header
-  '''
-  with open(csv_file) as input_file:
-      reader = csv.reader(input_file)
-      col_names = next(reader)
-      data = {name: [] for name in col_names}
-      for line in reader:
-        for pos, name in enumerate(col_names):
-          data[name].append(line[pos])
-  
-  return data
 
 #__________________________________________
 def calc_axion_rate(mirrorArea, Bfield, rhoDM, minMass, maxMass, DFSZ=False):
