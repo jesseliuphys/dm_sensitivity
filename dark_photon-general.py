@@ -17,6 +17,8 @@ import matplotlib.ticker  as ticker
 # So we can produce PDFs
 from matplotlib.backends.backend_pdf import PdfPages
 
+from common import *
+
 doLogY = False # Draw the y-axis on log scale
 
 mplt.rc("text", usetex=True)
@@ -88,27 +90,29 @@ def main():
   #plt.fill_between(lab['x'], lab['y'], 1e-1, edgecolor='none', facecolor=myLightestBlue)
 
   # Default values
-  Adish = 10. # dish area in m^2
-  snr   = 5.  # signal to noise
-  effic = 0.5 # signal detection efficiency
-  time  = 24000.  # integration time in hours
+  reldens = 0.45 # relic density in GeV/cm^3
+  Adish   = 10. # dish area in m^2
+  snr     = 5.  # signal to noise
+  effic   = 0.5 # signal detection efficiency
+  time    = 24000.  # integration time in hours
 
   #-----------------------------
   # Projections
   #-----------------------------
-  x, y = calc_darkPhoton_coupling(1e-21, Adish, 0.05, 500, snr, effic, time)
+  do_axion = False
+  x, y = calc_coupling_nep(1e-22, Adish, 10, 0.05, 500, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='-', c=myMediumOrange, zorder=4)   
-  x, y = calc_darkPhoton_coupling_dcr(1e-6, Adish, 100, 4000, snr, effic, time)
+  x, y = calc_coupling_dcr(1e-6, Adish, 10, 5, 4000, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='--', c=myMediumOrange, zorder=4) 
 
-  x, y = calc_darkPhoton_coupling(1e-20, Adish, 0.05, 500, snr, effic, time)
+  x, y = calc_coupling_nep(1e-20, Adish, 10, 0.05, 500, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='-', c=myDarkRed, zorder=4) 
-  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 100, 4000, snr, effic, time)
+  x, y = calc_coupling_dcr(1e-4, Adish, 10, 5, 4000, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='--', c=myDarkRed, zorder=4) 
 
-  x, y = calc_darkPhoton_coupling(1e-17, Adish, 0.05, 500, snr, effic, time)
+  x, y = calc_coupling_nep(1e-18, Adish, 10, 0.05, 500, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='-', c=myDarkPurple, zorder=4) 
-  x, y = calc_darkPhoton_coupling_dcr(1e-1, Adish, 100, 4000, snr, effic, time)
+  x, y = calc_coupling_dcr(1e-2, Adish, 10, 5, 4000, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='--', c=myDarkPurple, zorder=4) 
 
   plt.plot([1, 1], [1, 1], lw=4, ls='-',  c=myDarkGray, label=r'$\mathrm{Bolometer~NEP}$') 
@@ -123,13 +127,13 @@ def main():
   fig.text(0.84, 0.68, r'Stellar',         color=myDarkBlue, size=text_size)
   #fig.text(0.23, 0.78, r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
 
-  fig.text(0.39, 0.525, r'$10^{-17}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myDarkPurple,   size=text_size)
-  fig.text(0.39, 0.42,  r'$10^{-20}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myDarkRed,      size=text_size)
-  fig.text(0.39, 0.325, r'$10^{-21}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myMediumOrange, size=text_size)
+  fig.text(0.39, 0.500, r'$10^{-18}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myDarkPurple,   size=text_size)
+  fig.text(0.39, 0.430, r'$10^{-20}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myDarkRed,      size=text_size)
+  fig.text(0.39, 0.355, r'$10^{-22}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myMediumOrange, size=text_size)
 
-  fig.text(0.80, 0.43,  r'$0.1\,\mathrm{Hz}$ ',     color=myDarkPurple,   size=text_size)
-  fig.text(0.66, 0.33,  r'$10^{-4}\,\mathrm{Hz}$ ', color=myDarkRed,      size=text_size)
-  fig.text(0.66, 0.29,  r'$10^{-6}\,\mathrm{Hz}$ ', color=myMediumOrange, size=text_size)
+  fig.text(0.60, 0.35,  r'$10^{-2}\,\mathrm{Hz}$ ', color=myDarkPurple,   size=text_size, rotation=15)
+  fig.text(0.50, 0.27,  r'$10^{-4}\,\mathrm{Hz}$ ', color=myDarkRed,      size=text_size, rotation=15)
+  fig.text(0.50, 0.23,  r'$10^{-6}\,\mathrm{Hz}$ ', color=myMediumOrange, size=text_size, rotation=15)
   
   # Arrows for SHUKET and Tokyo dish antenna
   ax.annotate('', xy=(0.22, 0.74),  xycoords='axes fraction',
@@ -211,58 +215,6 @@ def main():
 
   # Save plot to pdf
   plt.savefig('fig_dark_photon_general_varyNEP1000days.pdf', format='pdf')
-
-#__________________________________________
-def calc_darkPhoton_coupling(nep, mirrorArea, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity = 0.45):
-  '''
-  Convert instrument parameters and detected signal power to dark photon coupling
-   - nep          = overall noise equivalent power of photonsensor in units of Watts/sqrt(Hz)
-   - mirrorArea   = area of dish antenna units is m^2
-   - min/maxMass  = min and max mass to plot (input in meV, output in eV)
-   - snr          = required signal to noise ratio 
-   - effic        = overall signal power efficiency 
-   - time         = integration time in hours
-   - relicDensity = dark matter relic density in GeV/cm^3
-  '''
-
-  ratio    = ( snr / 5. )
-  noise    = ( nep / 1.0e-21 )
-  area     = ( 10.0 / mirrorArea  ) 
-  dt       = math.sqrt( 1. / time )
-  epsilon  = ( 0.5 / effic )
-  rho      = ( 0.45 / relicDensity )
-
-  kineticMixingSq = 3.7 * ratio * noise * area * dt * epsilon * rho
-  kineticMixing   = math.sqrt( kineticMixingSq ) * 1e-14
- 
-  return [minMass*1e-3, maxMass*1e-3], [kineticMixing, kineticMixing]
-
-#__________________________________________
-def calc_darkPhoton_coupling_dcr(dcr, mirrorArea, minMass, maxMass, Zsignif=5., effic=0.5, time=1., relicDensity = 0.45):
-  '''
-  Convert instrument parameters and detected signal power to dark photon coupling
-   - dcr          = overall dark count rate of photonsensor in Hz
-   - mirrorArea   = area of dish antenna units is m^2
-   - min/maxMass  = min and max mass to plot (input in meV, output in eV)
-   - snr          = required signal to noise ratio 
-   - effic        = overall signal power efficiency 
-   - time         = integration time in hours
-   - relicDensity = dark matter relic density in GeV/cm^3
-  '''
-
-  ratio    = ( Zsignif / 5. )
-  noise    = math.sqrt( dcr / 0.01 )
-  area     = ( 10.0 / mirrorArea  ) 
-  dt       = math.sqrt( 1. / time )
-  epsilon  = ( 0.5 / effic )
-  rho      = ( 0.45 / relicDensity )
-
-  kineticMixingSqMin = 5.93 * ratio * noise * area * dt * epsilon * rho * minMass
-  kineticMixingSqMax = 5.93 * ratio * noise * area * dt * epsilon * rho * maxMass
-  kineticMixingMin   = math.sqrt( kineticMixingSqMin ) * 1e-15
-  kineticMixingMax   = math.sqrt( kineticMixingSqMax ) * 1e-15
- 
-  return [minMass*1e-3, maxMass*1e-3], [kineticMixingMin, kineticMixingMax]
 
 #_________________________________________________________________________
 def mkdir(dirPath):

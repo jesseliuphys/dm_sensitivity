@@ -18,6 +18,8 @@ import matplotlib.ticker  as ticker
 # So we can produce PDFs
 from matplotlib.backends.backend_pdf import PdfPages
 
+from common import *
+
 doLogY = False # Draw the y-axis on log scale
 
 mplt.rc("text", usetex=True)
@@ -144,28 +146,30 @@ def main():
   plt.plot([1.03535e-8, 0.999511], [5.79881e-14, 5.72150e-10], color=myMediumGreen, lw=2, ls='dotted', zorder=-1)
 
   # Default values
-  Adish  = 10. # dish area in m^2
-  Bfield = 10. # Tesla
-  snr    = 5.  # signal to noise
-  effic  = 0.5 # signal detection efficiency
-  time   = 24000.  # integration time in hours
+  reldens = 0.45 # relic density in GeV/cm^3
+  Adish   = 10. # dish area in m^2
+  Bfield  = 10. # Tesla
+  snr     = 5.  # signal to noise
+  effic   = 0.5 # signal detection efficiency
+  time    = 24000.  # integration time in hours
 
   #-----------------------------
   # Projections
   #-----------------------------
-  x, y = calc_axion_coupling(1e-21, Adish, Bfield, 0.05, 500, snr, effic, time)
+  do_axion = True
+  x, y = calc_coupling_nep(1e-22, Adish, Bfield, 0.05, 500, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='-', c=myMediumOrange, zorder=4)   
-  x, y = calc_axion_coupling_dcr(1e-6, Adish, Bfield, 100, 4000, snr, effic, time)
+  x, y = calc_coupling_dcr(1e-6, Adish, Bfield, 4, 4000, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='--', c=myMediumOrange, zorder=4) 
 
-  x, y = calc_axion_coupling(1e-20, Adish, Bfield, 0.05, 500, snr, effic, time)
+  x, y = calc_coupling_nep(1e-20, Adish, Bfield, 0.05, 500, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='-', c=myDarkRed, zorder=4) 
-  x, y = calc_axion_coupling_dcr(1e-4, Adish, Bfield, 100, 4000, snr, effic, time)
+  x, y = calc_coupling_dcr(1e-4, Adish, Bfield, 4, 4000, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='--', c=myDarkRed, zorder=4) 
 
-  x, y = calc_axion_coupling(1e-17, Adish, Bfield, 0.05, 500, snr, effic, time)
+  x, y = calc_coupling_nep(1e-18, Adish, Bfield, 0.05, 500, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='-', c=myDarkPurple, zorder=4) 
-  x, y = calc_axion_coupling_dcr(1e-1, Adish, Bfield, 100, 4000, snr, effic, time)
+  x, y = calc_coupling_dcr(1e-2, Adish, Bfield, 4, 4000, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=4, ls='--', c=myDarkPurple, zorder=4) 
 
   plt.plot([1, 1], [1, 1], lw=4, ls='-',  c=myDarkGray, label=r'$\mathrm{Bolometer~NEP}$') 
@@ -178,7 +182,7 @@ def main():
   text_size = 23
   fig.text(0.19, 0.45,  r'Haloscope',  color=myDarkerBlue, size=text_size)
   fig.text(0.22, 0.77,  r'CAST',       color=myDarkBlue, size=text_size)
-  fig.text(0.71, 0.74,  r'Stellar',    color=myDarkBlue, size=text_size)
+  fig.text(0.85, 0.74,  r'Stellar',    color=myDarkBlue, size=text_size)
   fig.text(0.92, 0.53,  r'Telescope',  color=myDarkBlue, size=text_size, rotation=90)
 
   # QCD axions
@@ -186,16 +190,16 @@ def main():
   fig.text(0.24, 0.20, r'DFSZ', color=myDarkGreen, size=text_size, rotation=34)
   fig.text(0.26, 0.17, r'QCD axion models', alpha=0.8, color=myMediumGreen, size=text_size, rotation=34)
 
-  fig.text(0.31, 0.555, r'Cogenesis', color=myMediumGreen, size=text_size*0.9, rotation=19)
-  fig.text(0.34, 0.545, r'$c_{a\gamma\gamma} = 1$', color=myMediumGreen, size=text_size*0.5, rotation=19)
+  fig.text(0.31, 0.595,  r'Cogenesis', color=myMediumGreen, size=text_size*0.9, rotation=19)
+  fig.text(0.34, 0.585, r'$c_{a\gamma\gamma} = 1$', color=myMediumGreen, size=text_size*0.5, rotation=19)
 
-  fig.text(0.49, 0.67,  r'$10^{-17}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myDarkPurple,   size=text_size, rotation=34)
-  fig.text(0.49, 0.52,  r'$10^{-20}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myDarkRed,      size=text_size, rotation=34)
-  fig.text(0.49, 0.40,  r'$10^{-21}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myMediumOrange, size=text_size, rotation=34)
+  fig.text(0.45, 0.67,  r'$10^{-18}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myDarkPurple,   size=text_size, rotation=34)
+  fig.text(0.45, 0.57,  r'$10^{-20}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myDarkRed,      size=text_size, rotation=34)
+  fig.text(0.45, 0.47,  r'$10^{-22}\,\mathrm{W}/\sqrt{\mathrm{Hz}}$ ',    color=myMediumOrange, size=text_size, rotation=34)
 
-  fig.text(0.78, 0.77,  r'$0.1\,\mathrm{Hz}$ ',     color=myDarkPurple,   size=text_size, rotation=34)
-  fig.text(0.68, 0.56,  r'$10^{-4}\,\mathrm{Hz}$ ', color=myDarkRed,      size=text_size, rotation=34)
-  fig.text(0.68, 0.50,  r'$10^{-6}\,\mathrm{Hz}$ ', color=myMediumOrange, size=text_size, rotation=34)
+  fig.text(0.64, 0.64,  r'$10^{-2}\,\mathrm{Hz}$ ', color=myDarkPurple,   size=text_size, rotation=44)
+  fig.text(0.51, 0.42,  r'$10^{-4}\,\mathrm{Hz}$ ', color=myDarkRed,      size=text_size, rotation=34)
+  fig.text(0.51, 0.38,  r'$10^{-6}\,\mathrm{Hz}$ ', color=myMediumOrange, size=text_size, rotation=34)
   
   fig.text(0.38, 0.17, r'Photocounter: SNR $\rightarrow Z = S/\sqrt{N}$', color=myMediumGray, size=text_size*0.4)
  
@@ -291,68 +295,6 @@ def csv_to_lists(csv_file):
           data[name].append(line[pos])
   
   return data
-
-#__________________________________________
-def calc_axion_coupling(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity = 0.45):
-  '''
-  Convert instrument parameters and detected signal power to axion coupling
-   - nep          = noise equivalent power is units of Watts per sqrt(Hz)
-   - mirrorArea   = dish area in m^2
-   - Bfield       = magnetic field strength in units of Tesla
-   - min/maxMass  = min and max mass to plot
-   - snr          = required signal to noise ratio 
-   - effic        = overall signal power efficiency 
-   - time         = integration time in hours
-   - relicDensity = dark matter relic density in GeV/cm^3
-  Returns lowest [minCoupling, maxCoupling] coupling values probed 
-  in units of 10^{-11}/GeV for [minMass, maxMass] 
-  '''
-  ratio    = ( snr / 5. )
-  noise    = ( nep / 1.0e-21 )
-  area     = ( 10. / mirrorArea  ) 
-  dt       = math.sqrt( 1. / time )
-  epsilon  = ( 0.5 / effic )
-  rho      = ( 0.3 / relicDensity )
-  magnet   = ( 10. / Bfield )**2 
-
-  massOverCouplingSq = 1. / ( 5.376 * ratio * noise * area * dt * epsilon * rho * magnet )
-  massOverCoupling = math.sqrt( massOverCouplingSq )
-
-  # For the input min and max masses, calculate corresponding couplings
-  minCoupling = ( minMass ) / massOverCoupling
-  maxCoupling = ( maxMass ) / massOverCoupling
-
-  return [minMass*1e-3, maxMass*1e-3], [minCoupling*1e-12, maxCoupling*1e-12]
-
-#__________________________________________
-def calc_axion_coupling_dcr(dcr, mirrorArea, Bfield, minMass, maxMass, Zsignif=5., effic=0.5, time=1., relicDensity = 0.45):
-  '''
-  Convert instrument parameters and detected signal power to axion coupling
-   - dcr          = dark count rate in Hz
-   - mirrorArea   = dish area in m^2
-   - Bfield       = magnetic field in Tesla
-   - min/maxMass  = min and max mass to plot
-   - Zsignif      = required significance 
-   - effic        = overall signal power efficiency 
-   - time         = integration time in hours
-   - relicDensity = dark matter relic density in GeV/cm^3
-  Returns lowest [minCoupling, maxCoupling] coupling values probed 
-  in units of 10^{-11}/GeV for [minMass, maxMass] 
-  '''
-  ratio    = ( Zsignif / 5. )
-  noise    = math.sqrt( dcr / 0.01 )
-  area     = ( 10. / mirrorArea  ) 
-  dt       = math.sqrt( 1. / time )
-  epsilon  = ( 0.5 / effic )
-  rho      = ( 0.45 / relicDensity )
-  magnet   = ( 10. / Bfield )**2 
-
-  couplingSqMin = 5.67 * ratio * noise * area * dt * epsilon * rho * magnet * ( minMass )**3 
-  couplingSqMax = 5.67 * ratio * noise * area * dt * epsilon * rho * magnet * ( maxMass )**3 
-  couplingMin = math.sqrt( couplingSqMin )
-  couplingMax = math.sqrt( couplingSqMax )
-
-  return [minMass*1e-3, maxMass*1e-3], [couplingMin*1e-13, couplingMax*1e-13]
   
 #_________________________________________________________________________
 def mkdir(dirPath):

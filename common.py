@@ -5,7 +5,7 @@ Collect common functions for calculating BREAD axion/dark photon observables/sen
 import math
 
 #__________________________________________
-def calc_coupling_nep(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity = 0.45, do_axion=True):
+def calc_coupling_nep(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity=0.45, do_axion=True):
   '''
   Convert instrument parameters and detected signal power to axion coupling
    - nep          = noise equivalent power is units of Watts per sqrt(Hz)
@@ -19,6 +19,7 @@ def calc_coupling_nep(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic=0
   Returns [minMass, maxMass] in eV and 
   [minCoupling, maxCoupling] coupling values in units of 1/GeV 
   '''
+
   snratio  = ( snr / 5. )
   noise    = ( nep / 1.0e-21 )
   rho      = ( 0.45 / relicDensity )
@@ -49,7 +50,7 @@ def calc_coupling_nep(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic=0
   return [minMass*1e-3, maxMass*1e-3], [minCoupling, maxCoupling]
 
 #__________________________________________
-def calc_coupling_dcr(dcr, mirrorArea, Bfield, minMass, maxMass, Zsignif=5., effic=0.5, time=1., relicDensity = 0.45, do_axion=True):
+def calc_coupling_dcr(dcr, mirrorArea, Bfield, minMass, maxMass, Zsignif=5., effic=0.5, time=1., relicDensity=0.45, do_axion=True):
   '''
   Convert instrument parameters and detected signal power to axion coupling
    - dcr          = dark count rate in Hz
@@ -63,7 +64,7 @@ def calc_coupling_dcr(dcr, mirrorArea, Bfield, minMass, maxMass, Zsignif=5., eff
   Returns [minMass, maxMass] in eV and 
   [minCoupling, maxCoupling] coupling values in units of 1/GeV 
   '''
-  zsig   = ( Zsignif / 5. )
+  zsig     = ( Zsignif / 5. )
   area     = ( 10.  / mirrorArea  ) 
   rho      = ( 0.45 / relicDensity )
   epsilon  = ( 0.5  / effic )
