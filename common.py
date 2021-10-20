@@ -35,8 +35,8 @@ def calc_coupling_nep(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic=0
   maxCoupling_axion = math.sqrt( 1.9 * ( maxMass ** 2 ) * magnet * common_exp_param ) * 1e-11
 
   # Dark photon
-  minCoupling_dp = math.sqrt( 7.6 * common_exp_param ) * 1e-14
-  maxCoupling_dp = math.sqrt( 7.6 * common_exp_param ) * 1e-14
+  minCoupling_dp    = math.sqrt( 7.6 * common_exp_param ) * 1e-14
+  maxCoupling_dp    = math.sqrt( 7.6 * common_exp_param ) * 1e-14
 
   # For the input min and max masses, calculate corresponding couplings
   if do_axion:
@@ -71,21 +71,16 @@ def calc_coupling_dcr(dcr, mirrorArea, Bfield, minMass, maxMass, Zsignif=5., eff
   noise    = math.sqrt( dcr / 0.01 )
   dt       = math.sqrt( 1. / time )
 
-  couplingSqMin = 3.0 * zsig * noise * area * dt * epsilon * rho * magnet * ( minMass )**3 
-  couplingSqMax = 3.0 * zsig * noise * area * dt * epsilon * rho * magnet * ( maxMass )**3 
-  couplingMin = math.sqrt( couplingSqMin ) * 1e-12
-  couplingMax = math.sqrt( couplingSqMax ) * 1e-12
-
   # Common experimental parameters
-  common_exp_param = snratio * noise * rho * area * epsilon  * dt
+  common_exp_param = zsig * noise * rho * area * epsilon  * dt
   
   # Axion
   minCoupling_axion = math.sqrt( 3.0 * ( minMass ** 3 ) * magnet * common_exp_param ) * 1e-12
   maxCoupling_axion = math.sqrt( 3.0 * ( maxMass ** 3 ) * magnet * common_exp_param ) * 1e-12
 
   # Dark photon
-  minCoupling_dp = math.sqrt( 11.9 * minMass * common_exp_param ) * 1e-15
-  maxCoupling_dp = math.sqrt( 11.9 * maxMass * common_exp_param ) * 1e-15
+  minCoupling_dp    = math.sqrt( 11.9 * minMass * common_exp_param ) * 1e-15
+  maxCoupling_dp    = math.sqrt( 11.9 * maxMass * common_exp_param ) * 1e-15
 
   # For the input min and max masses, calculate corresponding couplings
   if do_axion:
@@ -96,7 +91,7 @@ def calc_coupling_dcr(dcr, mirrorArea, Bfield, minMass, maxMass, Zsignif=5., eff
     maxCoupling = maxCoupling_dp
 
   return [minMass*1e-3, maxMass*1e-3], [minCoupling, maxCoupling]
-  
+
 #__________________________________________
 if __name__ == "__main__":
     main()
