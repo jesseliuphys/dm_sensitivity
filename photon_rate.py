@@ -94,7 +94,7 @@ def main():
   # ------------------------------------------------------- 
 
   plt.xlim(1e-6, 10)
-  plt.ylim(0.5, 5e6)
+  plt.ylim(1e-3, 1e5)
 
   # axes labels
   x_txt = r'$\mathrm{Axion~mass~[meV}]$'
@@ -176,16 +176,16 @@ def calc_axion_rate(mirrorArea, Bfield, rhoDM, minMass, maxMass, DFSZ=False):
   - DFSZ if True, else KSVZ axion
   '''
 
-  B = Bfield     / 10.
-  A = mirrorArea / 10.
+  B   = Bfield     / 10.
+  A   = mirrorArea / 10.
   rho = rhoDM    / 0.45
   
-  prefactor = 3.9
+  prefactor = 72.2
   if DFSZ:
-    prefactor = 1.5
+    prefactor = 10.6
 
-  minRate = prefactor * (1./minMass) * rho * A * (B**2)
-  maxRate = prefactor * (1./maxMass) * rho * A * (B**2)
+  minRate = prefactor * (1e-3/minMass) * rho * A * (B**2)
+  maxRate = prefactor * (1e-3/maxMass) * rho * A * (B**2)
 
   return [minMass, maxMass], [minRate, maxRate]
 
