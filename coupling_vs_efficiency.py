@@ -47,11 +47,11 @@ def main():
   Bfield = 10.0
 
   # Constant rate
-  x, y = calc_QCDaxion_coupling(1e-20, Adish, Bfield, snr=5., minEffic=1e-3, maxEffic=1., time=24000., relicDensity = 0.45)
-  plt.plot(x, y, lw=2, ls='-', c=myMediumBlue, label=r'$10^{-20}~\mathrm{W~Hz}^{-1/2}$') 
-
   x, y = calc_QCDaxion_coupling(1e-21, Adish, Bfield, snr=5., minEffic=1e-3, maxEffic=1., time=24000., relicDensity = 0.45)
-  plt.plot(x, y, lw=4, ls='-', c=myMediumOrange, label=r'$10^{-21}~\mathrm{W~Hz}^{-1/2}$') 
+  plt.plot(x, y, lw=2, ls='-', c=myMediumBlue, label=r'$10^{-21}~\mathrm{W~Hz}^{-1/2}$') 
+
+  x, y = calc_QCDaxion_coupling(1e-23, Adish, Bfield, snr=5., minEffic=1e-3, maxEffic=1., time=24000., relicDensity = 0.45)
+  plt.plot(x, y, lw=4, ls='-', c=myMediumOrange, label=r'$10^{-23}~\mathrm{W~Hz}^{-1/2}$') 
 
 
   plt.plot([1e-3, 1], [2.6, 2.6], lw=2, ls='-.', c=myMediumGray) 
@@ -65,7 +65,7 @@ def main():
   # ------------------------------------------------------- 
 
   plt.xlim(1e-3, 1)
-  plt.ylim(0.1, 6e3)
+  plt.ylim(0.1, 9e3)
 
   # axes labels
   x_txt = r'$\mathrm{Signal~efficiency}$'
@@ -91,10 +91,10 @@ def main():
   fig.text(0.23, 0.88, r'\textbf{BREAD}', color=myDarkGray, size=text_size)
   fig.text(0.23, 0.81, r'$A_\mathrm{dish} = 10~\mathrm{m}^2$', color=myDarkGray, size=text_size)
   fig.text(0.23, 0.74, r'$B_\mathrm{ext} = 10~\mathrm{T}$',    color=myDarkGray, size=text_size)
-  fig.text(0.23, 0.66, r'$\mathrm{SNR} = 5, \Delta t = 1000~\mathrm{days}$', color=myDarkGray, size=text_size)
+  fig.text(0.33, 0.66, r'$\mathrm{SNR} = 5, \Delta t = 1000~\mathrm{days}$', color=myDarkGray, size=text_size)
 
-  fig.text(0.28, 0.42, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
-  fig.text(0.28, 0.27, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
+  fig.text(0.24, 0.42, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
+  fig.text(0.24, 0.27, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
 
   # Adjust axis ticks
   ax.minorticks_on()
@@ -153,12 +153,11 @@ def calc_QCDaxion_coupling(NEP, mirrorArea, Bfield, snr=5., minEffic=1e-4, maxEf
   rho      = ( 0.45 / relicDensity )
   magnet   = ( 10. / Bfield )**2 
 
-  couplingSqMin = 3.6e-24 * ratio * noise * area * dt * minEpsilon * rho * magnet 
-  couplingMin   = math.sqrt( couplingSqMin )
-  couplingSqMax = 3.6e-24 * ratio * noise * area * dt * maxEpsilon * rho * magnet 
-  couplingMax  = math.sqrt( couplingSqMax )
+  couplingSqMin = 1.9 * ratio * noise * area * dt * minEpsilon * rho * magnet 
+  couplingMin   = math.sqrt( couplingSqMin ) * 1e-11
+  couplingSqMax = 1.9 * ratio * noise * area * dt * maxEpsilon * rho * magnet 
+  couplingMax   = math.sqrt( couplingSqMax ) * 1e-11
 
-  gKSVZ = 3.9e-13 #(1/GeV) (mass/meV )
   gDFSZ = 1.5e-13 #(1/GeV) (mass/meV )
 
   # For the input min and max masses in units of 1 meV

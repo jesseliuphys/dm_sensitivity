@@ -47,8 +47,8 @@ def main():
   Bfield = 10.0
 
   # Constant rate
-  x, y = calc_QCDaxion_coupling(1e-20, 0.1, 1000, 0.5, 1000, snr=5., effic=0.5, time=24., relicDensity = 0.45)
-  plt.plot(x, y, lw=2, ls='-', c=myMediumBlue, label=r'$1~\mathrm{day}$') 
+  x, y = calc_QCDaxion_coupling(1e-20, 0.1, 1000, 0.5, 1000, snr=5., effic=0.5, time=240., relicDensity = 0.45)
+  plt.plot(x, y, lw=2, ls='-', c=myMediumBlue, label=r'$10~\mathrm{days}$') 
   print(x)
   print(y)
   x, y = calc_QCDaxion_coupling(1e-20, 0.1, 1000, 0.5, 1000, snr=5., effic=0.5, time=24000., relicDensity = 0.45)
@@ -56,7 +56,7 @@ def main():
 
   plt.plot([1e-1, 1e7], [2.6, 2.6], lw=2, ls='-.', c=myMediumGray) 
   plt.plot([1e-1, 1e7], [1, 1],     lw=2, ls='--', c=myMediumGray) 
-  plt.plot([1e3, 1e3], [0.1, 70],  lw=3, ls='-',  c=myDarkPurple) 
+  #plt.plot([1e3, 1e3], [0.1, 70],  lw=3, ls='-',  c=myDarkPurple) 
 
   #plt.plot([1, 1], [1, 1], lw=3, ls=':', c=myDarkGray, label=r'$A_\mathrm{dish}/10$') 
   #plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'$B_\mathrm{ext}/10$') 
@@ -66,8 +66,8 @@ def main():
   # Axis properties
   # ------------------------------------------------------- 
 
-  plt.xlim(10, 1e6)
-  plt.ylim(0.1, 6e3)
+  plt.xlim(100, 1e7)
+  plt.ylim(0.1, 9e3)
 
   # axes labels
   x_txt = r'$A_\mathrm{dish}\cdot B_\mathrm{ext}^2~[\mathrm{m}^2~\mathrm{T}^2]$'
@@ -93,8 +93,8 @@ def main():
   fig.text(0.25, 0.43, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
   fig.text(0.25, 0.28, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
   
-  fig.text(0.52, 0.63, r'$A_\mathrm{dish} = 10~\mathrm{m}^2~(R = 0.75~\mathrm{m})$', color=myDarkPurple, size=text_size*0.8)
-  fig.text(0.52, 0.57, r'$B_\mathrm{ext} = 10~\mathrm{T}$', color=myDarkPurple, size=text_size*0.8)
+  #fig.text(0.52, 0.63, r'$A_\mathrm{dish} = 10~\mathrm{m}^2~(R = 0.75~\mathrm{m})$', color=myDarkPurple, size=text_size*0.8)
+  #fig.text(0.52, 0.57, r'$B_\mathrm{ext} = 10~\mathrm{T}$', color=myDarkPurple, size=text_size*0.8)
 
   # Adjust axis ticks
   ax.minorticks_on()
@@ -160,12 +160,11 @@ def calc_QCDaxion_coupling(nep, minMirrorArea, maxMirrorArea, minBfield, maxBfie
   minMagnet   = ( 10. / minBfield )**2 
   maxMagnet   = ( 10. / maxBfield )**2 
 
-  couplingSqMin = 3.6e-24 * ratio * noise * minArea * dt * epsilon * rho * minMagnet 
-  couplingMin   = math.sqrt( couplingSqMin )
-  couplingSqMax = 3.6e-24 * ratio * noise * maxArea * dt * epsilon * rho * maxMagnet 
-  couplingMax  = math.sqrt( couplingSqMax )
+  couplingSqMin = 1.9 * ratio * noise * minArea * dt * epsilon * rho * minMagnet 
+  couplingMin   = math.sqrt( couplingSqMin ) * 1e-11
+  couplingSqMax = 1.9 * ratio * noise * maxArea * dt * epsilon * rho * maxMagnet 
+  couplingMax  = math.sqrt( couplingSqMax ) * 1e-11
 
-  gKSVZ = 3.9e-13 #(1/GeV) (mass/meV )
   gDFSZ = 1.5e-13 #(1/GeV) (mass/meV )
 
   # For the input min and max masses in units of 1 meV

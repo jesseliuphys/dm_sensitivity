@@ -48,26 +48,26 @@ def main():
   Bfield = 10.0
 
   # Constant rate
-  x, y = calc_QCDaxion_coupling(1e-14, 1e-23, Adish, Bfield, snr=5., effic=0.5, time=24., relicDensity = 0.45)
-  plt.plot(x, y, lw=2, ls='-', c=myMediumBlue, label=r'$1~\mathrm{day}$') 
+  x, y = calc_QCDaxion_coupling(1e-14, 1e-24, Adish, Bfield, snr=5., effic=0.5, time=240., relicDensity = 0.45)
+  plt.plot(x, y, lw=2, ls='-', c=myMediumBlue, label=r'$10~\mathrm{days}$') 
 
-  x, y = calc_QCDaxion_coupling(1e-14, 1e-23, Adish, Bfield, snr=5., effic=0.5, time=24000., relicDensity = 0.45)
+  x, y = calc_QCDaxion_coupling(1e-14, 1e-24, Adish, Bfield, snr=5., effic=0.5, time=24000., relicDensity = 0.45)
   plt.plot(x, y, lw=4, ls='-', c=myMediumOrange, label=r'$1000~\mathrm{days}$') 
 
-  x, y = calc_QCDaxion_coupling(1e-18, 1e-21, Adish, Bfield, snr=5., effic=0.5, time=240., relicDensity = 0.45)
+  #x, y = calc_QCDaxion_coupling(1e-18, 1e-21, Adish, Bfield, snr=5., effic=0.5, time=240., relicDensity = 0.45)
   #plt.plot(x, y, lw=4, ls='-', c=myMediumOrange, label=r'$1000~\mathrm{days}$') 
 
-  plt.plot([1e-13, 1e-23], [2.6, 2.6], lw=2, ls='-.', c=myMediumGray) 
-  plt.plot([1e-13, 1e-23], [1, 1],     lw=2, ls='--', c=myMediumGray) 
-  plt.plot([1e-20, 1e-20], [0.1, 35], lw=3, ls='-',  c=myDarkPurple) 
+  plt.plot([1e-13, 1e-24], [2.6, 2.6], lw=2, ls='-.', c=myMediumGray) 
+  plt.plot([1e-13, 1e-24], [1, 1],     lw=2, ls='--', c=myMediumGray) 
+  #plt.plot([1e-20, 1e-20], [0.1, 35], lw=3, ls='-',  c=myDarkPurple) 
   plt.legend(loc='upper right', prop={'size':text_size*0.95}, frameon=False, handlelength=2.1, borderpad=0.6, handletextpad=0.1)
 
   # ------------------------------------------------------- 
   # Axis properties
   # ------------------------------------------------------- 
 
-  plt.xlim(1e-23, 1e-17)
-  plt.ylim(0.1, 6e3)
+  plt.xlim(1e-24, 1e-18)
+  plt.ylim(0.1, 8e3)
 
   # axes labels
   x_txt = r'$\mathrm{Noise~equivalent~power~[W/\sqrt{Hz}}]$'
@@ -93,7 +93,7 @@ def main():
   fig.text(0.73, 0.42, r'$\mathrm{KSVZ}$', color=myDarkGray, size=text_size)
   fig.text(0.73, 0.28, r'$\mathrm{DFSZ}$', color=myDarkGray, size=text_size)
 
-  fig.text(0.23, 0.61, r'$\mathrm{Quantum~capacitance~detector}$', color=myDarkPurple, size=text_size*0.7)
+  #fig.text(0.23, 0.61, r'$\mathrm{Quantum~capacitance~detector}$', color=myDarkPurple, size=text_size*0.7)
   
   # Adjust axis ticks
   ax.minorticks_on()
@@ -152,12 +152,11 @@ def calc_QCDaxion_coupling(minNEP, maxNEP, mirrorArea, Bfield, snr=5., effic=0.5
   rho      = ( 0.45 / relicDensity )
   magnet   = ( 10. / Bfield )**2 
 
-  couplingSqMin = 3.6e-24 * ratio * noiseMin * area * dt * epsilon * rho * magnet 
-  couplingMin   = math.sqrt( couplingSqMin )
-  couplingSqMax = 3.6e-24 * ratio * noiseMax * area * dt * epsilon * rho * magnet 
-  couplingMax  = math.sqrt( couplingSqMax )
+  couplingSqMin = 1.9 * ratio * noiseMin * area * dt * epsilon * rho * magnet 
+  couplingMin   = math.sqrt( couplingSqMin ) * 1e-11
+  couplingSqMax = 1.9 * ratio * noiseMax * area * dt * epsilon * rho * magnet 
+  couplingMax   = math.sqrt( couplingSqMax ) * 1e-11
 
-  gKSVZ = 3.9e-13 #(1/GeV) (mass/meV )
   gDFSZ = 1.5e-13 #(1/GeV) (mass/meV )
 
   # For the input min and max masses in units of 1 meV
