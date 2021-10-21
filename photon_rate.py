@@ -93,8 +93,8 @@ def main():
   # Axis properties
   # ------------------------------------------------------- 
 
-  plt.xlim(1e-6, 10)
-  plt.ylim(1e-3, 1e5)
+  plt.xlim(1e-6, 1)
+  plt.ylim(1e-2, 1e5)
 
   # axes labels
   x_txt = r'$\mathrm{Axion~mass~[meV}]$'
@@ -102,7 +102,7 @@ def main():
     
   # Axis label properties
   plt.xlabel(x_txt, labelpad=20, size=40) 
-  plt.ylabel(y_txt, labelpad=20, size=40)
+  plt.ylabel(y_txt, labelpad=10, size=40)
 
   ax.set_xscale('log')
   ax.set_yscale('log')
