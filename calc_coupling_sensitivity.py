@@ -17,8 +17,8 @@ def main():
   # ------------------------------------------------------- 
   Adish  = 0.7 # m^2
   Bfield = 10.0 # Tesla
-  hours  = 240 # hours
-  nep    = 1e-14 # W/sqrt(Hz)
+  hours  = 24000. # hours
+  nep    = 1e-22 # W/sqrt(Hz)
 
   # Constant rate
   couplingKSVZ, couplingDFSZ = calc_QCDaxion_coupling(nep, Adish, Bfield, snr=5., effic=0.5, time=hours, relicDensity = 0.45)
@@ -40,16 +40,18 @@ def calc_darkPhoton_coupling(nep, mirrorArea, snr=5., effic=0.5, time=1., relicD
    - relicDensity = dark matter relic density in GeV/cm^3
   '''
 
-  ratio    = ( snr / 5. )
+  snratio  = ( snr / 5. )
   noise    = ( nep / 1.0e-21 )
-  area     = ( 10.0 / mirrorArea  ) 
-  dt       = math.sqrt( 1. / time )
-  epsilon  = ( 0.5 / effic )
   rho      = ( 0.45 / relicDensity )
+  area     = ( 10.  / mirrorArea  ) 
+  epsilon  = ( 0.5  / effic )
+  dt       = math.sqrt( 1. / time )
 
-  kineticMixingSq = 3.7e-28 * ratio * noise * area * dt * epsilon * rho
-  kineticMixing   = math.sqrt( kineticMixingSq )
- 
+  # Common experimental parameters
+  common_exp_param = snratio * noise * rho * area * epsilon  * dt
+
+  kineticMixing    = math.sqrt( 7.6 * common_exp_param ) * 1e-14
+
   return kineticMixing / 1e-14
 
 #__________________________________________
@@ -67,16 +69,19 @@ def calc_QCDaxion_coupling(nep, mirrorArea, Bfield, snr=5., effic=0.5, time=1., 
   Returns lowest [minCoupling, maxCoupling] coupling values probed 
   in units of 10^{-11}/GeV
   '''
-  ratio    = ( snr / 5. )
-  noise   = ( nep / 1.0e-21 )
-  area  = ( 10. / mirrorArea ) 
-  dt       = math.sqrt( 1. / time )
-  epsilon  = ( 0.5 / effic )
+  snratio  = ( snr / 5. )
+  noise    = ( nep / 1.0e-21 )
   rho      = ( 0.45 / relicDensity )
-  magnet   = ( 10. / Bfield )**2 
+  area     = ( 10.  / mirrorArea  ) 
+  epsilon  = ( 0.5  / effic )
+  magnet   = ( 10.  / Bfield )**2 
+  dt       = math.sqrt( 1. / time )
 
-  couplingSq = 3.6e-24 * ratio * noise * area * dt * epsilon * rho * magnet 
-  coupling   = math.sqrt( couplingSq )
+  # Common experimental parameters
+  common_exp_param = snratio * noise * rho * area * epsilon  * dt
+  
+  # Axion
+  coupling = math.sqrt( 1.9 * magnet * common_exp_param ) * 1e-11
 
   gKSVZ = 3.9e-13 #(1/GeV) (mass/meV )
   gDFSZ = 1.5e-13 #(1/GeV) (mass/meV )
