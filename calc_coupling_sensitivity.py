@@ -15,7 +15,7 @@ def main():
   # ------------------------------------------------------- 
   # Sensitivity lines and regions
   # ------------------------------------------------------- 
-  Adish  = 0.7 # m^2
+  Adish  = 10.0 # m^2
   Bfield = 10.0 # Tesla
   hours  = 24000. # hours
   nep    = 1e-22 # W/sqrt(Hz)

@@ -158,17 +158,17 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.05, zorder=4)
 
   # TES [0.2, 1.2] meV
-  x, y = calc_coupling_nep(3e-21, Adish, Bfield, 0.2, 125, snr, effic, time*100, reldens, do_axion)
+  x, y = calc_coupling_nep(2e-21, Adish, Bfield, 0.2, 125, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, myDarkPurple, alpha=0.4,lw=3, ls='--', zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPurple, alpha=0.05, zorder=4)
 
   # SNSPD [207, 830] meV
-  x, y = calc_coupling_dcr(1e-6, Adish, Bfield, 124, 830, snr, effic, time*100, reldens, do_axion)
+  x, y = calc_coupling_dcr(1e-8, Adish, Bfield, 124, 830, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, myDarkPink, alpha=0.4,lw=3, ls='--',zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPink, alpha=0.05, zorder=4)
 
   # QCD [2, 125] meV
-  x, y = calc_coupling_nep(1e-22, Adish, Bfield, 2, 125, snr, effic, time*100, reldens, do_axion)
+  x, y = calc_coupling_nep(3e-23, Adish, Bfield, 2, 125, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myMediumOrange, zorder=4)
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -181,7 +181,7 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkGray, alpha=0.05, zorder=4)
 
   # TES [0.2, 1.2] meV
-  x, y = calc_coupling_nep(3e-19, Adish, Bfield, 0.2, 125, snr, effic, time*100, reldens, do_axion)
+  x, y = calc_coupling_nep(2e-19, Adish, Bfield, 0.2, 125, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, myDarkPurple, alpha=0.6,lw=3, ls='-.', zorder=4) 
 
   # SNSPD [207, 830] meV
@@ -190,7 +190,7 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.05, zorder=4)
 
   # QCD [2, 125] meV
-  x, y = calc_coupling_nep(1e-20, Adish, Bfield, 2, 125, snr, effic, time*100, reldens, do_axion)
+  x, y = calc_coupling_nep(3e-21, Adish, Bfield, 2, 125, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.6,lw=3, c=myMediumOrange, ls='-.', zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -199,7 +199,7 @@ def main():
   #-----------------------------
 
   # TES [0.2, 1.2] meV
-  x, y = calc_coupling_nep(3e-19, Adish, Bfield, 0.19, 125, snr, effic, time, reldens, do_axion)
+  x, y = calc_coupling_nep(2e-19, Adish, Bfield, 0.19, 125, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, myDarkPurple, alpha=0.9,lw=3, zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPurple, alpha=0.05, zorder=4)
 
@@ -214,7 +214,7 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.05, zorder=4)
 
   # QCD [2, 125] meV
-  x, y = calc_coupling_nep(1e-20, Adish, Bfield, 2, 125, snr, effic, time, reldens, do_axion)
+  x, y = calc_coupling_nep(3e-21, Adish, Bfield, 2, 125, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=3, c=myMediumOrange, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -229,8 +229,8 @@ def main():
   fig.text(0.445, 0.75, r'\textbf{IR Labs}',   color=myDarkGray,    size=text_size, rotation=30)
   fig.text(0.450, 0.73, r'(1.6 K commercial)', color=myDarkGray,    size=text_size*0.5, rotation=30)
   fig.text(0.78,  0.725,r'\textbf{SNSPD}',     color=myDarkPink,    size=text_size, rotation=40)
-  fig.text(0.45,  0.615,r'\textbf{KID/TES}',    color=myDarkPurple,  size=text_size, rotation=30)
-  fig.text(0.68,  0.675,r'\textbf{QCDet}',      color=myMediumOrange,size=text_size, rotation=30)
+  fig.text(0.45,  0.608,r'\textbf{KID/TES}',    color=myDarkPurple,  size=text_size, rotation=30)
+  fig.text(0.68,  0.652,r'\textbf{QCDet}',      color=myMediumOrange,size=text_size, rotation=30)
 
   # QCD axions
   #fig.text(0.29, 0.28, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
@@ -239,7 +239,7 @@ def main():
   fig.text(0.32, 0.21, r'QCD axion models', color=myMediumGreen, size=text_size, rotation=30)
 
   fig.text(0.31, 0.545, r'Cogenesis', color=myMediumGreen, size=text_size*0.9, rotation=14)
-  fig.text(0.36, 0.535, r'$c_{a\gamma\gamma} = 1$', color=myMediumGreen, size=text_size*0.5, rotation=14)
+  fig.text(0.358, 0.535, r'$c_{a\gamma\gamma} = 1$', color=myMediumGreen, size=text_size*0.5, rotation=14)
 
   fig.text(0.35, 0.17, r'SNSPD: NEP $\to$ DCR, SNR $\rightarrow Z = S/\sqrt{N}$', color=myMediumGray, size=text_size*0.4)
  
@@ -298,11 +298,11 @@ def main():
   plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'1000 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'1000 days, NEP/100') 
-  plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=2.8, borderpad=0.6)
+  plt.legend(loc='lower right', prop={'size':17}, frameon=False, handlelength=2.8, borderpad=0.6)
 
-  fig.text(0.68, 0.410, r'\textbf{BREAD}' , color=myDarkGray, size=text_size*1.1)
-  fig.text(0.68, 0.370, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size*0.9)
-  fig.text(0.68, 0.325, r'$B_\mathrm{ext} = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$', color=myDarkGray, size=text_size*0.9)
+  fig.text(0.665, 0.420, r'\textbf{BREAD}' , color=myDarkGray, size=text_size*1.1)
+  fig.text(0.665, 0.380, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size*0.9)
+  fig.text(0.665, 0.335, r'$B_\mathrm{ext} = ' + '{0}'.format(int(Bfield)) + '~\mathrm{T}$', color=myDarkGray, size=text_size*0.9)
   
   if time == 8760:
     integrationT = ', $\Delta t_\mathrm{int} = 1~\mathrm{yr}$'
@@ -310,7 +310,7 @@ def main():
     integrationT = ', $\Delta t_\mathrm{int} = 10~\mathrm{yrs}$'
   else:
     integrationT = ', $\Delta t_\mathrm{int}' + ' = {0:.0f}'.format(time) + '~\mathrm{hrs}$'
-  fig.text(0.68, 0.285, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + r', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
+  fig.text(0.665, 0.295, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + r', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
 
   # Plot margins
   plt.tight_layout(pad=0.3)

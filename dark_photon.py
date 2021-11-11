@@ -102,17 +102,17 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05)
 
   # TES/KID [0.2, 125] meV
-  x, y = calc_darkPhoton_coupling(3e-21, Adish, 0.2, 125, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling(2e-21, Adish, 0.2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkPurple, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.05)
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling_dcr(1e-6, Adish, 124, 830, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling_dcr(1e-8, Adish, 124, 830, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.05)
 
   # QCD [2, 125] meV
-  x, y = calc_darkPhoton_coupling(1e-22, Adish, 2, 125, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling(3e-23, Adish, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myMediumOrange, zorder=4)
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -125,7 +125,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05, zorder=4)
 
   # TES/KID [0.2, 125] meV
-  x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 125, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling(2e-19, Adish, 0.2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6, lw=3, ls='-.',c=myDarkPurple, zorder=4) 
 
   # SNSPD [207, 830] meV
@@ -134,7 +134,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.05, zorder=4)
   
   # QCD [2, 125] meV
-  x, y = calc_darkPhoton_coupling(1e-20, Adish, 2, 125, snr, effic, time*100)
+  x, y = calc_darkPhoton_coupling(3e-21, Adish, 2, 125, snr, effic, time*100)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myMediumOrange, zorder=4)
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -147,7 +147,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05, zorder=4)
 
   # TES/KID [0.2, 125] meV
-  x, y = calc_darkPhoton_coupling(3e-19, Adish, 0.2, 125, snr, effic, time)
+  x, y = calc_darkPhoton_coupling(2e-19, Adish, 0.2, 125, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkPurple, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.05, zorder=4)
 
@@ -157,7 +157,7 @@ def main():
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightPink, alpha=0.05, zorder=4)
 
   # QCD [2, 125] meV
-  x, y = calc_darkPhoton_coupling(1e-20, Adish, 2, 125, snr, effic, time)
+  x, y = calc_darkPhoton_coupling(3e-21, Adish, 2, 125, snr, effic, time)
   plt.plot(x, y, alpha=0.9,lw=3, c=myMediumOrange, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -187,14 +187,14 @@ def main():
   fig.text(0.23, 0.78, r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
   
   # Sensors labels
-  fig.text(0.65, 0.795,r'\textbf{Gentec}',    color=myDarkGreen, size=text_size)
-  fig.text(0.65, 0.77, r'(293 K commercial)', color=myDarkGreen, size=text_size*0.5)
-  fig.text(0.65,0.645, r'\textbf{IR Labs}',   color=myDarkGray,  size=text_size)
-  fig.text(0.65,0.625, r'(1.6 K commercial)', color=myDarkGray,  size=text_size*0.5)
+  fig.text(0.65,0.797,r'\textbf{Gentec}',     color=myDarkGreen, size=text_size)
+  fig.text(0.65,0.772, r'(293 K commercial)', color=myDarkGreen, size=text_size*0.5)
+  fig.text(0.65,0.640, r'\textbf{IR Labs}',   color=myDarkGray,  size=text_size)
+  fig.text(0.65,0.620, r'(1.6 K commercial)', color=myDarkGray,  size=text_size*0.5)
 
-  fig.text(0.775,0.305, r'\textbf{SNSPD}',     color=myDarkPink,    size=text_size, rotation=10)
-  fig.text(0.43, 0.400, r'\textbf{KID/TES}',   color=myDarkPurple,  size=text_size)
-  fig.text(0.65, 0.318, r'\textbf{QCDet}',     color=myMediumOrange,size=text_size)
+  fig.text(0.775,0.275, r'\textbf{SNSPD}',     color=myDarkPink,    size=text_size, rotation=10)
+  fig.text(0.42, 0.345, r'\textbf{KID/TES}',   color=myDarkPurple,  size=text_size)
+  fig.text(0.65, 0.290, r'\textbf{QCDet}',     color=myMediumOrange,size=text_size)
 
   # Arrows for SHUKET and Tokyo dish antenna
   ax.annotate('', xy=(0.22, 0.59),  xycoords='axes fraction',
@@ -211,7 +211,7 @@ def main():
   ax.set_yscale('log')
   # Axis limits
   ax.set_xlim(1e-6, 4.13567)
-  ax.set_ylim(1e-17, 1e-6)
+  ax.set_ylim(1e-18, 1e-6)
   # Axis labels
   x_txt = r"$m_{A'}~[\mathrm{meV}]$"
   y_txt = r'$\kappa$'
@@ -261,7 +261,7 @@ def main():
   plt.plot([1, 1], [1, 1], lw=3, ls='-',  c=myDarkGray, label=r'10 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='-.', c=myDarkGray, label=r'1000 days') 
   plt.plot([1, 1], [1, 1], lw=3, ls='--', c=myDarkGray, label=r'1000 days, NEP/100') 
-  plt.legend(loc='lower right', prop={'size':16}, frameon=False, handlelength=2.7, handletextpad=0.5, borderpad=0.6, ncol=2, columnspacing=0.6)
+  plt.legend(loc='lower right', prop={'size':17}, frameon=False, handlelength=2.7, handletextpad=0.5, borderpad=0.6, ncol=2, columnspacing=0.6)
 
   fig.text(0.16, 0.28, r'\textbf{BREAD}', color=myDarkGray, size=text_size*1.1)
   fig.text(0.16, 0.24, r'$A_\mathrm{dish} = ' + '{0}'.format(int(Adish)) + '~\mathrm{m}^2$', color=myDarkGray, size=text_size)
