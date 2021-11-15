@@ -17,6 +17,8 @@ import matplotlib.ticker  as ticker
 # So we can produce PDFs
 from matplotlib.backends.backend_pdf import PdfPages
 
+from common import *
+
 doLogY = False # Draw the y-axis on log scale
 
 mplt.rc("text", usetex=True)
@@ -88,31 +90,33 @@ def main():
   plt.fill_between(lab['x'], lab['y'], 1e-1, edgecolor='none', facecolor=myLightestBlue)
 
   # Default values
-  Adish = 10. # dish area in m^2
-  snr   = 5.  # signal to noise
-  effic = 0.5 # signal detection efficiency
-  time  = 240.  # integration time in hours
+  do_axion = False
+  reldens  = 0.45 # relic density GeV/cm^3
+  Adish    = 10. # dish area in m^2
+  snr      = 5.  # signal to noise
+  effic    = 0.5 # signal detection efficiency
+  time     = 240.  # integration time in hours
 
   #-----------------------------
   # 10x time of Upgrade 1
   #-----------------------------
   # Bolometer [1.65, 83] meV
-  x, y = calc_darkPhoton_coupling(5e-16, Adish, 0.24, 248, snr, effic, time*100)
+  x, y = calc_coupling_nep(5e-16, Adish, 1., 0.24, 248, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05)
 
   # TES/KID [0.2, 125] meV
-  x, y = calc_darkPhoton_coupling(2e-21, Adish, 0.2, 125, snr, effic, time*100)
+  x, y = calc_coupling_nep(2e-21, Adish, 1., 0.2, 125, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkPurple, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.05)
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling_dcr(1e-8, Adish, 124, 830, snr, effic, time*100)
+  x, y = calc_coupling_dcr(1e-8, Adish, 1., 124, 830, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.05)
 
   # QCD [2, 125] meV
-  x, y = calc_darkPhoton_coupling(3e-23, Adish, 2, 125, snr, effic, time*100)
+  x, y = calc_coupling_dcr(4e-4, Adish, 1., 2, 125, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myMediumOrange, zorder=4)
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -120,21 +124,21 @@ def main():
   # Upgrade 1
   #-----------------------------
   # Bolometer [1.65, 83] meV
-  x, y = calc_darkPhoton_coupling(5e-14, Adish, 0.24, 248, snr, effic, time*100)
+  x, y = calc_coupling_nep(5e-14, Adish, 1., 0.24, 248, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05, zorder=4)
 
   # TES/KID [0.2, 125] meV
-  x, y = calc_darkPhoton_coupling(2e-19, Adish, 0.2, 125, snr, effic, time*100)
+  x, y = calc_coupling_nep(2e-19, Adish, 1., 0.2, 125, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.6, lw=3, ls='-.',c=myDarkPurple, zorder=4) 
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 124, 830, snr, effic, time*100)
+  x, y = calc_coupling_dcr(1e-4, Adish, 1., 124, 830, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPink, alpha=0.05, zorder=4)
   
   # QCD [2, 125] meV
-  x, y = calc_darkPhoton_coupling(3e-21, Adish, 2, 125, snr, effic, time*100)
+  x, y = calc_coupling_dcr(4., Adish, 1., 2, 125, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.6,lw=3, ls='-.', c=myMediumOrange, zorder=4)
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -142,22 +146,22 @@ def main():
   # Baseline
   #-----------------------------
   # Far-IR 1.6 K IR Labs bolometer
-  x, y = calc_darkPhoton_coupling(5e-14, Adish, 0.24, 248, snr, effic, time)
+  x, y = calc_coupling_nep(5e-14, Adish, 1., 0.24, 248, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkGray, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGray, alpha=0.05, zorder=4)
 
   # TES/KID [0.2, 125] meV
-  x, y = calc_darkPhoton_coupling(2e-19, Adish, 0.2, 125, snr, effic, time)
+  x, y = calc_coupling_nep(2e-19, Adish, 1., 0.2, 125, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkPurple, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myDarkPurple, alpha=0.05, zorder=4)
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish, 124, 830, snr, effic, time)
+  x, y = calc_coupling_dcr(1e-4, Adish, 1., 124, 830, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=3, c=myDarkPink, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightPink, alpha=0.05, zorder=4)
 
-  # QCD [2, 125] meV
-  x, y = calc_darkPhoton_coupling(3e-21, Adish, 2, 125, snr, effic, time)
+  # QCD [2, 125] meV (3e-21W/sqrt(Hz) NEP = 3.7 Hz DCR)
+  x, y = calc_coupling_dcr(4., Adish, 1., 2, 125, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=3, c=myMediumOrange, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -166,43 +170,45 @@ def main():
   #-----------------------------
 
   # Gentec [0.4, 120] meV
-  x, y = calc_darkPhoton_coupling(1e-8, Adish*(0.7/10), 0.4, 120, snr, effic, time/10.0)
+  x, y = calc_coupling_nep(1e-8, Adish*(0.7/10), 1, 0.4, 120, snr, effic, time/10.0, reldens, do_axion)
   plt.plot(x, y, lw=1, ls='-', c=myDarkGreen, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myMediumGreen, alpha=0.2, zorder=4)
 
   # Far-IR 1.6 K IR Labs bolometer
-  x, y = calc_darkPhoton_coupling(5e-14, Adish*(0.7/10), 0.24, 248, snr, effic, time/10.0)
+  x, y = calc_coupling_nep(5e-14, Adish*(0.7/10), 1, 0.24, 248, snr, effic, time/10.0, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=1, c=myDarkGray, zorder=4) 
 
   # SNSPD [207, 830] meV
-  x, y = calc_darkPhoton_coupling_dcr(1e-4, Adish*(0.7/10), 124, 830, snr, effic, time/10.0)
+  x, y = calc_coupling_dcr(1e-4, Adish*(0.7/10), 1, 124, 830, snr, effic, time/10.0, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=1, c=myDarkPink, zorder=4) 
 
   # Existing constraint labels
   text_size = 23
   fig.text(0.18, 0.40, r'Haloscope',       color=myDarkerBlue, size=text_size)
-  fig.text(0.35, 0.545,r'Dish',            color=myDarkerBlue, size=text_size)
+  fig.text(0.35, 0.565,r'Dish',            color=myDarkerBlue, size=text_size)
   fig.text(0.19, 0.64, r'Cosmology',       color=myDarkBlue, size=text_size)
   fig.text(0.87, 0.63, r'Stellar',         color=myDarkBlue, size=text_size)
   fig.text(0.23, 0.78, r"$\gamma \to A'$", color=myDarkBlue, size=text_size)
   
   # Sensors labels
-  fig.text(0.65,0.797,r'\textbf{Gentec}',     color=myDarkGreen, size=text_size)
-  fig.text(0.65,0.772, r'(293 K commercial)', color=myDarkGreen, size=text_size*0.5)
-  fig.text(0.65,0.640, r'\textbf{IR Labs}',   color=myDarkGray,  size=text_size)
-  fig.text(0.65,0.620, r'(1.6 K commercial)', color=myDarkGray,  size=text_size*0.5)
+  fig.text(0.63,0.807,r'\textbf{Gentec}',     color=myDarkGreen, size=text_size)
+  fig.text(0.63,0.782, r'(293 K commercial)', color=myDarkGreen, size=text_size*0.5)
+  fig.text(0.63,0.650, r'\textbf{IR Labs}',   color=myDarkGray,  size=text_size)
+  fig.text(0.63,0.629, r'(1.6 K commercial)', color=myDarkGray,  size=text_size*0.5)
 
-  fig.text(0.775,0.275, r'\textbf{SNSPD}',     color=myDarkPink,    size=text_size, rotation=10)
-  fig.text(0.42, 0.345, r'\textbf{KID/TES}',   color=myDarkPurple,  size=text_size)
-  fig.text(0.65, 0.290, r'\textbf{QCDet}',     color=myMediumOrange,size=text_size)
+  fig.text(0.775,0.273, r'\textbf{SNSPD}',     color=myDarkPink,    size=text_size, rotation=10)
+  fig.text(0.42, 0.355, r'\textbf{KID/TES}',   color=myDarkPurple,  size=text_size)
+  fig.text(0.57, 0.290, r'\textbf{QCDet}',     color=myMediumOrange,size=text_size, rotation=10)
 
   # Arrows for SHUKET and Tokyo dish antenna
-  ax.annotate('', xy=(0.22, 0.59),  xycoords='axes fraction',
-            xytext=(0.26, 0.59), textcoords='axes fraction',
+  # Horizontal arrow for SHUKET
+  ax.annotate('', xy=(0.22, 0.62),  xycoords='axes fraction',
+            xytext=(0.26, 0.62), textcoords='axes fraction',
             arrowprops=dict(facecolor=myDarkerBlue, width=1.2, shrink=0.05, lw=0),
             horizontalalignment='left', verticalalignment='top',)
-  ax.annotate('', xy=(0.312, 0.65),  xycoords='axes fraction',
-            xytext=(0.312, 0.60), textcoords='axes fraction',
+  # Vertical arrow for Tokyo
+  ax.annotate('', xy=(0.312, 0.68),  xycoords='axes fraction',
+            xytext=(0.312, 0.63), textcoords='axes fraction',
             arrowprops=dict(facecolor=myDarkerBlue, width=1.2, shrink=0.05, lw=0),
             horizontalalignment='left', verticalalignment='top',)
 
@@ -275,7 +281,7 @@ def main():
   #fig.text(0.40, 0.175, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic) + integrationT, color=myDarkGray, size=text_size*0.68)
   fig.text(0.16, 0.20, r'$\mathrm{SNR}' + ' = {0:.0f}$'.format(snr) + ', $\epsilon_\mathrm{sig}' + ' = {0}$'.format(effic), color=myDarkGray, size=text_size*0.9)
 
-  fig.text(0.16, 0.17, r'SNSPD: NEP $\to$ DCR, SNR $\rightarrow Z = S/\sqrt{N}$', color=myMediumGray, size=text_size*0.4)
+  fig.text(0.16, 0.17, r'SNSPD/QCDet: NEP $\to$ DCR, SNR $\rightarrow Z = S/\sqrt{N}$', color=myMediumGray, size=text_size*0.4)
  
   # Plot margins
   plt.tight_layout(pad=0.3)
@@ -283,58 +289,6 @@ def main():
 
   # Save plot to pdf
   plt.savefig('fig_dark_photon_photosensors.pdf', format='pdf')
-
-#__________________________________________
-def calc_darkPhoton_coupling(nep, mirrorArea, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity = 0.45):
-  '''
-  Convert instrument parameters and detected signal power to dark photon coupling
-   - nep          = overall noise equivalent power of photonsensor in units of Watts/sqrt(Hz)
-   - mirrorArea   = area of dish antenna units is m^2
-   - min/maxMass  = min and max mass to plot (input in meV, output in eV)
-   - snr          = required signal to noise ratio 
-   - effic        = overall signal power efficiency 
-   - time         = integration time in hours
-   - relicDensity = dark matter relic density in GeV/cm^3
-  '''
-
-  ratio    = ( snr / 5. )
-  noise    = ( nep / 1.0e-21 )
-  area     = ( 10.0 / mirrorArea  ) 
-  dt       = math.sqrt( 1. / time )
-  epsilon  = ( 0.5 / effic )
-  rho      = ( 0.45 / relicDensity )
-
-  kineticMixingSq = 3.7 * ratio * noise * area * dt * epsilon * rho
-  kineticMixing   = math.sqrt( kineticMixingSq ) * 1e-14
- 
-  return [minMass*1e-3, maxMass*1e-3], [kineticMixing, kineticMixing]
-
-#__________________________________________
-def calc_darkPhoton_coupling_dcr(dcr, mirrorArea, minMass, maxMass, Zsignif=5., effic=0.5, time=1., relicDensity = 0.45):
-  '''
-  Convert instrument parameters and detected signal power to dark photon coupling
-   - dcr          = overall dark count rate of photonsensor in Hz
-   - mirrorArea   = area of dish antenna units is m^2
-   - min/maxMass  = min and max mass to plot (input in meV, output in eV)
-   - snr          = required signal to noise ratio 
-   - effic        = overall signal power efficiency 
-   - time         = integration time in hours
-   - relicDensity = dark matter relic density in GeV/cm^3
-  '''
-
-  ratio    = ( Zsignif / 5. )
-  noise    = math.sqrt( dcr / 0.01 )
-  area     = ( 10.0 / mirrorArea  ) 
-  dt       = math.sqrt( 1. / time )
-  epsilon  = ( 0.5 / effic )
-  rho      = ( 0.45 / relicDensity )
-
-  kineticMixingSqMin = 5.93 * ratio * noise * area * dt * epsilon * rho * minMass
-  kineticMixingSqMax = 5.93 * ratio * noise * area * dt * epsilon * rho * maxMass
-  kineticMixingMin   = math.sqrt( kineticMixingSqMin ) * 1e-15
-  kineticMixingMax   = math.sqrt( kineticMixingSqMax ) * 1e-15
- 
-  return [minMass*1e-3, maxMass*1e-3], [kineticMixingMin, kineticMixingMax]
 
 #_________________________________________________________________________
 def mkdir(dirPath):

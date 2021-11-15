@@ -168,7 +168,7 @@ def main():
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myDarkPink, alpha=0.05, zorder=4)
 
   # QCD [2, 125] meV
-  x, y = calc_coupling_nep(3e-23, Adish, Bfield, 2, 125, snr, effic, time*100, reldens, do_axion)
+  x, y = calc_coupling_dcr(4e-4, Adish, Bfield, 2, 125, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.4,lw=3, ls='--', c=myMediumOrange, zorder=4)
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -189,8 +189,8 @@ def main():
   plt.plot(x, y, myDarkPink, alpha=0.6,lw=3, ls='-.', zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.05, zorder=4)
 
-  # QCD [2, 125] meV
-  x, y = calc_coupling_nep(3e-21, Adish, Bfield, 2, 125, snr, effic, time*100, reldens, do_axion)
+  # QCD [2, 125] meV 
+  x, y = calc_coupling_dcr(4., Adish, Bfield, 2, 125, snr, effic, time*100, reldens, do_axion)
   plt.plot(x, y, alpha=0.6,lw=3, c=myMediumOrange, ls='-.', zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -213,8 +213,8 @@ def main():
   plt.plot(x, y, myDarkPink, alpha=0.9,lw=3, zorder=4) 
   plt.fill_between(x, y, [1e-1, 1e-1], edgecolor='none', facecolor=myLightPink, alpha=0.05, zorder=4)
 
-  # QCD [2, 125] meV
-  x, y = calc_coupling_nep(3e-21, Adish, Bfield, 2, 125, snr, effic, time, reldens, do_axion)
+  # QCD [2, 125] meV (3e-21W/sqrt(Hz) NEP = 3.7 Hz DCR)
+  x, y = calc_coupling_dcr(4., Adish, Bfield, 2, 125, snr, effic, time, reldens, do_axion)
   plt.plot(x, y, alpha=0.9,lw=3, c=myMediumOrange, zorder=4) 
   plt.fill_between(x, y, 1e-1, edgecolor='none', facecolor=myLightOrange, alpha=0.1, zorder=4)
 
@@ -228,9 +228,9 @@ def main():
   # Sensors labels
   fig.text(0.445, 0.75, r'\textbf{IR Labs}',   color=myDarkGray,    size=text_size, rotation=30)
   fig.text(0.450, 0.73, r'(1.6 K commercial)', color=myDarkGray,    size=text_size*0.5, rotation=30)
-  fig.text(0.78,  0.725,r'\textbf{SNSPD}',     color=myDarkPink,    size=text_size, rotation=40)
+  fig.text(0.78,  0.725,r'\textbf{SNSPD}',     color=myDarkPink,    size=text_size, rotation=42)
   fig.text(0.45,  0.608,r'\textbf{KID/TES}',    color=myDarkPurple,  size=text_size, rotation=30)
-  fig.text(0.68,  0.652,r'\textbf{QCDet}',      color=myMediumOrange,size=text_size, rotation=30)
+  fig.text(0.66,  0.648,r'\textbf{QCDet}',      color=myMediumOrange,size=text_size, rotation=42)
 
   # QCD axions
   #fig.text(0.29, 0.28, r'KSVZ', color=myDarkGreen, size=text_size, rotation=28)
@@ -239,9 +239,9 @@ def main():
   fig.text(0.32, 0.21, r'QCD axion models', color=myMediumGreen, size=text_size, rotation=30)
 
   fig.text(0.31, 0.545, r'Cogenesis', color=myMediumGreen, size=text_size*0.9, rotation=14)
-  fig.text(0.358, 0.535, r'$c_{a\gamma\gamma} = 1$', color=myMediumGreen, size=text_size*0.5, rotation=14)
+  fig.text(0.358, 0.535,r'$c_{a\gamma\gamma} = 1$', color=myMediumGreen, size=text_size*0.5, rotation=14)
 
-  fig.text(0.35, 0.17, r'SNSPD: NEP $\to$ DCR, SNR $\rightarrow Z = S/\sqrt{N}$', color=myMediumGray, size=text_size*0.4)
+  fig.text(0.35, 0.17, r'SNSPD/QCDet: NEP $\to$ DCR, SNR $\rightarrow Z = S/\sqrt{N}$', color=myMediumGray, size=text_size*0.4)
  
   # Axis log scale
   ax.set_xscale('log')
