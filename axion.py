@@ -75,7 +75,7 @@ def main():
   admx3= pd.read_csv('limits/common/Ax_ADMX2019_2.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
   plt.fill_between(admx3['x'], admx3['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
   admx4= pd.read_csv('limits/common/Ax_ADMX2021.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
-  plt.fill_between(admx3['x'], admx3['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+  plt.fill_between(admx4['x'], admx4['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
 
   capp1= pd.read_csv('limits/common/Ax_CAPP-1.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
   plt.fill_between(capp1['x'], capp1['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
