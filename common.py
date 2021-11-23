@@ -5,6 +5,21 @@ Collect common functions for calculating BREAD axion/dark photon observables/sen
 import math
 
 #__________________________________________
+def ax2dp(xvals, yvals, Bfield, costh):
+  '''
+  Convert axion haloscope limits to dark photon limits
+  Given an array of (xvals, yvals) <--> (mass, coupling)
+  Magnetic field Bfield
+  Polarization factor costh
+  '''
+
+  # Following https://github.com/cajohare/AxionLimits/blob/master/DarkPhoton.ipynb
+  denom = 1.44e-3 * costh * xvals
+  dpvals = 1e-9 * yvals * (Bfield / denom )
+  return dpvals
+
+
+#__________________________________________
 def calc_coupling_nep(nep, mirrorArea, Bfield, minMass, maxMass, snr=5., effic=0.5, time=1., relicDensity=0.45, do_axion=True):
   '''
   Convert instrument parameters and detected signal power to axion coupling

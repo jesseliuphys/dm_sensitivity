@@ -64,9 +64,37 @@ def main():
   myDarkGray       = '#525252'
 
   # Existing constraints from https://arxiv.org/abs/2105.04565 https://github.com/cajohare/AxionLimits/ 
-  haloscope= pd.read_csv('limits/common/DP_Combined_Haloscope.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
-  plt.fill_between(haloscope['x'], haloscope['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
+  #haloscope= pd.read_csv('limits/common/DP_Combined_Haloscope.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  #plt.fill_between(haloscope['x'], haloscope['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)
 
+  # Axion haloscopes following https://github.com/cajohare/AxionLimits/blob/master/DarkPhoton.ipynb
+  costh = math.sqrt(0.019)
+  dat= pd.read_csv('limits/common/Ax_ADMX.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(dat['x'], ax2dp(dat['x'], dat['y'], 7.6, costh), 1e-1, edgecolor='none', facecolor=myLightBlue)
+  dat= pd.read_csv('limits/common/Ax_ADMX2018.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(dat['x'], ax2dp(dat['x'], dat['y'], 6.8, costh), 1e-1, edgecolor='none', facecolor=myLightBlue)
+  dat= pd.read_csv('limits/common/Ax_ADMX2019_1.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(dat['x'], ax2dp(dat['x'], dat['y'], 7.6, costh), 1e-1, edgecolor='none', facecolor=myLightBlue)
+  dat= pd.read_csv('limits/common/Ax_ADMX2019_2.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(dat['x'], ax2dp(dat['x'], dat['y'], 7.6, costh), 1e-1, edgecolor='none', facecolor=myLightBlue)
+  dat= pd.read_csv('limits/common/Ax_ADMX2021.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(dat['x'], ax2dp(dat['x'], dat['y'], 7.6, costh), 1e-1, edgecolor='none', facecolor=myLightBlue)
+
+  dat= pd.read_csv('limits/common/Ax_HAYSTAC_highres.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(dat['x'], ax2dp(dat['x'], dat['y'], 9., costh), 1e-1, edgecolor='none', facecolor=myLightBlue)
+  dat= pd.read_csv('limits/common/Ax_HAYSTAC_2020_highres.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(dat['x'], ax2dp(dat['x'], dat['y'], 9., costh), 1e-1, edgecolor='none', facecolor=myLightBlue)
+
+  dat= pd.read_csv('limits/common/Ax_CAPP-1.txt',sep='\t', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(dat['x'], ax2dp(dat['x'], dat['y'], 7.3, costh), 1e-1, edgecolor='none', facecolor=myLightBlue)
+  dat= pd.read_csv('limits/common/Ax_CAPP-2.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(dat['x'], ax2dp(dat['x'], dat['y'], 7.8, costh), 1e-1, edgecolor='none', facecolor=myLightBlue)
+  dat= pd.read_csv('limits/common/Ax_CAPP-3.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(dat['x'], ax2dp(dat['x'], dat['y'], 7.9, costh), 1e-1, edgecolor='none', facecolor=myLightBlue)
+
+  dat = pd.read_csv('limits/common/Ax_QUAX.txt',sep=' ', lineterminator='\n', names=['x', 'y'])
+  plt.fill_between(dat['x'], ax2dp(dat['x'], dat['y'], 8.1, costh), 1e-1, edgecolor='none', facecolor=myLightBlue)
+  
   dmsearch = pd.read_csv('limits/common/DP_Combined_DarkMatterSearches.txt', sep=' ', lineterminator='\n', names=['x', 'y'])
   plt.fill_between(dmsearch['x'], dmsearch['y'], 1e-1, edgecolor='none', facecolor=myLightBlue)  
 
